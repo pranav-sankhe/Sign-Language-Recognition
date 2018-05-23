@@ -1,31 +1,33 @@
 import numpy as np
-from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.animation
-import pandas as pd
+import tensorflow as tf
 
+num_points = 100
+dimensions = 2
+points = np.random.uniform(0, 1000, [num_points, dimensions])
 
-a = np.random.rand(2000, 3)*10
-t = np.array([np.ones(100)*i for i in range(20)]).flatten()
-print a.shape, t.shape
-print a[:,0].shape
-df = pd.DataFrame({"time": t ,"x" : a[:,0], "y" : a[:,1], "z" : a[:,2]})
+def input_fn():
+  return tf.train.limit_epochs(
+      tf.convert_to_tensor(points, dtype=tf.float32), num_epochs=1)
 
-def update_graph(num):
-    data=df[df['time']==num]
-    graph._offsets3d = (data.x, data.y, data.z)
-    title.set_text('3D Test, time={}'.format(num))
+num_clusters = 5
+kmeans = tf.contrib.factorization.KMeansClustering(
+    num_clusters=num_clusters, use_mini_batch=False)
 
+# train
+num_iterations = 10
+previous_centers = None
+for _ in xrange(num_iterations):
+  kmeans.train(input_fn)
+  cluster_centers = kmeans.cluster_centers()
+  if previous_centers is not None:
+    print 'delta:', cluster_centers - previous_centers
+  previous_centers = cluster_centers
+  print 'score:', kmeans.score(input_fn)
+print 'cluster centers:', cluster_centers
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-title = ax.set_title('3D Test')
-
-data=df[df['time']==0]
-graph = ax.scatter(data.x, data.y, data.z)
-print data.x.shape
-
-ani = matplotlib.animation.FuncAnimation(fig, update_graph, 19, 
-                               interval=1000, blit=False)
-
-plt.show()
+# map the input points to their clusters
+cluster_indices = list(kmeans.predict_cluster_index(input_fn))
+for i, point in enumerate(points):
+  cluster_index = cluster_indices[i]
+  center = cluster_centers[cluster_index]
+  print 'point:', point, 'is in cluster', cluster_index, 'centered at', center
