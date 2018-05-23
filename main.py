@@ -10,7 +10,7 @@ sys.path.append(os.path.abspath("/home/user/Documents/SignLangRecog/data"))
 import utils
 
 meta_filepath = "/home/user/Documents/SignLangRecog/data/position_full.xlsx"
-motionData_filepath =  "/home/user/Documents/SignLangRecog/data/RG0_Corpus_201707_01A_02_t01.csv"
+motionData_filepath =  "/home/user/Documents/SignLangRecog/data/RG0_Corpus_201801_P203_02_t01.csv"
 
 motionData = utils.render_motionData(meta_filepath, motionData_filepath)
 # utils.plot3D(motionData, interactiveMode=True)

@@ -117,8 +117,6 @@ class ZoomPan:
         return onMotion
 
 
-
-
 def meanVariance(mdata):
 	xdata = mdata[:,0]
 	ydata = mdata[:,1]
@@ -129,14 +127,16 @@ def meanVariance(mdata):
 	mdata = [xdata, ydata, zdata, zrot, yrot, xrot]
 	mColumn_list = ['xpos', 'ypos', 'zpos', 'zrot', 'yrot', 'xrot']
 	var_df = pd.DataFrame(columns=mColumn_list)
+	var_df = var_df
 
 	for i in range(MOTION_PARAMETERS):
 		var_df[mColumn_list[i]] = np.var(mdata[i], axis=1)
 		var_df[mColumn_list[i]] = var_df[mColumn_list[i]].apply(lambda x: 0 if x < 1e-5 else x)
+	
 
 	pd.DataFrame.to_csv(var_df, './data/var.csv')	
 	fig = figure()
-	for i in range(1,2):
+	for i in range(MOTION_PARAMETERS):
 		
 
 		ax = fig.add_subplot(111, xlim=(0,120), ylim=(0,3000), autoscale_on=False)
@@ -150,7 +150,13 @@ def meanVariance(mdata):
 		figZoom = zp.zoom_factory(ax, base_scale = scale)
 		figPan = zp.pan_factory(ax)
 		ax.legend()
+	fig = figure()
 
+	var_sum = var_df[mColumn_list[0]]
+	for i in range(1,6):
+		var_sum = var_sum + var_df[mColumn_list[i]] 	
+
+	plt.plot(var_sum)
 	# for i in range(MOTION_PARAMETERS):
 	# 	plt.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
 	# 	plt.legend()
