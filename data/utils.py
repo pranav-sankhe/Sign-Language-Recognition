@@ -4,34 +4,34 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 from matplotlib.pyplot import figure, show
 import tensorflow as tf
+import os
 
 NUM_MARKERS = 107         #Total Number of markers
 MOTION_PARAMETERS = 6
-
-
+selectCriterion_matrix = np.zeros(NUM_MARKERS)
 def num_elements(shape):
-	num = 1
-	for i in list(shape):
-		num *= i
-	return num
+    num = 1
+    for i in list(shape):
+        num *= i
+    return num
 
 def range_len(rang):
-	return rang[1]-rang[0]+1
+    return rang[1]-rang[0]+1
 
 def convert_to_one_hot(data, rang):
 
-	data_shape = data.shape
-	data_oned = data.reshape(num_elements(data_shape))
+    data_shape = data.shape
+    data_oned = data.reshape(num_elements(data_shape))
 
-	enc_data_shape = ( num_elements(data_shape), range_len(rang) )
-	enc_data = np.zeros(enc_data_shape)
-	enc_data[np.arange(num_elements(data_shape)), data_oned] = 1
+    enc_data_shape = ( num_elements(data_shape), range_len(rang) )
+    enc_data = np.zeros(enc_data_shape)
+    enc_data[np.arange(num_elements(data_shape)), data_oned] = 1
 
-	enc_data_shape = list(data_shape)
-	enc_data_shape.append(range_len(rang))
-	enc_data = enc_data.reshape(enc_data_shape)
+    enc_data_shape = list(data_shape)
+    enc_data_shape.append(range_len(rang))
+    enc_data = enc_data.reshape(enc_data_shape)
 
-	return enc_data
+    return enc_data
 
 
 
@@ -116,87 +116,122 @@ class ZoomPan:
         #return the function
         return onMotion
 
+def getSelectedBodParts(Selected_Markers):
+    body_desc_path = "./data/body.csv"
+    df = pd.read_csv(body_desc_path)
+    body_desc_array = df.values 
+    selected_body_desc = body_desc_array[Selected_Markers]
+    selected_body_descDF = pd.DataFrame(selected_body_desc, Selected_Markers)
+    pd.DataFrame.to_csv(selected_body_descDF, './data/selected_body_parts.csv' )
+    return selected_body_desc
 
-def meanVariance(mdata):
-	xdata = mdata[:,0]
-	ydata = mdata[:,1]
-	zdata = mdata[:,2]
-	zrot = mdata[:,3]
-	yrot = mdata[:,4]
-	xrot = mdata[:,5]
-	mdata = [xdata, ydata, zdata, zrot, yrot, xrot]
-	mColumn_list = ['xpos', 'ypos', 'zpos', 'zrot', 'yrot', 'xrot']
-	var_df = pd.DataFrame(columns=mColumn_list)
-	var_df = var_df
 
-	for i in range(MOTION_PARAMETERS):
-		var_df[mColumn_list[i]] = np.var(mdata[i], axis=1)
-		var_df[mColumn_list[i]] = var_df[mColumn_list[i]].apply(lambda x: 0 if x < 1e-5 else x)
-	
+def Variance(mdata, filename):
+    xdata = mdata[:,0]
+    ydata = mdata[:,1]
+    zdata = mdata[:,2]
+    zrot = mdata[:,3]
+    yrot = mdata[:,4]
+    xrot = mdata[:,5]
+    mdata = [xdata, ydata, zdata, zrot, yrot, xrot]
+    mColumn_list = ['xpos', 'ypos', 'zpos', 'zrot', 'yrot', 'xrot']
+    var_df = pd.DataFrame(columns=mColumn_list)
+    var_df = var_df
+    filename = os.path.splitext(filename)[0]
+    for i in range(MOTION_PARAMETERS):
+        var_df[mColumn_list[i]] = np.var(mdata[i], axis=1)
+        var_df[mColumn_list[i]] = var_df[mColumn_list[i]].apply(lambda x: 0 if x < 1e-5 else x)
+    
 
-	pd.DataFrame.to_csv(var_df, './data/var.csv')	
-	fig = figure()
-	for i in range(MOTION_PARAMETERS):
-		
+    pd.DataFrame.to_csv(var_df, './data/var.csv')   #save variance data in the data folder 
+    
 
-		ax = fig.add_subplot(111, xlim=(0,120), ylim=(0,3000), autoscale_on=False)
+    var_sum = var_df[mColumn_list[0]]
+    for i in range(1,6):
+        var_sum = var_sum + var_df[mColumn_list[i]]     
 
-		ax.set_title('Click to zoom')
-		ax.set_xlabel('markers')
-		ax.set_ylabel('variance')
-		ax.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
-		scale = 1.1
-		zp = ZoomPan()
-		figZoom = zp.zoom_factory(ax, base_scale = scale)
-		figPan = zp.pan_factory(ax)
-		ax.legend()
-	fig = figure()
 
-	var_sum = var_df[mColumn_list[0]]
-	for i in range(1,6):
-		var_sum = var_sum + var_df[mColumn_list[i]] 	
+    highVar_makers = np.where( var_sum > 1)    
 
-	plt.plot(var_sum)
-	# for i in range(MOTION_PARAMETERS):
-	# 	plt.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
-	# 	plt.legend()
-	plt.show()	
+
+
+    selectCriterion_matrix[highVar_makers] = selectCriterion_matrix[highVar_makers] + 1
+    thresholdCriterion = 200
+    numSelected = np.sum(selectCriterion_matrix >=thresholdCriterion)
+
+    Selected_Markers = np.where(selectCriterion_matrix > thresholdCriterion)        
+         
+
+    # print "High variance markers", highVar_makers
+    # print "variance values", var_sum.values[highVar_makers]   
+    # print "selection criterion matrix", selectCriterion_matrix
+    print "Number of seleted points ", numSelected , "  Number of markers not selected  ", NUM_MARKERS - numSelected 
+    print "Selected matrix", Selected_Markers
+    # fig = figure()
+    # for i in range(1):
+        
+
+    #     ax = fig.add_subplot(111, xlim=(0,120), ylim=(0,3000), autoscale_on=False)
+
+    #     ax.set_title('Click to zoom')
+    #     ax.set_xlabel('markers')
+    #     ax.set_ylabel('variance')
+    #     ax.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
+    #     scale = 1.1
+    #     zp = ZoomPan()
+    #     figZoom = zp.zoom_factory(ax, base_scale = scale)
+    #     figPan = zp.pan_factory(ax)
+    #     ax.legend()
+    #     #plt.savefig("./data/normalized_var_all/" + filename)
+
+    # fig = figure()
+    # plt.plot(var_sum)
+
+    #plt.savefig("./data/normalized_var_sum/" + filename)
+    # for i in range(MOTION_PARAMETERS):
+    #   plt.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
+    #   plt.legend()
+    #plt.show()  
+    return Selected_Markers
+
 
 
 def plot3D(mdata, interactiveMode=True):
-	ax = plt.axes(projection='3d')
-	plt.ion()
-	plt.show()
-	
-	ax.set_xlabel('x')
-	ax.set_ylabel('y')
-	ax.set_zlabel('z')
-
-	xdata = mdata[:,0]
-	ydata = mdata[:,1]
-	zdata = mdata[:,2]
-	zrot = mdata[:,3]
-	yrot = mdata[:,4]
-	xrot = mdata[:,5]
-	print mdata.shape[2]
-
-	for markers in range(int(mdata.shape[2])):	
-		ax.scatter3D(xdata[:,markers], ydata[:,markers], zdata[:,markers], c=zdata[:,markers], cmap='spring_r');
-		print "markers: ", markers
-		plt.pause(0.001)	
-
-		
+    
+    plt.ion()
+    plt.show()
+    
 
 
-def render_motionData(meta_filepath, filepath):
+    xdata = mdata[:,0]
+    ydata = mdata[:,1]
+    zdata = mdata[:,2]
+    zrot = mdata[:,3]
+    yrot = mdata[:,4]
+    xrot = mdata[:,5]
+    print mdata.shape[2]
 
-	motionData = pd.read_csv(filepath)
-	cLength = motionData.shape[1]
-	cList = np.arange(cLength)
-	motionData = pd.read_csv(filepath, names = cList)
+    for timestamp in range(int(mdata.shape[2])):    
+        ax = plt.axes(projection='3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
+        ax.scatter3D(xdata[:,timestamp], ydata[:,timestamp], zdata[:,timestamp], c=zdata[:,timestamp], cmap='spring_r');
+        print "timestamp: ", timestamp
+        plt.pause(0.001)    
 
-	motionData = motionData.values
-	motionData = np.reshape(motionData, (NUM_MARKERS, MOTION_PARAMETERS, cLength))
-	return motionData
+        
+
+
+def render_motionData(filepath):
+
+    motionData = pd.read_csv(filepath)
+    cLength = motionData.shape[1]
+    cList = np.arange(cLength)
+    motionData = pd.read_csv(filepath, names = cList)
+
+    motionData = motionData.values
+    motionData = np.reshape(motionData, (NUM_MARKERS, MOTION_PARAMETERS, cLength))
+    return motionData
 
 
