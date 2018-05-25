@@ -1,0 +1,925 @@
+RG0_Corpus_201707_01A_01_t01.csv : 603
+RG0_Corpus_201707_01A_02_t01.csv : 786
+RG0_Corpus_201707_01A_03_t01.csv : 612
+RG0_Corpus_201707_01B_01_t03.csv : 584
+RG0_Corpus_201707_01B_02_t01.csv : 637
+RG0_Corpus_201707_01C_01_t01.csv : 512
+RG0_Corpus_201707_01C_02_t01.csv : 683
+RG0_Corpus_201707_01D_01_t01.csv : 636
+RG0_Corpus_201707_01D_02_t01.csv : 710
+RG0_Corpus_201707_01E_01_t02.csv : 619
+RG0_Corpus_201707_01E_02_t03.csv : 807
+RG0_Corpus_201707_02A_01_t02.csv : 486
+RG0_Corpus_201707_02A_02_t01.csv : 617
+RG0_Corpus_201707_02A_03_t01.csv : 535
+RG0_Corpus_201707_02B_01_t01.csv : 522
+RG0_Corpus_201707_02B_02_t03.csv : 667
+RG0_Corpus_201707_02C_01_t01.csv : 609
+RG0_Corpus_201707_02C_02_t01.csv : 780
+RG0_Corpus_201707_02D_01_t01.csv : 613
+RG0_Corpus_201707_02D_02_t01.csv : 755
+RG0_Corpus_201707_02E_01_t02.csv : 610
+RG0_Corpus_201707_02E_02_t03.csv : 769
+RG0_Corpus_201707_02F_01_t01.csv : 559
+RG0_Corpus_201707_02F_02_t01.csv : 648
+RG0_Corpus_201707_03A_01_t01.csv : 697
+RG0_Corpus_201707_03A_02_t02.csv : 784
+RG0_Corpus_201707_03A_03_t02.csv : 706
+RG0_Corpus_201707_03B_01_t01.csv : 592
+RG0_Corpus_201707_03B_02_t01.csv : 790
+RG0_Corpus_201707_03C_01_t02.csv : 419
+RG0_Corpus_201707_03C_02_t01.csv : 541
+RG0_Corpus_201707_03D_01_t02.csv : 457
+RG0_Corpus_201707_03D_02_t01.csv : 582
+RG0_Corpus_201707_03E_01_t01.csv : 677
+RG0_Corpus_201707_03E_02_t01.csv : 746
+RG0_Corpus_201707_04A_01_t02.csv : 549
+RG0_Corpus_201707_04A_02_t01.csv : 675
+RG0_Corpus_201707_04A_03_t01.csv : 614
+RG0_Corpus_201707_04B_01_t01.csv : 552
+RG0_Corpus_201707_04B_02_t01.csv : 684
+RG0_Corpus_201707_04C_01_t01.csv : 588
+RG0_Corpus_201707_04C_02_t01.csv : 752
+RG0_Corpus_201707_04D_01_t02.csv : 630
+RG0_Corpus_201707_04D_02_t01.csv : 808
+RG0_Corpus_201707_04E_01_t01.csv : 549
+RG0_Corpus_201707_04E_02_t01.csv : 637
+RG0_Corpus_201707_05A_01_t01.csv : 528
+RG0_Corpus_201707_05A_02_t01.csv : 578
+RG0_Corpus_201707_05A_03_t01.csv : 519
+RG0_Corpus_201707_05B_01_t01.csv : 565
+RG0_Corpus_201707_05B_02_t01.csv : 657
+RG0_Corpus_201707_05C_01_t01.csv : 487
+RG0_Corpus_201707_05C_02_t01.csv : 542
+RG0_Corpus_201707_05D_01_t01.csv : 532
+RG0_Corpus_201707_05D_02_t01.csv : 607
+RG0_Corpus_201707_05E_01_t01.csv : 605
+RG0_Corpus_201707_05E_02_t02.csv : 698
+RG0_Corpus_201707_05F_01_t02.csv : 600
+RG0_Corpus_201707_05F_02_t01.csv : 758
+RG0_Corpus_201707_06A_01_t01.csv : 587
+RG0_Corpus_201707_06A_02_t01.csv : 667
+RG0_Corpus_201707_06A_03_t01.csv : 560
+RG0_Corpus_201707_06B_01_t01.csv : 522
+RG0_Corpus_201707_06B_02_t02.csv : 657
+RG0_Corpus_201707_06C_01_t01.csv : 538
+RG0_Corpus_201707_06C_02_t01.csv : 691
+RG0_Corpus_201707_06D_01_t02.csv : 615
+RG0_Corpus_201707_06D_02_t01.csv : 811
+RG0_Corpus_201707_06E_01_t01.csv : 558
+RG0_Corpus_201707_06E_02_t01.csv : 691
+RG0_Corpus_201707_07A_01_t01.csv : 488
+RG0_Corpus_201707_07A_02_t01.csv : 621
+RG0_Corpus_201707_07A_03_t01.csv : 493
+RG0_Corpus_201707_07B_01_t01.csv : 527
+RG0_Corpus_201707_07B_02_t01.csv : 649
+RG0_Corpus_201707_07C_01_t01.csv : 520
+RG0_Corpus_201707_07C_02_t01.csv : 618
+RG0_Corpus_201707_07D_01_t01.csv : 619
+RG0_Corpus_201707_07D_02_t01.csv : 774
+RG0_Corpus_201707_07E_01_t01.csv : 526
+RG0_Corpus_201707_07E_02_t01.csv : 604
+RG0_Corpus_201707_07F_01_t01.csv : 555
+RG0_Corpus_201707_07F_02_t01.csv : 702
+RG0_Corpus_201707_08A_01_t02.csv : 447
+RG0_Corpus_201707_08A_02_t01.csv : 626
+RG0_Corpus_201707_08A_03_t01.csv : 482
+RG0_Corpus_201707_08B_01_t02.csv : 476
+RG0_Corpus_201707_08B_02_t01.csv : 638
+RG0_Corpus_201707_08C_01_t02.csv : 448
+RG0_Corpus_201707_08C_02_t02.csv : 554
+RG0_Corpus_201707_08D_01_t01.csv : 593
+RG0_Corpus_201707_08D_02_t03.csv : 690
+RG0_Corpus_201707_08E_01_t01.csv : 512
+RG0_Corpus_201707_08E_02_t02.csv : 638
+RG0_Corpus_201707_08F_01_t03.csv : 483
+RG0_Corpus_201707_08F_02_t01.csv : 532
+RG0_Corpus_201707_09A_01_t01.csv : 474
+RG0_Corpus_201707_09A_02_t02.csv : 587
+RG0_Corpus_201707_09A_03_t03.csv : 506
+RG0_Corpus_201707_09B_01_t01.csv : 472
+RG0_Corpus_201707_09B_02_t01.csv : 566
+RG0_Corpus_201707_09C_01_t01.csv : 413
+RG0_Corpus_201707_09C_02_t01.csv : 551
+RG0_Corpus_201707_09D_01_t01.csv : 568
+RG0_Corpus_201707_09D_02_t01.csv : 764
+RG0_Corpus_201707_09E_01_t02.csv : 459
+RG0_Corpus_201707_09E_02_t01.csv : 598
+RG0_Corpus_201707_10A_01_t01.csv : 384
+RG0_Corpus_201707_10A_02_t01.csv : 414
+RG0_Corpus_201707_10A_03_t01.csv : 376
+RG0_Corpus_201707_10B_01_t01.csv : 344
+RG0_Corpus_201707_10B_02_t02.csv : 422
+RG0_Corpus_201707_10C_01_t01.csv : 366
+RG0_Corpus_201707_10C_02_t01.csv : 436
+RG0_Corpus_201707_10D_01_t01.csv : 443
+RG0_Corpus_201707_10D_02_t01.csv : 574
+RG0_Corpus_201707_10E_01_t01.csv : 320
+RG0_Corpus_201707_10E_02_t02.csv : 459
+RG0_Corpus_201707_11A_01_t02.csv : 419
+RG0_Corpus_201707_11A_02_t01.csv : 571
+RG0_Corpus_201707_11A_03_t01.csv : 485
+RG0_Corpus_201707_11B_01_t02.csv : 471
+RG0_Corpus_201707_11B_02_t01.csv : 561
+RG0_Corpus_201707_11C_01_t01.csv : 463
+RG0_Corpus_201707_11C_02_t01.csv : 615
+RG0_Corpus_201707_11D_01_t01.csv : 378
+RG0_Corpus_201707_11D_02_t01.csv : 483
+RG0_Corpus_201707_11E_01_t03.csv : 406
+RG0_Corpus_201707_11E_02_t01.csv : 561
+RG0_Corpus_201707_11F_01_t01.csv : 519
+RG0_Corpus_201707_11F_02_t01.csv : 635
+RG0_Corpus_201707_12A_01_t01.csv : 531
+RG0_Corpus_201707_12A_02_t01.csv : 633
+RG0_Corpus_201707_12A_03_t01.csv : 536
+RG0_Corpus_201707_12B_01_t01.csv : 428
+RG0_Corpus_201707_12B_02_t01.csv : 557
+RG0_Corpus_201707_12C_01_t01.csv : 517
+RG0_Corpus_201707_12C_02_t01.csv : 685
+RG0_Corpus_201707_12D_01_t01.csv : 465
+RG0_Corpus_201707_12D_02_t01.csv : 590
+RG0_Corpus_201707_12E_01_t01.csv : 417
+RG0_Corpus_201707_12E_02_t01.csv : 528
+RG0_Corpus_201707_13A_01_t01.csv : 358
+RG0_Corpus_201707_13A_02_t01.csv : 426
+RG0_Corpus_201707_13A_03_t01.csv : 373
+RG0_Corpus_201707_13B_01_t01.csv : 471
+RG0_Corpus_201707_13B_02_t01.csv : 581
+RG0_Corpus_201707_13C_01_t02.csv : 409
+RG0_Corpus_201707_13C_02_t01.csv : 561
+RG0_Corpus_201707_13D_01_t01.csv : 451
+RG0_Corpus_201707_13D_02_t01.csv : 533
+RG0_Corpus_201707_13E_01_t01.csv : 430
+RG0_Corpus_201707_13E_02_t01.csv : 515
+RG0_Corpus_201707_13F_01_t01.csv : 400
+RG0_Corpus_201707_13F_02_t01.csv : 451
+RG0_Corpus_201707_13G_01_t01.csv : 465
+RG0_Corpus_201707_13G_02_t01.csv : 564
+RG0_Corpus_201707_14A_01_t01.csv : 416
+RG0_Corpus_201707_14A_02_t01.csv : 539
+RG0_Corpus_201707_14A_03_t01.csv : 433
+RG0_Corpus_201707_14B_01_t01.csv : 443
+RG0_Corpus_201707_14B_02_t01.csv : 493
+RG0_Corpus_201707_14C_01_t01.csv : 458
+RG0_Corpus_201707_14C_02_t02.csv : 599
+RG0_Corpus_201707_14D_01_t02.csv : 522
+RG0_Corpus_201707_14D_02_t01.csv : 622
+RG0_Corpus_201707_14E_01_t01.csv : 453
+RG0_Corpus_201707_14E_02_t01.csv : 565
+RG0_Corpus_201707_15A_01_t02.csv : 429
+RG0_Corpus_201707_15A_02_t01.csv : 526
+RG0_Corpus_201707_15A_03_t01.csv : 429
+RG0_Corpus_201707_15B_01_t03.csv : 433
+RG0_Corpus_201707_15B_02_t01.csv : 520
+RG0_Corpus_201707_15C_02_t02.csv : 548
+RG0_Corpus_201707_15D_01_t01.csv : 363
+RG0_Corpus_201707_15D_02_t02.csv : 473
+RG0_Corpus_201707_15E_01_t01.csv : 425
+RG0_Corpus_201707_15E_02_t02.csv : 489
+RG0_Corpus_201707_16A_01_t01.csv : 506
+RG0_Corpus_201707_16A_02_t01.csv : 644
+RG0_Corpus_201707_16A_03_t01.csv : 505
+RG0_Corpus_201707_16B_01_t01.csv : 594
+RG0_Corpus_201707_16B_02_t01.csv : 695
+RG0_Corpus_201707_16C_01_t01.csv : 675
+RG0_Corpus_201707_16C_02_t01.csv : 684
+RG0_Corpus_201707_16D_01_t02.csv : 573
+RG0_Corpus_201707_16D_02_t01.csv : 668
+RG0_Corpus_201707_16E_01_t01.csv : 508
+RG0_Corpus_201707_16E_02_t01.csv : 658
+RG0_Corpus_201707_16F_01_t02.csv : 490
+RG0_Corpus_201707_16F_02_t01.csv : 623
+RG0_Corpus_201707_17A_01_t01.csv : 486
+RG0_Corpus_201707_17A_02_t01.csv : 600
+RG0_Corpus_201707_17A_03_t02.csv : 509
+RG0_Corpus_201707_17B_01_t01.csv : 481
+RG0_Corpus_201707_17B_02_t01.csv : 519
+RG0_Corpus_201707_17C_01_t02.csv : 417
+RG0_Corpus_201707_17C_02_t01.csv : 447
+RG0_Corpus_201707_17D_01_t01.csv : 509
+RG0_Corpus_201707_17D_02_t03.csv : 566
+RG0_Corpus_201707_17E_01_t02.csv : 528
+RG0_Corpus_201707_17E_02_t01.csv : 685
+RG0_Corpus_201707_17F_01_t01.csv : 549
+RG0_Corpus_201707_17F_02_t01.csv : 607
+RG0_Corpus_201707_18A_01_t01.csv : 465
+RG0_Corpus_201707_18A_02_t01.csv : 595
+RG0_Corpus_201707_18A_03_t01.csv : 481
+RG0_Corpus_201707_18B_01_t01.csv : 472
+RG0_Corpus_201707_18B_02_t01.csv : 550
+RG0_Corpus_201707_18C_01_t01.csv : 482
+RG0_Corpus_201707_18C_02_t01.csv : 586
+RG0_Corpus_201707_18D_01_t01.csv : 509
+RG0_Corpus_201707_18D_02_t01.csv : 619
+RG0_Corpus_201707_18E_01_t02.csv : 507
+RG0_Corpus_201707_18E_02_t01.csv : 618
+RG0_Corpus_201707_19A_01_t01.csv : 397
+RG0_Corpus_201707_19A_02_t02.csv : 435
+RG0_Corpus_201707_19A_03_t01.csv : 354
+RG0_Corpus_201707_19B_01_t01.csv : 411
+RG0_Corpus_201707_19B_02_t01.csv : 502
+RG0_Corpus_201707_19C_01_t02.csv : 493
+RG0_Corpus_201707_19C_02_t01.csv : 626
+RG0_Corpus_201707_19D_01_t01.csv : 396
+RG0_Corpus_201707_19D_02_t01.csv : 536
+RG0_Corpus_201707_19E_01_t01.csv : 500
+RG0_Corpus_201707_19E_02_t01.csv : 631
+RG0_Corpus_201707_19F_01_t03.csv : 405
+RG0_Corpus_201707_19F_02_t01.csv : 532
+RG0_Corpus_201707_20A_01_t01.csv : 369
+RG0_Corpus_201707_20A_02_t01.csv : 409
+RG0_Corpus_201707_20A_03_t01.csv : 347
+RG0_Corpus_201707_20B_01_t01.csv : 388
+RG0_Corpus_201707_20B_02_t01.csv : 505
+RG0_Corpus_201707_20C_01_t01.csv : 452
+RG0_Corpus_201707_20C_02_t01.csv : 569
+RG0_Corpus_201707_20D_01_t01.csv : 527
+RG0_Corpus_201707_20D_02_t01.csv : 644
+RG0_Corpus_201707_20E_01_t03.csv : 447
+RG0_Corpus_201707_20E_02_t01.csv : 547
+RG0_Corpus_201707_20F_01_t01.csv : 448
+RG0_Corpus_201707_20F_02_t01.csv : 540
+RG0_Corpus_201707_21A_01_t01.csv : 581
+RG0_Corpus_201707_21A_02_t01.csv : 658
+RG0_Corpus_201707_21A_03_t01.csv : 553
+RG0_Corpus_201707_21B_01_t01.csv : 720
+RG0_Corpus_201707_21B_02_t01.csv : 845
+RG0_Corpus_201707_21C_01_t01.csv : 557
+RG0_Corpus_201707_21C_02_t02.csv : 709
+RG0_Corpus_201707_21D_01_t01.csv : 653
+RG0_Corpus_201707_21D_02_t01.csv : 813
+RG0_Corpus_201707_21E_01_t01.csv : 618
+RG0_Corpus_201707_21E_02_t01.csv : 741
+RG0_Corpus_201707_21F_01_t01.csv : 598
+RG0_Corpus_201707_21F_02_t01.csv : 732
+RG0_Corpus_201707_22A_01_t01.csv : 471
+RG0_Corpus_201707_22A_02_t01.csv : 545
+RG0_Corpus_201707_22A_03_t01.csv : 436
+RG0_Corpus_201707_22B_01_t01.csv : 504
+RG0_Corpus_201707_22B_02_t01.csv : 620
+RG0_Corpus_201707_22C_01_t01.csv : 479
+RG0_Corpus_201707_22C_02_t01.csv : 575
+RG0_Corpus_201707_22D_01_t01.csv : 517
+RG0_Corpus_201707_22D_02_t01.csv : 646
+RG0_Corpus_201707_22E_01_t01.csv : 457
+RG0_Corpus_201707_22E_02_t03.csv : 571
+RG0_Corpus_201707_22F_01_t01.csv : 553
+RG0_Corpus_201707_22F_02_t01.csv : 696
+RG0_Corpus_201707_23A_01_t01.csv : 418
+RG0_Corpus_201707_23A_02_t02.csv : 541
+RG0_Corpus_201707_23A_03_t01.csv : 429
+RG0_Corpus_201707_23B_01_t01.csv : 458
+RG0_Corpus_201707_23B_02_t03.csv : 528
+RG0_Corpus_201707_23C_01_t01.csv : 464
+RG0_Corpus_201707_23C_02_t01.csv : 543
+RG0_Corpus_201707_23D_01_t01.csv : 370
+RG0_Corpus_201707_23D_02_t01.csv : 473
+RG0_Corpus_201707_23E_01_t02.csv : 465
+RG0_Corpus_201707_23E_02_t01.csv : 559
+RG0_Corpus_201707_23F_01_t01.csv : 651
+RG0_Corpus_201707_23F_02_t02.csv : 766
+RG0_Corpus_201707_24A_01_t01.csv : 446
+RG0_Corpus_201707_24A_02_t01.csv : 531
+RG0_Corpus_201707_24A_03_t01.csv : 407
+RG0_Corpus_201707_24B_01_t01.csv : 528
+RG0_Corpus_201707_24B_02_t01.csv : 624
+RG0_Corpus_201707_24C_01_t01.csv : 455
+RG0_Corpus_201707_24C_02_t02.csv : 485
+RG0_Corpus_201707_24D_01_t01.csv : 477
+RG0_Corpus_201707_24D_02_t01.csv : 525
+RG0_Corpus_201707_25A_01_t01.csv : 377
+RG0_Corpus_201707_25A_02_t01.csv : 489
+RG0_Corpus_201707_25A_03_t01.csv : 380
+RG0_Corpus_201707_25B_01_t01.csv : 429
+RG0_Corpus_201707_25B_02_t01.csv : 521
+RG0_Corpus_201707_25C_01_t01.csv : 418
+RG0_Corpus_201707_25C_02_t01.csv : 478
+RG0_Corpus_201707_26A_01_t01.csv : 393
+RG0_Corpus_201707_26A_02_t01.csv : 523
+RG0_Corpus_201707_26A_03_t01.csv : 366
+RG0_Corpus_201707_26B_01_t01.csv : 458
+RG0_Corpus_201707_26B_02_t01.csv : 592
+RG0_Corpus_201707_26C_01_t01.csv : 505
+RG0_Corpus_201707_26C_02_t02.csv : 626
+RG0_Corpus_201707_26D_01_t02.csv : 442
+RG0_Corpus_201707_26D_02_t01.csv : 549
+RG0_Corpus_201707_27A_01_t01.csv : 505
+RG0_Corpus_201707_27A_02_t01.csv : 703
+RG0_Corpus_201707_27A_03_t01.csv : 545
+RG0_Corpus_201707_27B_01_t01.csv : 503
+RG0_Corpus_201707_27B_02_t01.csv : 705
+RG0_Corpus_201707_27C_01_t04.csv : 628
+RG0_Corpus_201707_27C_02_t01.csv : 837
+RG0_Corpus_201707_27D_01_t01.csv : 597
+RG0_Corpus_201707_27D_02_t01.csv : 668
+RG0_Corpus_201707_27E_01_t03.csv : 543
+RG0_Corpus_201707_27E_02_t02.csv : 696
+RG0_Corpus_201707_28A_01_t01.csv : 435
+RG0_Corpus_201707_28A_02_t01.csv : 564
+RG0_Corpus_201707_28A_03_t01.csv : 398
+RG0_Corpus_201707_28B_01_t01.csv : 472
+RG0_Corpus_201707_28B_02_t01.csv : 590
+RG0_Corpus_201707_28C_01_t01.csv : 519
+RG0_Corpus_201707_28C_02_t01.csv : 707
+RG0_Corpus_201707_28D_01_t01.csv : 605
+RG0_Corpus_201707_28D_02_t01.csv : 805
+RG0_Corpus_201707_28E_01_t01.csv : 553
+RG0_Corpus_201707_28E_02_t01.csv : 713
+RG0_Corpus_201707_29A_01_t01.csv : 510
+RG0_Corpus_201707_29A_02_t02.csv : 646
+RG0_Corpus_201707_29A_03_t01.csv : 491
+RG0_Corpus_201707_29B_01_t01.csv : 566
+RG0_Corpus_201707_29B_02_t01.csv : 732
+RG0_Corpus_201707_29C_01_t01.csv : 537
+RG0_Corpus_201707_29C_02_t01.csv : 653
+RG0_Corpus_201707_29D_01_t01.csv : 434
+RG0_Corpus_201707_29D_02_t01.csv : 525
+RG0_Corpus_201707_29E_01_t01.csv : 498
+RG0_Corpus_201707_29E_02_t01.csv : 622
+RG0_Corpus_201707_30A_01_t01.csv : 374
+RG0_Corpus_201707_30A_02_t02.csv : 440
+RG0_Corpus_201707_30A_03_t01.csv : 377
+RG0_Corpus_201707_30B_01_t01.csv : 508
+RG0_Corpus_201707_30B_02_t02.csv : 655
+RG0_Corpus_201707_30C_01_t01.csv : 498
+RG0_Corpus_201707_30C_02_t01.csv : 661
+RG0_Corpus_201707_30D_01_t02.csv : 461
+RG0_Corpus_201707_30D_02_t01.csv : 594
+RG0_Corpus_201707_31A_01_t01.csv : 493
+RG0_Corpus_201707_31A_02_t01.csv : 594
+RG0_Corpus_201707_31A_03_t01.csv : 459
+RG0_Corpus_201707_31B_01_t01.csv : 492
+RG0_Corpus_201707_31B_02_t01.csv : 585
+RG0_Corpus_201707_31C_01_t01.csv : 605
+RG0_Corpus_201707_31C_02_t01.csv : 776
+RG0_Corpus_201707_31D_01_t01.csv : 469
+RG0_Corpus_201707_31D_02_t01.csv : 613
+RG0_Corpus_201707_31E_01_t01.csv : 595
+RG0_Corpus_201707_31E_02_t01.csv : 757
+RG0_Corpus_201707_31F_01_t01.csv : 526
+RG0_Corpus_201707_31F_02_t02.csv : 718
+RG0_Corpus_201707_31G_01_t01.csv : 498
+RG0_Corpus_201707_31G_02_t01.csv : 591
+RG0_Corpus_201707_32A_01_t01.csv : 391
+RG0_Corpus_201707_32A_02_t01.csv : 509
+RG0_Corpus_201707_32A_03_t01.csv : 375
+RG0_Corpus_201707_32B_01_t01.csv : 390
+RG0_Corpus_201707_32B_02_t01.csv : 458
+RG0_Corpus_201707_32C_01_t01.csv : 413
+RG0_Corpus_201707_32C_02_t01.csv : 540
+RG0_Corpus_201707_32D_01_t01.csv : 401
+RG0_Corpus_201707_32D_02_t01.csv : 521
+RG0_Corpus_201707_32E_01_t01.csv : 498
+RG0_Corpus_201707_32E_02_t01.csv : 633
+RG0_Corpus_201707_32F_01_t01.csv : 504
+RG0_Corpus_201707_32F_02_t01.csv : 654
+RG0_Corpus_201707_33A_01_t01.csv : 395
+RG0_Corpus_201707_33A_02_t01.csv : 478
+RG0_Corpus_201707_33A_03_t01.csv : 372
+RG0_Corpus_201707_33B_01_t01.csv : 426
+RG0_Corpus_201707_33B_02_t01.csv : 491
+RG0_Corpus_201707_33C_01_t01.csv : 361
+RG0_Corpus_201707_33C_02_t01.csv : 459
+RG0_Corpus_201707_33D_01_t01.csv : 528
+RG0_Corpus_201707_33D_02_t01.csv : 588
+RG0_Corpus_201707_33E_01_t01.csv : 611
+RG0_Corpus_201707_33E_02_t01.csv : 728
+RG0_Corpus_201707_34A_01_t01.csv : 587
+RG0_Corpus_201707_34A_02_t01.csv : 756
+RG0_Corpus_201707_34A_03_t02.csv : 596
+RG0_Corpus_201707_34B_01_t01.csv : 646
+RG0_Corpus_201707_34B_02_t01.csv : 716
+RG0_Corpus_201707_34C_01_t01.csv : 518
+RG0_Corpus_201707_34C_02_t01.csv : 700
+RG0_Corpus_201707_34D_01_t01.csv : 545
+RG0_Corpus_201707_34D_02_t01.csv : 726
+RG0_Corpus_201707_35A_01_t01.csv : 430
+RG0_Corpus_201707_35A_02_t01.csv : 579
+RG0_Corpus_201707_35A_03_t01.csv : 433
+RG0_Corpus_201707_35B_01_t01.csv : 460
+RG0_Corpus_201707_35B_02_t01.csv : 581
+RG0_Corpus_201707_35C_01_t01.csv : 547
+RG0_Corpus_201707_35C_02_t01.csv : 670
+RG0_Corpus_201707_35D_01_t01.csv : 500
+RG0_Corpus_201707_35D_02_t01.csv : 621
+RG0_Corpus_201707_35E_01_t01.csv : 449
+RG0_Corpus_201707_35E_02_t02.csv : 518
+RG0_Corpus_201707_35F_01_t01.csv : 443
+RG0_Corpus_201707_35F_02_t01.csv : 552
+RG0_Corpus_201707_36A_01_t02.csv : 528
+RG0_Corpus_201707_36A_02_t01.csv : 606
+RG0_Corpus_201707_36A_03_t01.csv : 459
+RG0_Corpus_201707_36B_01_t01.csv : 584
+RG0_Corpus_201707_36B_02_t01.csv : 769
+RG0_Corpus_201707_36C_01_t01.csv : 514
+RG0_Corpus_201707_36C_02_t01.csv : 665
+RG0_Corpus_201707_36D_01_t02.csv : 692
+RG0_Corpus_201707_36D_02_t01.csv : 817
+RG0_Corpus_201707_36E_01_t01.csv : 450
+RG0_Corpus_201707_36E_02_t02.csv : 603
+RG0_Corpus_201707_36F_01_t01.csv : 601
+RG0_Corpus_201707_36F_02_t01.csv : 742
+RG0_Corpus_201707_37A_01_t01.csv : 472
+RG0_Corpus_201707_37A_02_t01.csv : 597
+RG0_Corpus_201707_37A_03_t01.csv : 448
+RG0_Corpus_201707_37B_01_t01.csv : 471
+RG0_Corpus_201707_37B_02_t01.csv : 607
+RG0_Corpus_201707_37C_01_t02.csv : 472
+RG0_Corpus_201707_37C_02_t01.csv : 581
+RG0_Corpus_201707_37D_01_t02.csv : 537
+RG0_Corpus_201707_37D_02_t01.csv : 702
+RG0_Corpus_201707_37E_01_t01.csv : 617
+RG0_Corpus_201707_37E_02_t01.csv : 698
+RG0_Corpus_201707_38A_01_t01.csv : 423
+RG0_Corpus_201707_38A_02_t01.csv : 513
+RG0_Corpus_201707_38A_03_t01.csv : 376
+RG0_Corpus_201707_38B_01_t01.csv : 429
+RG0_Corpus_201707_38B_02_t01.csv : 502
+RG0_Corpus_201707_38C_01_t01.csv : 392
+RG0_Corpus_201707_38C_02_t01.csv : 487
+RG0_Corpus_201707_38D_01_t01.csv : 551
+RG0_Corpus_201707_38D_02_t01.csv : 686
+RG0_Corpus_201707_38E_01_t01.csv : 573
+RG0_Corpus_201707_38E_02_t01.csv : 624
+RG0_Corpus_201707_39A_01_t01.csv : 351
+RG0_Corpus_201707_39A_02_t01.csv : 425
+RG0_Corpus_201707_39A_03_t01.csv : 320
+RG0_Corpus_201707_39B_01_t01.csv : 401
+RG0_Corpus_201707_39B_02_t01.csv : 489
+RG0_Corpus_201707_39C_01_t01.csv : 397
+RG0_Corpus_201707_39C_02_t01.csv : 505
+RG0_Corpus_201707_39D_01_t01.csv : 505
+RG0_Corpus_201707_39D_02_t01.csv : 650
+RG0_Corpus_201707_39E_01_t01.csv : 460
+RG0_Corpus_201707_39E_02_t01.csv : 570
+RG0_Corpus_201707_39F_01_t01.csv : 445
+RG0_Corpus_201707_39F_02_t01.csv : 582
+RG0_Corpus_201707_40A_01_t01.csv : 508
+RG0_Corpus_201707_40A_02_t01.csv : 651
+RG0_Corpus_201707_40A_03_t01.csv : 475
+RG0_Corpus_201707_40B_01_t01.csv : 697
+RG0_Corpus_201707_40B_02_t02.csv : 828
+RG0_Corpus_201707_40C_01_t01.csv : 523
+RG0_Corpus_201707_40C_02_t02.csv : 581
+RG0_Corpus_201707_40D_01_t01.csv : 597
+RG0_Corpus_201707_40D_02_t01.csv : 782
+RG0_Corpus_201707_40E_01_t01.csv : 581
+RG0_Corpus_201707_40E_02_t01.csv : 739
+RG0_Corpus_201707_40F_01_t01.csv : 544
+RG0_Corpus_201707_40F_02_t01.csv : 619
+RG0_Corpus_201707_41A_01_t01.csv : 429
+RG0_Corpus_201707_41A_02_t01.csv : 512
+RG0_Corpus_201707_41A_03_t01.csv : 395
+RG0_Corpus_201707_41B_01_t01.csv : 516
+RG0_Corpus_201707_41B_02_t02.csv : 578
+RG0_Corpus_201707_41C_01_t01.csv : 430
+RG0_Corpus_201707_41C_02_t01.csv : 521
+RG0_Corpus_201707_41D_01_t01.csv : 452
+RG0_Corpus_201707_41D_02_t01.csv : 520
+RG0_Corpus_201707_41E_01_t01.csv : 550
+RG0_Corpus_201707_41E_02_t02.csv : 693
+RG0_Corpus_201707_41F_01_t01.csv : 512
+RG0_Corpus_201707_41F_02_t01.csv : 618
+RG0_Corpus_201707_42A_01_t02.csv : 581
+RG0_Corpus_201707_42A_02_t01.csv : 705
+RG0_Corpus_201707_42A_03_t01.csv : 549
+RG0_Corpus_201707_42B_01_t02.csv : 551
+RG0_Corpus_201707_42B_02_t01.csv : 703
+RG0_Corpus_201707_42C_01_t01.csv : 532
+RG0_Corpus_201707_42C_02_t01.csv : 686
+RG0_Corpus_201707_42D_01_t01.csv : 492
+RG0_Corpus_201707_42D_02_t02.csv : 673
+RG0_Corpus_201707_42E_01_t01.csv : 572
+RG0_Corpus_201707_42E_02_t01.csv : 765
+RG0_Corpus_201707_43A_01_t02.csv : 417
+RG0_Corpus_201707_43A_02_t01.csv : 601
+RG0_Corpus_201707_43A_03_t01.csv : 379
+RG0_Corpus_201707_43B_01_t01.csv : 466
+RG0_Corpus_201707_43B_02_t01.csv : 601
+RG0_Corpus_201707_43C_01_t01.csv : 462
+RG0_Corpus_201707_43C_02_t01.csv : 578
+RG0_Corpus_201707_43D_01_t01.csv : 426
+RG0_Corpus_201707_43D_02_t01.csv : 521
+RG0_Corpus_201707_43E_01_t01.csv : 428
+RG0_Corpus_201707_43E_02_t01.csv : 506
+RG0_Corpus_201707_44A_01_t01.csv : 495
+RG0_Corpus_201707_44A_02_t01.csv : 657
+RG0_Corpus_201707_44A_03_t01.csv : 467
+RG0_Corpus_201707_44B_01_t01.csv : 534
+RG0_Corpus_201707_44B_02_t01.csv : 725
+RG0_Corpus_201707_44C_01_t02.csv : 536
+RG0_Corpus_201707_44C_02_t02.csv : 708
+RG0_Corpus_201707_44D_01_t01.csv : 653
+RG0_Corpus_201707_44D_02_t01.csv : 857
+RG0_Corpus_201707_44E_01_t01.csv : 545
+RG0_Corpus_201707_44E_02_t01.csv : 768
+RG0_Corpus_201707_44F_01_t02.csv : 550
+RG0_Corpus_201707_44F_02_t02.csv : 738
+RG0_Corpus_201707_45A_01_t01.csv : 439
+RG0_Corpus_201707_45A_02_t01.csv : 577
+RG0_Corpus_201707_45A_03_t01.csv : 469
+RG0_Corpus_201707_45B_01_t01.csv : 539
+RG0_Corpus_201707_45B_02_t01.csv : 654
+RG0_Corpus_201707_45C_01_t01.csv : 515
+RG0_Corpus_201707_45C_02_t02.csv : 615
+RG0_Corpus_201707_45D_01_t02.csv : 639
+RG0_Corpus_201707_45D_02_t02.csv : 858
+RG0_Corpus_201707_45E_01_t03.csv : 573
+RG0_Corpus_201707_45E_02_t02.csv : 768
+RG0_Corpus_201707_45F_01_t02.csv : 526
+RG0_Corpus_201707_45F_02_t02.csv : 645
+RG0_Corpus_201707_46A_01_t01.csv : 481
+RG0_Corpus_201707_46A_02_t01.csv : 641
+RG0_Corpus_201707_46A_03_t01.csv : 477
+RG0_Corpus_201707_46B_01_t01.csv : 498
+RG0_Corpus_201707_46B_02_t01.csv : 602
+RG0_Corpus_201707_46C_01_t01.csv : 581
+RG0_Corpus_201707_46C_02_t02.csv : 780
+RG0_Corpus_201707_46D_01_t01.csv : 540
+RG0_Corpus_201707_46D_02_t02.csv : 729
+RG0_Corpus_201707_46E_01_t01.csv : 648
+RG0_Corpus_201707_46E_02_t01.csv : 826
+RG0_Corpus_201707_46F_01_t01.csv : 527
+RG0_Corpus_201707_46F_02_t01.csv : 665
+RG0_Corpus_201707_47A_01_t01.csv : 533
+RG0_Corpus_201707_47A_02_t01.csv : 677
+RG0_Corpus_201707_47A_03_t01.csv : 494
+RG0_Corpus_201707_47B_01_t01.csv : 613
+RG0_Corpus_201707_47B_02_t01.csv : 690
+RG0_Corpus_201707_47C_01_t01.csv : 539
+RG0_Corpus_201707_47C_02_t01.csv : 667
+RG0_Corpus_201707_47D_01_t01.csv : 530
+RG0_Corpus_201707_47D_02_t01.csv : 673
+RG0_Corpus_201707_47E_01_t01.csv : 506
+RG0_Corpus_201707_47E_02_t01.csv : 694
+RG0_Corpus_201707_48A_01_t01.csv : 518
+RG0_Corpus_201707_48A_02_t01.csv : 698
+RG0_Corpus_201707_48A_03_t01.csv : 504
+RG0_Corpus_201707_48B_01_t01.csv : 461
+RG0_Corpus_201707_48B_02_t01.csv : 598
+RG0_Corpus_201707_48C_01_t01.csv : 499
+RG0_Corpus_201707_48C_02_t02.csv : 660
+RG0_Corpus_201707_48D_01_t01.csv : 461
+RG0_Corpus_201707_48D_02_t01.csv : 590
+RG0_Corpus_201707_48E_01_t01.csv : 481
+RG0_Corpus_201707_48E_02_t01.csv : 673
+RG0_Corpus_201707_49A_01_t01.csv : 454
+RG0_Corpus_201707_49A_02_t01.csv : 588
+RG0_Corpus_201707_49A_03_t01.csv : 466
+RG0_Corpus_201707_49B_01_t01.csv : 541
+RG0_Corpus_201707_49B_02_t01.csv : 711
+RG0_Corpus_201707_49C_01_t01.csv : 408
+RG0_Corpus_201707_49C_02_t01.csv : 534
+RG0_Corpus_201707_49D_01_t01.csv : 557
+RG0_Corpus_201707_49D_02_t01.csv : 741
+RG0_Corpus_201707_49E_01_t01.csv : 434
+RG0_Corpus_201707_49E_02_t01.csv : 593
+RG0_Corpus_201707_49F_01_t01.csv : 503
+RG0_Corpus_201707_49F_02_t01.csv : 620
+RG0_Corpus_201707_50A_01_t01.csv : 573
+RG0_Corpus_201707_50A_02_t01.csv : 795
+RG0_Corpus_201707_50A_03_t01.csv : 620
+RG0_Corpus_201707_50B_01_t02.csv : 555
+RG0_Corpus_201707_50B_02_t01.csv : 607
+RG0_Corpus_201707_50C_01_t01.csv : 410
+RG0_Corpus_201707_50C_02_t01.csv : 477
+RG0_Corpus_201707_50D_01_t01.csv : 622
+RG0_Corpus_201707_50D_02_t01.csv : 813
+RG0_Corpus_201707_50E_01_t01.csv : 471
+RG0_Corpus_201707_50E_02_t01.csv : 564
+RG0_Corpus_201707_51A_01_t01.csv : 533
+RG0_Corpus_201707_51A_02_t01.csv : 651
+RG0_Corpus_201707_51A_03_t01.csv : 544
+RG0_Corpus_201707_51B_01_t02.csv : 591
+RG0_Corpus_201707_51B_02_t01.csv : 813
+RG0_Corpus_201707_51C_01_t01.csv : 581
+RG0_Corpus_201707_51C_02_t01.csv : 672
+RG0_Corpus_201707_51D_01_t01.csv : 525
+RG0_Corpus_201707_51D_02_t02.csv : 689
+RG0_Corpus_201707_51E_01_t01.csv : 697
+RG0_Corpus_201707_51E_02_t02.csv : 778
+RG0_Corpus_201707_52A_01_t01.csv : 607
+RG0_Corpus_201707_52A_02_t02.csv : 689
+RG0_Corpus_201707_52A_03_t01.csv : 621
+RG0_Corpus_201707_52B_01_t01.csv : 543
+RG0_Corpus_201707_52B_02_t01.csv : 661
+RG0_Corpus_201707_52C_01_t01.csv : 595
+RG0_Corpus_201707_52C_02_t01.csv : 755
+RG0_Corpus_201707_52D_01_t01.csv : 463
+RG0_Corpus_201707_52D_02_t01.csv : 555
+RG0_Corpus_201707_52E_01_t01.csv : 528
+RG0_Corpus_201707_52E_02_t01.csv : 686
+RG0_Corpus_201707_53A_01_t01.csv : 390
+RG0_Corpus_201707_53A_02_t01.csv : 522
+RG0_Corpus_201707_53A_03_t01.csv : 415
+RG0_Corpus_201707_53B_01_t01.csv : 560
+RG0_Corpus_201707_53B_02_t01.csv : 648
+RG0_Corpus_201707_53C_01_t01.csv : 539
+RG0_Corpus_201707_53C_02_t01.csv : 708
+RG0_Corpus_201707_53D_01_t01.csv : 509
+RG0_Corpus_201707_53D_02_t01.csv : 583
+RG0_Corpus_201707_53E_01_t02.csv : 561
+RG0_Corpus_201707_53E_02_t01.csv : 760
+RG0_Corpus_201707_54A_01_t01.csv : 526
+RG0_Corpus_201707_54A_02_t01.csv : 639
+RG0_Corpus_201707_54A_03_t02.csv : 501
+RG0_Corpus_201707_54B_01_t01.csv : 541
+RG0_Corpus_201707_54B_02_t01.csv : 679
+RG0_Corpus_201707_54C_01_t01.csv : 482
+RG0_Corpus_201707_54C_02_t01.csv : 618
+RG0_Corpus_201707_54D_01_t03.csv : 428
+RG0_Corpus_201707_54D_02_t01.csv : 564
+RG0_Corpus_201707_54E_01_t01.csv : 443
+RG0_Corpus_201707_54E_02_t01.csv : 571
+RG0_Corpus_201707_55A_01_t01.csv : 444
+RG0_Corpus_201707_55A_02_t01.csv : 564
+RG0_Corpus_201707_55A_03_t01.csv : 437
+RG0_Corpus_201707_55B_01_t02.csv : 563
+RG0_Corpus_201707_55B_02_t01.csv : 735
+RG0_Corpus_201707_55C_01_t01.csv : 568
+RG0_Corpus_201707_55C_02_t01.csv : 648
+RG0_Corpus_201707_55D_01_t02.csv : 544
+RG0_Corpus_201707_55D_02_t01.csv : 657
+RG0_Corpus_201707_55E_01_t02.csv : 565
+RG0_Corpus_201707_55E_02_t01.csv : 660
+RG0_Corpus_201707_56A_01_t01.csv : 520
+RG0_Corpus_201707_56A_02_t01.csv : 635
+RG0_Corpus_201707_56A_03_t01.csv : 517
+RG0_Corpus_201707_56B_01_t03.csv : 517
+RG0_Corpus_201707_56B_02_t01.csv : 650
+RG0_Corpus_201707_56C_01_t01.csv : 609
+RG0_Corpus_201707_56C_02_t01.csv : 616
+RG0_Corpus_201707_56D_01_t01.csv : 516
+RG0_Corpus_201707_56D_02_t01.csv : 626
+RG0_Corpus_201707_57A_01_t01.csv : 557
+RG0_Corpus_201707_57A_02_t01.csv : 725
+RG0_Corpus_201707_57A_03_t01.csv : 545
+RG0_Corpus_201707_57B_01_t01.csv : 560
+RG0_Corpus_201707_57B_02_t01.csv : 691
+RG0_Corpus_201707_57C_01_t01.csv : 616
+RG0_Corpus_201707_57C_02_t01.csv : 759
+RG0_Corpus_201707_57D_01_t01.csv : 680
+RG0_Corpus_201707_57D_02_t01.csv : 806
+RG0_Corpus_201707_57E_01_t01.csv : 650
+RG0_Corpus_201707_57E_02_t02.csv : 814
+RG0_Corpus_201707_58A_01_t01.csv : 489
+RG0_Corpus_201707_58A_02_t01.csv : 575
+RG0_Corpus_201707_58A_03_t01.csv : 500
+RG0_Corpus_201707_58B_01_t01.csv : 472
+RG0_Corpus_201707_58B_02_t01.csv : 585
+RG0_Corpus_201707_58C_01_t01.csv : 498
+RG0_Corpus_201707_58C_02_t02.csv : 641
+RG0_Corpus_201707_58D_01_t01.csv : 641
+RG0_Corpus_201707_58D_02_t01.csv : 813
+RG0_Corpus_201707_59A_01_t03.csv : 519
+RG0_Corpus_201707_59A_02_t01.csv : 653
+RG0_Corpus_201707_59A_03_t01.csv : 559
+RG0_Corpus_201707_59B_01_t01.csv : 614
+RG0_Corpus_201707_59B_02_t01.csv : 751
+RG0_Corpus_201707_59C_01_t02.csv : 390
+RG0_Corpus_201707_59C_02_t01.csv : 539
+RG0_Corpus_201707_59D_01_t01.csv : 573
+RG0_Corpus_201707_59D_02_t01.csv : 727
+RG0_Corpus_201707_59E_01_t01.csv : 622
+RG0_Corpus_201707_59E_02_t01.csv : 761
+RG0_Corpus_201707_60A_01_t01.csv : 473
+RG0_Corpus_201707_60A_02_t01.csv : 589
+RG0_Corpus_201707_60A_03_t01.csv : 452
+RG0_Corpus_201707_60B_01_t01.csv : 452
+RG0_Corpus_201707_60B_02_t01.csv : 548
+RG0_Corpus_201707_60C_01_t01.csv : 469
+RG0_Corpus_201707_60C_02_t02.csv : 627
+RG0_Corpus_201707_60D_01_t02.csv : 513
+RG0_Corpus_201707_60D_02_t01.csv : 625
+RG0_Corpus_201707_60E_01_t01.csv : 526
+RG0_Corpus_201707_60E_02_t01.csv : 696
+RG0_Corpus_201707_61A_01_t01.csv : 522
+RG0_Corpus_201707_61A_02_t01.csv : 643
+RG0_Corpus_201707_61A_03_t01.csv : 519
+RG0_Corpus_201707_61B_01_t01.csv : 643
+RG0_Corpus_201707_61B_02_t01.csv : 834
+RG0_Corpus_201707_61C_01_t01.csv : 498
+RG0_Corpus_201707_61C_02_t01.csv : 668
+RG0_Corpus_201707_61D_01_t01.csv : 420
+RG0_Corpus_201707_61D_02_t01.csv : 509
+RG0_Corpus_201707_62A_01_t01.csv : 457
+RG0_Corpus_201707_62A_02_t01.csv : 577
+RG0_Corpus_201707_62A_03_t01.csv : 457
+RG0_Corpus_201707_62B_01_t01.csv : 512
+RG0_Corpus_201707_62B_02_t01.csv : 702
+RG0_Corpus_201707_62C_01_t01.csv : 442
+RG0_Corpus_201707_62C_02_t01.csv : 547
+RG0_Corpus_201707_62D_01_t01.csv : 479
+RG0_Corpus_201707_62D_02_t01.csv : 620
+RG0_Corpus_201707_63A_01_t01.csv : 464
+RG0_Corpus_201707_63A_02_t01.csv : 571
+RG0_Corpus_201707_63A_03_t02.csv : 469
+RG0_Corpus_201707_63B_01_t01.csv : 459
+RG0_Corpus_201707_63B_02_t01.csv : 588
+RG0_Corpus_201707_63C_01_t01.csv : 459
+RG0_Corpus_201707_63C_02_t01.csv : 603
+RG0_Corpus_201707_63D_01_t01.csv : 428
+RG0_Corpus_201707_63D_02_t01.csv : 637
+RG0_Corpus_201707_63E_01_t01.csv : 492
+RG0_Corpus_201707_63E_02_t01.csv : 626
+RG0_Corpus_201707_64A_01_t01.csv : 491
+RG0_Corpus_201707_64A_02_t01.csv : 671
+RG0_Corpus_201707_64A_03_t01.csv : 491
+RG0_Corpus_201707_64B_01_t01.csv : 506
+RG0_Corpus_201707_64B_02_t02.csv : 633
+RG0_Corpus_201707_64C_01_t01.csv : 473
+RG0_Corpus_201707_64C_02_t02.csv : 606
+RG0_Corpus_201707_64D_01_t01.csv : 460
+RG0_Corpus_201707_64D_02_t01.csv : 581
+RG0_Corpus_201707_65A_01_t01.csv : 456
+RG0_Corpus_201707_65A_02_t01.csv : 570
+RG0_Corpus_201707_65A_03_t02.csv : 477
+RG0_Corpus_201707_65B_01_t01.csv : 391
+RG0_Corpus_201707_65B_02_t01.csv : 490
+RG0_Corpus_201707_65C_01_t01.csv : 528
+RG0_Corpus_201707_65C_02_t01.csv : 683
+RG0_Corpus_201707_65D_01_t01.csv : 427
+RG0_Corpus_201707_65D_02_t01.csv : 539
+RG0_Corpus_201707_66A_01_t01.csv : 559
+RG0_Corpus_201707_66A_02_t01.csv : 737
+RG0_Corpus_201707_66A_03_t01.csv : 568
+RG0_Corpus_201707_66B_01_t01.csv : 584
+RG0_Corpus_201707_66B_02_t01.csv : 832
+RG0_Corpus_201707_66C_01_t01.csv : 546
+RG0_Corpus_201707_66C_02_t02.csv : 658
+RG0_Corpus_201707_66D_01_t01.csv : 552
+RG0_Corpus_201707_66D_02_t01.csv : 667
+RG0_Corpus_201707_66E_01_t01.csv : 407
+RG0_Corpus_201707_66E_02_t01.csv : 527
+RG0_Corpus_201707_66F_01_t02.csv : 452
+RG0_Corpus_201707_66F_02_t01.csv : 551
+RG0_Corpus_201707_67A_01_t01.csv : 555
+RG0_Corpus_201707_67A_02_t01.csv : 672
+RG0_Corpus_201707_67A_03_t01.csv : 512
+RG0_Corpus_201707_67B_01_t01.csv : 496
+RG0_Corpus_201707_67B_02_t01.csv : 528
+RG0_Corpus_201707_67C_01_t01.csv : 616
+RG0_Corpus_201707_67C_02_t01.csv : 765
+RG0_Corpus_201707_67D_01_t01.csv : 491
+RG0_Corpus_201707_67D_02_t02.csv : 558
+RG0_Corpus_201707_67E_01_t01.csv : 526
+RG0_Corpus_201707_67E_02_t01.csv : 627
+RG0_Corpus_201707_68A_01_t01.csv : 478
+RG0_Corpus_201707_68A_02_t01.csv : 620
+RG0_Corpus_201707_68A_03_t01.csv : 487
+RG0_Corpus_201707_68B_01_t01.csv : 471
+RG0_Corpus_201707_68B_02_t01.csv : 580
+RG0_Corpus_201707_68C_01_t01.csv : 498
+RG0_Corpus_201707_68C_02_t01.csv : 682
+RG0_Corpus_201707_68D_01_t01.csv : 576
+RG0_Corpus_201707_68D_02_t01.csv : 718
+RG0_Corpus_201707_68E_01_t01.csv : 589
+RG0_Corpus_201707_68E_02_t01.csv : 766
+RG0_Corpus_201707_69A_01_t01.csv : 371
+RG0_Corpus_201707_69A_02_t01.csv : 477
+RG0_Corpus_201707_69A_03_t01.csv : 357
+RG0_Corpus_201707_69B_01_t01.csv : 465
+RG0_Corpus_201707_69B_02_t01.csv : 639
+RG0_Corpus_201707_69C_01_t01.csv : 566
+RG0_Corpus_201707_69C_02_t01.csv : 703
+RG0_Corpus_201707_69D_01_t01.csv : 453
+RG0_Corpus_201707_69D_02_t01.csv : 592
+RG0_Corpus_201707_69E_01_t01.csv : 331
+RG0_Corpus_201707_69E_02_t01.csv : 443
+RG0_Corpus_201707_70A_01_t01.csv : 449
+RG0_Corpus_201707_70A_02_t01.csv : 544
+RG0_Corpus_201707_71A_01_t01.csv : 446
+RG0_Corpus_201707_71A_02_t01.csv : 538
+RG0_Corpus_201707_72A_01_t01.csv : 445
+RG0_Corpus_201707_72A_02_t01.csv : 537
+RG0_Corpus_201707_73A_01_t01.csv : 454
+RG0_Corpus_201707_73A_02_t01.csv : 629
+RG0_Corpus_201707_74A_01_t01.csv : 404
+RG0_Corpus_201707_74A_02_t01.csv : 500
+RG0_Corpus_201707_75A_01_t01.csv : 442
+RG0_Corpus_201707_75A_02_t01.csv : 531
+RG0_Corpus_201707_76A_01_t01.csv : 377
+RG0_Corpus_201707_76A_02_t01.csv : 461
+RG0_Corpus_201707_77A_01_t01.csv : 502
+RG0_Corpus_201707_77A_02_t01.csv : 683
+RG0_Corpus_201707_78A_01_t01.csv : 405
+RG0_Corpus_201707_78A_02_t01.csv : 523
+RG0_Corpus_201707_79A_01_t01.csv : 331
+RG0_Corpus_201707_79A_02_t01.csv : 415
+
+
+value : 0Å`1
+
+colÅF320Å`858
+ Time(frame)
+RowÅF107Å~3=321 (Zrotation,Xrotation,Yrotation)
+ Hips
+     Zrotation
+     Xrotation
+     Yrotation
+ RightHip
+ RightKnee
+ RightAnkle
+ RightToe
+ LeftHip
+ LeftKnee
+ LeftAnkle
+ LeftToe
+ Chest1
+ Chest2
+ Chest3
+ RightCollar
+ RightShoulder
+ RightElbow
+ RightForeArm
+ RightWrist
+ RightThumb1
+ RightThumb2
+ RightThumb3
+ RightIndex0
+ RightIndex1
+ RightIndex2
+ RightIndex3
+ RightMiddle0
+ RightMiddle1
+ RightMiddle2
+ RightMiddle3
+ RightRing0
+ RightRing1
+ RightRing2
+ RightRing3
+ RightPinky0
+ RightPinky1
+ RightPinky2
+ RightPinky3
+ LeftCollar
+ LeftShoulder
+ LeftElbow
+ LeftForeArm
+ LeftWrist
+ LeftThumb1
+ LeftThumb2
+ LeftThumb3
+ LeftIndex0
+ LeftIndex1
+ LeftIndex2
+ LeftIndex3
+ LeftMiddle0
+ LeftMiddle1
+ LeftMiddle2
+ LeftMiddle3
+ LeftRing0
+ LeftRing1
+ LeftRing2
+ LeftRing3
+ LeftPinky0
+ LeftPinky1
+ LeftPinky2
+ LeftPinky3
+ Neck
+ Head
+ Jaw_Root
+ Low_Teeth01
+ Up_Teeth01
+ Tongue01
+ Tongue04
+ Tongue03
+ Tongue02
+ Center_Up_Jaw
+ Center_Low_Mouth
+ Center_Jaw
+ R_Cheek03
+ R_Side_Mouth
+ R_Low_Mouth
+ R_Jaw01
+ R_Jaw02
+ L_Cheek03
+ L_Side_Mouth
+ L_Low_Mouth
+ L_Jaw01
+ L_Jaw02
+ R_Up_Eye
+ L_Up_Eye
+ R_Brow02
+ R_Cheek04
+ R_Cheek01
+ R_Brow01
+ R_Up_Mouth
+ R_Nose
+ R_Low_Eye
+ R_Cheek02
+ R_Brow03
+ L_Brow02
+ L_Cheek04
+ L_Cheek01
+ L_Brow01
+ L_Up_Mouth
+ L_Nose
+ L_Low_Eye
+ L_Cheek02
+ L_Brow03
+ Nose_Top
+ Center_Up_Mouth
+ RightEye
+ LeftEye
+ Tongue05

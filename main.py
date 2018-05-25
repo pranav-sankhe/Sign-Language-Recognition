@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import os 
 import sys
+import numpy as np 
 sys.path.append(os.path.abspath("/home/user/Documents/SignLangRecog/data"))
 import utils
 
@@ -19,16 +20,19 @@ for filename in os.listdir(BASE_PATH):
         motionData_filepath = BASE_PATH +'/' + filename
         motionData = utils.render_motionData(motionData_filepath)
         # utils.plot3D(motionData, interactiveMode=True)
-        mat = utils.Variance(motionData, filename)
+        selected_markers_var = utils.Variance(motionData, filename)
+        print selected_markers_var, selected_markers_var.shape
+        mat = utils.VARsum(selected_markers_var)
+        
         print "file count:: ", count 
         count = count + 1
-        # if count > 500:
-        #     break
+        if count > 5:                                           #control the number of iterations
+            break
 
-print utils.getSelectedBodParts(mat)
-
-# plt.plot(mat, 'ro')
-# plt.show()
+mat = np.transpose(mat)
+for i in range(2,3):
+    plt.plot(mat[i])
+plt.show()
 
 # meta_filepath = "/home/user/Documents/SignLangRecog/data/position_full.xlsx"
 # motionData_filepath =  "/home/user/Documents/SignLangRecog/data/RG0_Corpus_201801_P203_02_t01.csv"
