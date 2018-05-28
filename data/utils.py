@@ -16,9 +16,17 @@ from keras.utils import np_utils
 
 NUM_MARKERS = 107         #Total Number of markers
 MOTION_PARAMETERS = 6
+VARIANCE_THRESHOLD = 0    #for 1000 file iterations
+THRESHOLD_CRITERION = 700 #for 1000 file iterations
+PLOT_ARG = False
+HANDCRAFTED = True
+DROP_POSDATA = True
+
 selectCriterion_matrix = np.zeros(NUM_MARKERS)
 VARsumFlag = 0 
 selec_var_sum = []
+
+
 def num_elements(shape):
     num = 1
     for i in list(shape):
@@ -126,23 +134,51 @@ class ZoomPan:
         #return the function
         return onMotion
 
+def render_motionData(filepath):
+
+    motionData = pd.read_csv(filepath)
+    cLength = motionData.shape[1]
+    cList = np.arange(cLength)
+    motionData = pd.read_csv(filepath, names = cList)
+
+    motionData = motionData.values
+    motionData = np.reshape(motionData, (NUM_MARKERS, MOTION_PARAMETERS, cLength))
+    return motionData
+
+
 def getSelectedBodParts(Selected_Markers):
-    body_desc_path = "./data/body.csv"
+    body_desc_path = "body.csv"
     df = pd.read_csv(body_desc_path)
-    body_desc_array = df.values 
+    body_desc_array = df.values
+
     selected_body_desc = body_desc_array[Selected_Markers]
     Selected_Markers = np.array(Selected_Markers)
     selected_body_desc = np.array(selected_body_desc)
     selected_body_desc = np.reshape(selected_body_desc, max(np.array(selected_body_desc.shape)))
+    body_desc_array = np.reshape(body_desc_array, max(np.array(body_desc_array.shape)))
     Selected_Markers = np.reshape(Selected_Markers, max(np.array(Selected_Markers.shape)))
-    selected_body_descDF = pd.DataFrame({'selected body parts':selected_body_desc,'indices':Selected_Markers})
-    pd.DataFrame.to_csv(selected_body_descDF, './data/selected_body_parts.csv' )
+
+
+    selected_body_desc = np.pad(selected_body_desc, [0,len(body_desc_array) - len(selected_body_desc)], mode='constant', constant_values=0)
+    Selected_Markers = np.pad(Selected_Markers, [0,len(body_desc_array) - len(Selected_Markers)], mode='constant', constant_values=0)
+
+    selected_body_descDF = pd.DataFrame({'selected body parts':selected_body_desc,'indices':Selected_Markers, 'all parts': body_desc_array })
+    pd.DataFrame.to_csv(selected_body_descDF, 'selected_body_parts.csv' )
     return selected_body_desc
 
 def store_variances(filename, var_data):
-    pd.DataFrame.to_csv(var_data, './data/' + filename)
+    pd.DataFrame.to_csv(var_data, '' + filename)
 
-def Variance(mdata, filename):
+def drop_posData(DROP_POSDATA):
+  return DROP_POSDATA
+
+def handCrafted(HANDCRAFTED):
+    return HANDCRAFTED
+
+
+
+def Variance(mdata, filename, handcrafted, drop_posdata):
+    
     xdata = mdata[:,0]
     ydata = mdata[:,1]
     zdata = mdata[:,2]
@@ -150,78 +186,93 @@ def Variance(mdata, filename):
     yrot = mdata[:,4]
     xrot = mdata[:,5]
     
-    mdata = [xdata, ydata, zdata, zrot, yrot, xrot]                    #all motion data                              
-    mColumn_list = ['xpos', 'ypos', 'zpos', 'zrot', 'yrot', 'xrot']         
-    
 
-    var_df = pd.DataFrame(columns=mColumn_list)                        # create a dataframe to store variances     
+    if drop_posdata == True:
+        mdata = [zrot, yrot, xrot]
+        mColumn_list = ['zrot', 'yrot', 'xrot']
+                
+    else:
+        mdata = [xdata, ydata, zdata, zrot, yrot, xrot]                    #all motion data
+        mColumn_list = ['xpos', 'ypos', 'zpos', 'zrot', 'yrot', 'xrot']         
+
+
+    var_df = pd.DataFrame(columns=mColumn_list)                            # create a dataframe to store variances     
     var_df = var_df
     filename = os.path.splitext(filename)[0]                        
-    for i in range(MOTION_PARAMETERS):
+    for i in range(len(mColumn_list)):
         var_df[mColumn_list[i]] = np.var(mdata[i], axis=1)
-        #var_df[mColumn_list[i]] = var_df[mColumn_list[i]].apply(lambda x: 0 if x < 1e-5 else x)         # map low variances to zero
+        var_df[mColumn_list[i]] = var_df[mColumn_list[i]].apply(lambda x: 0 if x < 1e-5 else x)         # map low variances to zero
     
-    body_desc_path = "./data/body.csv"
+    if handCrafted(handcrafted) == True:
+        for i in range(9):
+            for j in range(3):
+                var_df.iloc[i,j] = 0 
+       
+        
+    body_desc_path = "body.csv"
     body_df = pd.read_csv(body_desc_path)
     body_df = body_df.values
 
 
-    var_df['body parts'] = body_df
+
     store_variances('var.csv', var_df)   #save variance data in the data folder 
 
-    # var_sum = var_df[mColumn_list[0]]               # compute the sum of variances.  Gives an idea of the motion of the marker
-    # for i in range(1,6):
-    #     var_sum = var_sum + var_df[mColumn_list[i]]     
+    var_sum = var_df[mColumn_list[0]]               # compute the sum of variances.  Gives an idea of the motion of the marker
+    for i in range(1,len(mColumn_list)):
+        var_sum = var_sum + var_df[mColumn_list[i]]     
 
-    # varianceThreshold = 0                               
-    # highVar_makers = np.where( var_sum > varianceThreshold)   #markers having a positive variances will be selected and the rest will be thrown out
+    varianceThreshold = VARIANCE_THRESHOLD                               
+    highVar_makers = np.where( var_sum > varianceThreshold)   #markers having a positive variances will be selected and the rest will be thrown out
 
 
 
-    # selectCriterion_matrix[highVar_makers] = selectCriterion_matrix[highVar_makers] + 1 # This will be iterated over all the files and a score is alloted to a marker is it has a positive variance
-    # thresholdCriterion = 200
-    # numSelected = np.sum(selectCriterion_matrix >=thresholdCriterion)                   #number of selected markers
+    selectCriterion_matrix[highVar_makers] = selectCriterion_matrix[highVar_makers] + 1 # This will be iterated over all the files and a score is alloted to a marker is it has a positive variance
+    thresholdCriterion = THRESHOLD_CRITERION
+    numSelected = np.sum(selectCriterion_matrix >=thresholdCriterion)                   #number of selected markers
 
-    # Selected_Markers = np.where(selectCriterion_matrix >= thresholdCriterion)            #The indices of the selected markers after examining all the files since the threshold criterion matrix is computed for all the files            
+    Selected_Markers = np.where(selectCriterion_matrix >= thresholdCriterion)            #The indices of the selected markers after examining all the files since the threshold criterion matrix is computed for all the files            
          
 
-    # # print "High variance markers", highVar_makers
-    # # print "variance values", var_sum.values[highVar_makers]   
-    # # print "selection criterion matrix", selectCriterion_matrix
-    # print "Number of seleted points ", numSelected , "  Number of markers not selected  ", NUM_MARKERS - numSelected 
-    # print "Selected matrix", Selected_Markers
+    print "High variance markers", highVar_makers
+    print "variance values", var_sum.values[highVar_makers]   
+    print "selection criterion matrix", selectCriterion_matrix
+    print "Number of seleted points ", numSelected , "  Number of markers not selected  ", NUM_MARKERS - numSelected 
+    print "Selected matrix", Selected_Markers
     
-    # selected_markers_var = var_df.values[Selected_Markers]                            #The variances of selected markers only  
-    # selected_markers_var = pd.DataFrame(selected_markers_var, columns=mColumn_list)     
-    # store_variances('selected_var.csv', selected_markers_var)
-    # pd.DataFrame.to_csv(selected_markers_var, './data/selected_var.csv')               #  
+    selected_markers_var = var_df.values[Selected_Markers]                            #The variances of selected markers only  
+    selected_markers_var = pd.DataFrame(selected_markers_var, columns=mColumn_list)     
+    store_variances('selected_var.csv', selected_markers_var)
+    pd.DataFrame.to_csv(selected_markers_var, 'selected_var.csv')               #  
 
-    # fig = figure()
-    # for i in range(1):
-        
+    if PLOT_ARG == True: 
+        fig = figure()
+        for i in range(1):
+            
 
-    #     ax = fig.add_subplot(111, xlim=(0,120), ylim=(0,3000), autoscale_on=False)
+            ax = fig.add_subplot(111, xlim=(0,120), ylim=(0,3000), autoscale_on=False)
 
-    #     ax.set_title('Click to zoom')
-    #     ax.set_xlabel('markers')
-    #     ax.set_ylabel('variance')
-    #     ax.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
-    #     scale = 1.1
-    #     zp = ZoomPan()
-    #     figZoom = zp.zoom_factory(ax, base_scale = scale)
-    #     figPan = zp.pan_factory(ax)
-    #     ax.legend()
-    #     #plt.savefig("./data/normalized_var_all/" + filename)
+            ax.set_title('Click to zoom')
+            ax.set_xlabel('markers')
+            ax.set_ylabel('variance')
+            ax.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
+            scale = 1.1
+            zp = ZoomPan()
+            figZoom = zp.zoom_factory(ax, base_scale = scale)
+            figPan = zp.pan_factory(ax)
+            ax.legend()
+            #plt.savefig("normalized_var_all/" + filename)
 
-    # fig = figure()
-    # plt.plot(var_sum)
+        fig = figure()
+        plt.plot(var_sum)
 
-    #plt.savefig("./data/normalized_var_sum/" + filename)
-    # for i in range(MOTION_PARAMETERS):
-    #   plt.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
-    #   plt.legend()
-    #plt.show()
-   # return selected_markers_var #Selected_Markers
+        plt.savefig("normalized_var_sum/" + filename)
+        for i in range(MOTION_PARAMETERS):
+          plt.plot(var_df[mColumn_list[i]], label=mColumn_list[i])
+          plt.legend()
+        plt.show()
+
+
+    return Selected_Markers
 
 def VARsum(selected_markers_var):
     mat = np.array(selected_markers_var)
@@ -242,9 +293,6 @@ def plot3D(mdata, interactiveMode=True):
     
     plt.ion()
     plt.show()
-    
-
-
     xdata = mdata[:,0]
     ydata = mdata[:,1]
     zdata = mdata[:,2]
@@ -264,17 +312,6 @@ def plot3D(mdata, interactiveMode=True):
 
         
 
-
-def render_motionData(filepath):
-
-    motionData = pd.read_csv(filepath)
-    cLength = motionData.shape[1]
-    cList = np.arange(cLength)
-    motionData = pd.read_csv(filepath, names = cList)
-
-    motionData = motionData.values
-    motionData = np.reshape(motionData, (NUM_MARKERS, MOTION_PARAMETERS, cLength))
-    return motionData
 
 
 
