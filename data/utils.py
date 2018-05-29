@@ -22,6 +22,7 @@ PLOT_ARG = False
 HANDCRAFTED = True
 DROP_POSDATA = True
 
+bad_filepath = './nturgbd_skeletons/samples_with_missing_skeletons.txt'
 
 
 selectCriterion_matrix = np.zeros(NUM_MARKERS)
@@ -356,6 +357,13 @@ def downsampleMotionData(data, prescaler):
 
 def readSkeletonFiles(filepath):
     f = open(filepath, "r")
+
+    filename = os.path.basename(filepath)    
+    bad_files = np.load('badfiles.npy')
+    if filename.split('.')[0] in bad_files:
+        print "bad file detected. Continuing."
+        continue
+   
     numFrames = f.readline()
     numFrames = int(numFrames)
     for i in range(numFrames):
@@ -388,17 +396,26 @@ def readSkeletonFiles(filepath):
             break
         break
 
+def bad_file_txt(l):
+    f = open(bad_filepath, "r")
+    
+    for line in f:
+        line = line.strip('\n')
+        l.append(line)
+    return l 
 
-# def bad_files_list():
-#     body_id = 
-#     f = open(filepath, "r")
-#     numFrames = f.readline()
-#     numFrames = int(numFrames)
-#     for i in range(numFrames):
-#         one = f.readline()
-#         meta_data = f.readline()
-#         meta_data = meta_data.split()        
-#         bodyID    = float(meta_data[0])
+def twoPpl_list(l,filename):  
+    # print l
+    filename = filename.split('.')[0]
+    actionLabel = filename[len(filename) - 3:]
+    actionLabel = int(actionLabel)
+    if actionLabel > 49:
+        l.append(filename)
+        print "two people detected"
+    # print l
+    return l     
+
+
 
 
 

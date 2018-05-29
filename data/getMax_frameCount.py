@@ -1,7 +1,5 @@
 from __future__ import absolute_import
 from __future__ import division
-import matplotlib.pyplot as plt
-import tensorflow as tf
 import os 
 import sys
 import numpy as np 
@@ -16,6 +14,11 @@ for filename in os.listdir(BASE_PATH):
     if filename.endswith("skeleton"):
         count = count + 1 
         print "Running through the skeleton file: ", filename, " File Number: ", count
+        bad_files = np.load('badfiles.npy')
+        if filename.split('.')[0] in bad_files:
+            print "bad file detected. Continuing."
+            continue
+        
         filepath = BASE_PATH +'/' + filename
         l = utils.get_max_frame_count(filepath,l)
 
