@@ -23,7 +23,7 @@ for filename in os.listdir(BASE_PATH):
         l = utils.get_max_frame_count(filepath,l)
 
 L = max(l)
-
+length = len(l)
 
 
 BASE_PATH = "/home/user/Documents/SignLangRecog/data/01_CSV_full"
@@ -38,6 +38,8 @@ for filename in os.listdir(BASE_PATH):
         l = utils.get_max_time_steps(motionData_filepath,l)
         count = count + 1 
         
-
+print "Total Number of Skeleton files " , length 
 print "max frame length for skeleton files = ", L 
+
+print "Total Number of csv files " , len(l) 
 print "max frame length for CSV files = ", max(l)
