@@ -19,7 +19,7 @@ for filename in os.listdir(BASE_PATH):
     if filename.endswith("csv"):
         print filename
         motionData_filepath = BASE_PATH +'/' + filename
-        motionData = utils.render_motionData(motionData_filepath)
+        motionData = utils.render_motionData(motionData_filepath,2)
         markers = utils.Variance(motionData, filename,handcrafted, drop_posdata)        
         print "file count:: ", count 
         count = count + 1

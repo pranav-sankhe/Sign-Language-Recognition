@@ -22,6 +22,8 @@ PLOT_ARG = False
 HANDCRAFTED = True
 DROP_POSDATA = True
 
+
+
 selectCriterion_matrix = np.zeros(NUM_MARKERS)
 VARsumFlag = 0 
 selec_var_sum = []
@@ -135,7 +137,7 @@ class ZoomPan:
         #return the function
         return onMotion
 
-def render_motionData(filepath):
+def render_motionData(filepath, prescaler):
 
     motionData = pd.read_csv(filepath)
     
@@ -146,7 +148,7 @@ def render_motionData(filepath):
 
     motionData = motionData.values
     motionData = np.reshape(motionData, (NUM_MARKERS, MOTION_PARAMETERS, cLength))
-    
+    motionData = downsampleMotionData(motionData, prescaler)
     return motionData
 
 
@@ -213,7 +215,7 @@ def Variance(mdata, filename, handcrafted, drop_posdata):
                 var_df.iloc[i,j] = 0 
        
         
-    body_desc_path = "csv"
+    body_desc_path = "body.csv"
     body_df = pd.read_csv(body_desc_path)
     body_df = body_df.values
 
@@ -312,6 +314,13 @@ def plot3D(mdata, interactiveMode=True):
         print "timestamp: ", timestamp
         plt.pause(0.001)    
 
+def downsampleMotionData(data, prescaler):
+    data = data[:, :, ::prescaler]
+    return data
+
+# def downsampleVideo(filepath):
+
+
 
 # SpineBase = 1;
 # SpineMid = 2;
@@ -320,10 +329,13 @@ def plot3D(mdata, interactiveMode=True):
 # ShoulderLeft = 5;
 # ElbowLeft = 6;
 # WristLeft = 7;
+
 # HandLeft = 8;
+
 # ShoulderRight = 9;
 # ElbowRight = 10;
 # WristRight = 11;
+
 # HandRight = 12;
 
 # HipLeft = 13;
@@ -376,3 +388,29 @@ def readSkeletonFiles(filepath):
             break
         break
 
+
+# def bad_files_list():
+#     body_id = 
+#     f = open(filepath, "r")
+#     numFrames = f.readline()
+#     numFrames = int(numFrames)
+#     for i in range(numFrames):
+#         one = f.readline()
+#         meta_data = f.readline()
+#         meta_data = meta_data.split()        
+#         bodyID    = float(meta_data[0])
+
+
+
+
+def get_max_frame_count(filepath, l):
+    f = open(filepath, "r")
+    numFrames = f.readline()
+    numFrames = int(numFrames)    
+    l.append(numFrames)
+    return l
+
+def get_max_time_steps(filepath, l):
+    data = render_motionData(filepath, prescaler=2)
+    l.append(data.shape[2])
+    return l
