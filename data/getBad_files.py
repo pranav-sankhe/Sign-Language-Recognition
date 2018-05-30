@@ -13,7 +13,7 @@ for filename in os.listdir(BASE_PATH):
         count = count + 1 
         print "Running through the skeleton file: ", filename, " File Number: ", count
         filepath = BASE_PATH +'/' + filename
-        l = utils.twoPpl_list(l, filename)
+        l = utils.twoPpl_list(l, filepath)
        
 
 
@@ -21,5 +21,8 @@ for filename in os.listdir(BASE_PATH):
 
 
 l = np.array(l)
+l = np.unique(l)
+print count
+print len(l)
 
 np.save('badfiles.npy', l)

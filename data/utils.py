@@ -368,14 +368,41 @@ def bad_file_txt(l):
         l.append(line)
     return l 
 
-def twoPpl_list(l,filename):  
-    filename = filename.split('.')[0]
-    actionLabel = filename[len(filename) - 3:]
-    actionLabel = int(actionLabel)
-    if actionLabel > 49:
-        l.append(filename)
-        print "two people detected"
+def twoPpl_list(l,filepath):  
+    # filename = os.path.basename(filepath)
+    # filename = filename.split('.')[0]
+    # actionLabel = filename[len(filename) - 3:]
+    # actionLabel = int(actionLabel)
+    # if actionLabel > 49:
+    #     l.append(filename)
+    #     print "two people detected"
+    f = open(filepath, "r")                     # Open the file
+    numFrames = f.readline()                    # Read the 1st line of the file which gives the number of frames
+    numFrames = int(numFrames)                  # convert string to int
+        
+    for i in range(numFrames):                  # for each frame loop over the contents
+        skeletons = f.readline()                      # a constant 1
+       
+        skeletons = int(skeletons)
+
+        if skeletons != 1: 
+            print "two people detected"
+            l.append(os.path.basename(filepath).split('.')[0])
+            f.close()
+            #print l
+            return l
+        meta_data = f.readline()                # a line containing all the meta data     
+        numJoints = f.readline()                # Read the number of joints. Always equal to 25
+        numJoints = int(numJoints)              # Convert string to int     
+         
+ 
+        for j in range(numJoints):
+            motion_line = f.readline()         #read line containing data of a single joint    
+
+
     return l     
+                                  
+       
 
 def get_max_frame_count(filepath, l):
     f = open(filepath, "r")
@@ -394,11 +421,16 @@ def readSkeletonFiles(filepath):
     f = open(filepath, "r")                     # Open the file
     numFrames = f.readline()                    # Read the 1st line of the file which gives the number of frames
     numFrames = int(numFrames)                  # convert string to int
-    motion_data = np.zeros((numFrames, 45))     # store motion data of file in this matrix which we will return
+    motion_data = np.zeros((numFrames, 45)) # store motion data of file in this matrix which we will return 
+    print "Reading file: ", os.path.basename(filepath).split('.')[0] 
     for i in range(numFrames):                  # for each frame loop over the contents
-        one = f.readline()                      # a constant 1
+        skeletons = f.readline()                      # a constant 1
+
+
         meta_data = f.readline()                # a line containing all the meta data 
-        meta_data = meta_data.split()           
+        #print meta_data
+        meta_data = meta_data.split() 
+
         bodyID              = float(meta_data[0])       # extrcat all meta data
         clipedEdges         = float(meta_data[1])
         handLeftConfidence  = float(meta_data[2])
@@ -428,12 +460,17 @@ def readSkeletonFiles(filepath):
                 x_pos = float(motion_line[0])
                 y_pos = float(motion_line[1])
                 z_pos = float(motion_line[2])
+                #print x_pos, y_pos, z_pos
                 motion_data[i,3*iterator] = float(motion_line[0])
                 motion_data[i,3*iterator+1] = float(motion_line[1])            
                 motion_data[i,3*iterator+2] = float(motion_line[2])
-                iterator = iterator + 1
-                
-    print motion_data.shape                 
+                iterator = iterator + 1                    
+    
+    filename = os.path.basename(filepath)
+    filename = filename.split('.')[0]
+    actionLabel = filename[len(filename) - 3:]
+    actionLabel = int(actionLabel)
 
-    return motion_data
+                
+    return [motion_data, actionLabel]
 

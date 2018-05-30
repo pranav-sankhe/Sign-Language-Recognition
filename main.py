@@ -5,24 +5,22 @@ import tensorflow as tf
 import os 
 import sys
 import numpy as np 
-sys.path.append(os.path.abspath("/home/user/Documents/SignLangRecog/data"))
-import utils
+sys.path.append(os.path.abspath("/home/user/Documents/SignLangRecog/models"))
+import rnn
 
 
-BASE_PATH = '/home/user/Documents/SignLangRecog/data/nturgbd_skeletons/nturgb+d_skeleton'
-count = 0 
-l = []
-for filename in os.listdir(BASE_PATH):
-    if filename.endswith("skeleton"):
-        count = count + 1 
-        print "Running through the skeleton file: ", filename, " File Number: ", count
-        bad_files = np.load('./data/badfiles.npy')
-        if filename.split('.')[0] in bad_files:
-            print "bad file detected. Continuing."
-            continue
-        
-        filepath = BASE_PATH +'/' + filename
-        utils.readSkeletonFiles(filepath)
+BATCH_SIZE = 100 
+MAX_FRAME_LEN = 429 
+NUM_FEATURES = 45
 
-        if count >= 1:
-        	break
+INPUT_SIZE = (BATCH_SIZE, MAX_FRAME_LEN, NUM_FEATURES)           # input size =  (batch size, number of time steps, hidden size) 
+OUTPUT_SIZE = 60                    
+FULLY_CONNECTED_SIZE = 512
+HIDDEN_LAYER_1 = 256 
+HIDDEN_LAYER_2 = 256
+
+NUM_EPOCHS = 462
+
+
+l= rnn.get_skeleton_batch_data()
+print l[0].shape, l[1].shape
