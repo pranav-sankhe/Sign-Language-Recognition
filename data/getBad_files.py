@@ -6,7 +6,7 @@ l = []
 
 l =  utils.bad_file_txt(l)
 
-BASE_PATH = '/home/user/Documents/SignLangRecog/data/nturgbd_skeletons/nturgb+d_skeletons/'
+BASE_PATH = './nturgbd_skeletons/nturgb+d_skeletons/'
 count = 0 
 for filename in os.listdir(BASE_PATH): 
     if filename.endswith("skeleton"):

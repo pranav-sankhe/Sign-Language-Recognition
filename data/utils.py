@@ -12,6 +12,7 @@ import cv2
 import math
 import lmdb
 from keras.utils import np_utils
+from sklearn import preprocessing
 
 BAD_JOINTS = np.array([8,12,13,14,15,16,17,18,19,20]) 
 
@@ -369,13 +370,13 @@ def bad_file_txt(l):
     return l 
 
 def twoPpl_list(l,filepath):  
-    # filename = os.path.basename(filepath)
-    # filename = filename.split('.')[0]
-    # actionLabel = filename[len(filename) - 3:]
-    # actionLabel = int(actionLabel)
-    # if actionLabel > 49:
-    #     l.append(filename)
-    #     print "two people detected"
+    filename = os.path.basename(filepath)
+    filename = filename.split('.')[0]
+    actionLabel = filename[len(filename) - 3:]
+    actionLabel = int(actionLabel)
+    if actionLabel > 49:
+        l.append(filename)
+        print "two people detected"
     f = open(filepath, "r")                     # Open the file
     numFrames = f.readline()                    # Read the 1st line of the file which gives the number of frames
     numFrames = int(numFrames)                  # convert string to int
@@ -400,7 +401,7 @@ def twoPpl_list(l,filepath):
             motion_line = f.readline()         #read line containing data of a single joint    
 
 
-    return l     
+    return l      
                                   
        
 
@@ -469,7 +470,12 @@ def readSkeletonFiles(filepath):
     filename = os.path.basename(filepath)
     filename = filename.split('.')[0]
     actionLabel = filename[len(filename) - 3:]
+    #print actionLabel
     actionLabel = int(actionLabel)
+    if actionLabel == 0:
+        print "action label = zero"
+    motion_data = preprocessing.normalize(motion_data, norm='l2', axis=0)
+    #print motion_data
 
                 
     return [motion_data, actionLabel]
