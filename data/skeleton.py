@@ -263,7 +263,7 @@ def vids_with_missing_skeletons():
 
 def generate_data(argv):
   bad_files = vids_with_missing_skeletons()
-  skeleton_dir_root = "/home/user/Documents/SignLangRecog/data/nturgbd_skeletons/nturgb+d_skeletons"
+  skeleton_dir_root = "./nturgbd_skeletons/nturgb+d_skeletons"
   skeleton_files = os.listdir(skeleton_dir_root)
   #data_out_dir = '/media/tk/EE44DA8044DA4B4B/subjects_split_rot_norm_quat/'
 
@@ -382,7 +382,7 @@ def generate_data(argv):
     if count % 100 == 0:
       print count,"/",num_files
       break
-  ## END FILE LOOP
+  # END FILE LOOP
 
 
   print "Writing out data . . . "
@@ -475,6 +475,8 @@ def generate_data(argv):
 
   # #pdb.set_trace()
   #print "WROTE TESTING"
+  np.save('x_train', X_train)
+  np.save('y_train', y_train)
   print "TRAINING SAMPLES: ",len(X_train), "TESTING SAMPLES:", len(X_test)
   
   

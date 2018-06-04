@@ -11,9 +11,9 @@ sys.path.append(os.path.abspath("./data"))
 import utils
 
 
-BATCH_SIZE = 32 
+BATCH_SIZE = 128 
 MAX_FRAME_LEN = 429 
-NUM_FEATURES = 45
+NUM_FEATURES = 75
 
 INPUT_SIZE = (BATCH_SIZE, MAX_FRAME_LEN, NUM_FEATURES)           # input size =  (batch size, number of time steps, hidden size) 
 OUTPUT_SIZE = 60                    
@@ -21,7 +21,7 @@ FULLY_CONNECTED_SIZE = 512
 HIDDEN_LAYER_1 = 256 
 HIDDEN_LAYER_2 = 256
 
-NUM_EPOCHS = 1384
+NUM_EPOCHS = 346
 
 
 # l= rnn.get_skeleton_batch_data()

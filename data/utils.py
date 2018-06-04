@@ -18,7 +18,7 @@ BAD_JOINTS = np.array([8,12,13,14,15,16,17,18,19,20])
 
 BATCH_SIZE = 100 
 MAX_FRAME_LEN = 429 
-NUM_FEATURES = 45
+NUM_FEATURES = 75
 
 NUM_MARKERS = 107         #Total Number of markers
 MOTION_PARAMETERS = 6
@@ -422,7 +422,7 @@ def readSkeletonFiles(filepath):
     f = open(filepath, "r")                     # Open the file
     numFrames = f.readline()                    # Read the 1st line of the file which gives the number of frames
     numFrames = int(numFrames)                  # convert string to int
-    motion_data = np.zeros((numFrames, 45)) # store motion data of file in this matrix which we will return 
+    motion_data = np.zeros((numFrames, NUM_FEATURES)) # store motion data of file in this matrix which we will return 
     print "Reading file: ", os.path.basename(filepath).split('.')[0] 
     for i in range(numFrames):                  # for each frame loop over the contents
         skeletons = f.readline()                      # a constant 1
@@ -453,28 +453,26 @@ def readSkeletonFiles(filepath):
             motion_line = f.readline()         #read line containing data of a single joint    
             motion_line = motion_line.split()
                         
-            if j + 1 in BAD_JOINTS:             # check if the joint is unwanted 
-                #print "bad joint detected"
-                continue     
+            # if j + 1 in BAD_JOINTS:             # check if the joint is unwanted 
+            #     #print "bad joint detected"
+            #     continue     
             
-            else:                
-                x_pos = float(motion_line[0])
-                y_pos = float(motion_line[1])
-                z_pos = float(motion_line[2])
-                #print x_pos, y_pos, z_pos
-                motion_data[i,3*iterator] = float(motion_line[0])
-                motion_data[i,3*iterator+1] = float(motion_line[1])            
-                motion_data[i,3*iterator+2] = float(motion_line[2])
-                iterator = iterator + 1                    
+
+            x_pos = float(motion_line[0])
+            y_pos = float(motion_line[1])
+            z_pos = float(motion_line[2])
+            #print x_pos, y_pos, z_pos
+            motion_data[i,3*iterator] = float(motion_line[0])
+            motion_data[i,3*iterator+1] = float(motion_line[1])            
+            motion_data[i,3*iterator+2] = float(motion_line[2])
+            iterator = iterator + 1                    
     
     filename = os.path.basename(filepath)
     filename = filename.split('.')[0]
     actionLabel = filename[len(filename) - 3:]
     #print actionLabel
     actionLabel = int(actionLabel)
-    if actionLabel == 0:
-        print "action label = zero"
-    motion_data = preprocessing.normalize(motion_data, norm='l2', axis=0)
+    #motion_data = preprocessing.normalize(motion_data, norm='l2', axis=0)
     #print motion_data
 
                 

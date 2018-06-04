@@ -124,7 +124,7 @@ num_fully_connected = 1024
 learning_rate = 0.001
 lambda_loss_amount = 0.0015
 training_iters = training_data_count * 300  # Loop 300 times on the dataset
-batch_size = 128
+batch_size = 128 
 display_iter = 30000  # To show test set accuracy during training
 
 
@@ -136,86 +136,40 @@ print(X_train.shape, y_train.shape, np.mean(X_train), np.std(X_train))
 print("The dataset is therefore properly normalised, as expected, but not yet one-hot encoded.")
 
 
-def BiLSTM(_X, _weights, _biases):
+def LSTM_RNN(_X, _weights, _biases):
     # Function returns a tensorflow LSTM (RNN) artificial neural network from given parameters. 
-    
-    #_X = tf.unstack(_X, n_steps, 1)
-    
-    # # (NOTE: This step could be greatly optimised by shaping the dataset once
-    # # input shape: (batch_size, n_steps, n_input)
-    # _X = tf.transpose(_X, [1, 0, 2])  # permute n_steps and batch_size
+    # Moreover, two LSTM cells are stacked which adds deepness to the neural network. 
+    # Note, some code of this notebook is inspired from an slightly different 
+    # RNN architecture used on another dataset, some of the credits goes to 
+    # "aymericdamien" under the MIT license.
+
+    # (NOTE: This step could be greatly optimised by shaping the dataset once
+    # input shape: (batch_size, n_steps, n_input)
+    _X = tf.transpose(_X, [1, 0, 2])  # permute n_steps and batch_size
     # Reshape to prepare input to hidden activation
-    # _X = tf.reshape(_X, [-1, n_input]) 
+    _X = tf.reshape(_X, [-1, n_input]) 
     # new shape: (n_steps*batch_size, n_input)
-    #print "INPUT", _X 
-    # Linear activation
-    # _X = tf.nn.relu(tf.matmul(_X, _weights['hidden']) + _biases['hidden'])          # y = x * W + b  
-    # Split data because rnn cell needs a list of inputs for the RNN inner loop
-    # _X = tf.split(_X, n_steps, 0)
-
-    # # new shape: n_steps * (batch_size, n_hidden)
-    dropout = 0.25
-    #First BLSTM
-    cell1 = tf.contrib.rnn.GRUCell(n_hidden)
-    cell1 = tf.contrib.rnn.DropoutWrapper(cell1, output_keep_prob=1)
-    cell2 = tf.contrib.rnn.GRUCell(n_hidden)
-    cell2 = tf.contrib.rnn.DropoutWrapper(cell2, output_keep_prob=1)
-    cell3 = tf.contrib.rnn.GRUCell(n_hidden)
-    cell3 = tf.contrib.rnn.DropoutWrapper(cell3, output_keep_prob=1)
-    cells_fw = [cell1, cell2, cell3]
-    cells_bw = [cell1, cell2, cell3]
-
-    output, _, _ = tf.contrib.rnn.stack_bidirectional_dynamic_rnn(
-    cells_fw,
-    cells_bw,
-    _X,
-    dtype=tf.float32,
-    sequence_length=np.random.rand(batch_size))
-
     
-    epsilon = 1e-3
-
-    lstm_last_output = output[:,-1,:]
-    batch_mean1, batch_var1 = tf.nn.moments(lstm_last_output,[0])
-
-    BN_layer =  tf.nn.batch_normalization(
-    lstm_last_output,
-    batch_mean1,
-    batch_var1,
-    _biases['beta'],
-    _weights['scale'],
-    epsilon)
- 
-    BN_layer  = tf.layers.dropout(
-        BN_layer,
-        rate=0.25,
-        noise_shape=None,
-        seed=None,
-        training=False,
-        name=None
-    )
-
-
-    fc = tf.layers.dense(
-        BN_layer,
-        num_fully_connected,
-        activation=tf.nn.relu,
-        use_bias=True,
-        kernel_initializer=None,
-        bias_initializer=tf.zeros_initializer(),
-        kernel_regularizer=None,
-        bias_regularizer=None,
-        activity_regularizer=None,
-        kernel_constraint=None,
-        bias_constraint=None,
-        trainable=True,
-        name=None,
-        reuse=None
-    )
-
-
     # Linear activation
-    return tf.matmul(fc, _weights['out']) + _biases['out']
+    _X = tf.nn.relu(tf.matmul(_X, _weights['hidden']) + _biases['hidden'])
+    # Split data because rnn cell needs a list of inputs for the RNN inner loop
+    _X = tf.split(_X, n_steps, 0) 
+    # new shape: n_steps * (batch_size, n_hidden)
+
+    # Define two stacked LSTM cells (two recurrent layers deep) with tensorflow
+    lstm_cell_1 = tf.contrib.rnn.BasicLSTMCell(n_hidden, forget_bias=1.0, state_is_tuple=True)
+    lstm_cell_2 = tf.contrib.rnn.BasicLSTMCell(n_hidden, forget_bias=1.0, state_is_tuple=True)
+    lstm_cells = tf.contrib.rnn.MultiRNNCell([lstm_cell_1, lstm_cell_2], state_is_tuple=True)
+    # Get LSTM cell output
+    outputs, states = tf.contrib.rnn.static_rnn(lstm_cells, _X, dtype=tf.float32)
+
+    # Get last time step's output feature for a "many to one" style classifier, 
+    # as in the image describing RNNs at the top of this page
+    lstm_last_output = outputs[-1]
+    
+    # Linear activation
+    return tf.matmul(lstm_last_output, _weights['out']) + _biases['out']
+
 
 
 
@@ -259,15 +213,14 @@ y = tf.placeholder(tf.float32, [batch_size, n_classes])
 
 # Graph weights
 weights = {
-    'scale':     tf.Variable(tf.ones([batch_size, 2*n_hidden])),  #BatchNormalization weights
-    'out': tf.Variable(tf.random_normal([num_fully_connected, n_classes], mean=1.0))
+    'hidden': tf.Variable(tf.random_normal([n_input, n_hidden])), # Hidden layer weights
+    'out': tf.Variable(tf.random_normal([n_hidden, n_classes], mean=1.0))
 }
 biases = {
-    'beta':     tf.Variable(tf.zeros([2*n_hidden])),
+    'hidden': tf.Variable(tf.random_normal([n_hidden])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
-
-pred = BiLSTM(x, weights, biases)
+pred = LSTM_RNN(x, weights, biases)
 
 # Loss, optimizer and evaluation
 l2 = lambda_loss_amount * sum(
