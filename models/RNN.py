@@ -1,12 +1,21 @@
 # All Includes
-
+import os
+import warnings
+warnings.simplefilter("ignore", DeprecationWarning)
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import tensorflow as tf  # Version 1.0.0 (some previous versions are used in past commits)
 from sklearn import metrics
 
-import os
+
+
+
+# create a sequence classification instance
+
 
 
 # # Useful Constants
@@ -91,8 +100,7 @@ X_test =  data[40000:]
 # y_test_path = DATASET_PATH + TEST + "y_test.txt"
 labels = np.load('labels.npy')
 y_train = labels[0:40000]
-y_test = labels[40000:]
-
+y_test =  labels[40000:]
 
 
 # Input Data 
@@ -109,13 +117,14 @@ print training_data_count, n_steps, n_input
 n_hidden = 256 # Hidden layer num of features
 n_classes = len(np.unique(labels)) # Total classes (should go up, or should go down)
 
+num_fully_connected = 1024
 
 # Training 
 
-learning_rate = 0.0001
+learning_rate = 0.001
 lambda_loss_amount = 0.0015
 training_iters = training_data_count * 300  # Loop 300 times on the dataset
-batch_size = 100
+batch_size = 128
 display_iter = 30000  # To show test set accuracy during training
 
 
@@ -129,41 +138,84 @@ print("The dataset is therefore properly normalised, as expected, but not yet on
 
 def BiLSTM(_X, _weights, _biases):
     # Function returns a tensorflow LSTM (RNN) artificial neural network from given parameters. 
-    # Moreover, two LSTM cells are stacked which adds deepness to the neural network. 
-    # Note, some code of this notebook is inspired from an slightly different 
-
-    # (NOTE: This step could be greatly optimised by shaping the dataset once
-    # input shape: (batch_size, n_steps, n_input)
-    _X = tf.transpose(_X, [1, 0, 2])  # permute n_steps and batch_size
+    
+    #_X = tf.unstack(_X, n_steps, 1)
+    
+    # # (NOTE: This step could be greatly optimised by shaping the dataset once
+    # # input shape: (batch_size, n_steps, n_input)
+    # _X = tf.transpose(_X, [1, 0, 2])  # permute n_steps and batch_size
     # Reshape to prepare input to hidden activation
-    _X = tf.reshape(_X, [-1, n_input]) 
+    # _X = tf.reshape(_X, [-1, n_input]) 
     # new shape: (n_steps*batch_size, n_input)
-    
+    #print "INPUT", _X 
     # Linear activation
-    _X = tf.nn.relu(tf.matmul(_X, _weights['hidden']) + _biases['hidden'])          # y = x * W + b  
+    # _X = tf.nn.relu(tf.matmul(_X, _weights['hidden']) + _biases['hidden'])          # y = x * W + b  
     # Split data because rnn cell needs a list of inputs for the RNN inner loop
-    _X = tf.split(_X, n_steps, 0) 
-    # new shape: n_steps * (batch_size, n_hidden)
+    # _X = tf.split(_X, n_steps, 0)
 
-
+    # # new shape: n_steps * (batch_size, n_hidden)
+    dropout = 0.25
     #First BLSTM
-    cell = tf.contrib.rnn.GRUCell(n_hidden)
-    cell = tf.contrib.rnn.GRUCell.DropoutWrapper(cell, output_keep_prob=1-dropout)
-    (forward_output, backward_output), _ = tf.nn.bidirectional_dynamic_rnn(cell, cell, inputs=_X,
-                                             dtype=tf.float32,scope='BLSTM_1')
-    outputs = tf.concat([forward_output, backward_output], axis=2)
+    cell1 = tf.contrib.rnn.GRUCell(n_hidden)
+    cell1 = tf.contrib.rnn.DropoutWrapper(cell1, output_keep_prob=1)
+    cell2 = tf.contrib.rnn.GRUCell(n_hidden)
+    cell2 = tf.contrib.rnn.DropoutWrapper(cell2, output_keep_prob=1)
+    cell3 = tf.contrib.rnn.GRUCell(n_hidden)
+    cell3 = tf.contrib.rnn.DropoutWrapper(cell3, output_keep_prob=1)
+    cells_fw = [cell1, cell2, cell3]
+    cells_bw = [cell1, cell2, cell3]
 
-    #Second BLSTM using the output of previous layer as an input.
-    cell2 = tf.nn.rnn_cell.GRUCell(n_hidden)
-    cell2 = tf.nn.rnn_cell.DropoutWrapper(cell2, output_keep_prob=1-dropout)
-    (forward_output, backward_output), _ = tf.nn.bidirectional_dynamic_rnn(cell2, cell2, inputs=outputs,
-                                        sequence_length=lengths, dtype=tf.float32,scope='BLSTM_2')
-    outputs = tf.concat([forward_output, backward_output], axis=2)
+    output, _, _ = tf.contrib.rnn.stack_bidirectional_dynamic_rnn(
+    cells_fw,
+    cells_bw,
+    _X,
+    dtype=tf.float32,
+    sequence_length=np.random.rand(batch_size))
+
     
-    lstm_last_output = outputs[-1]
-    
+    epsilon = 1e-3
+
+    lstm_last_output = output[:,-1,:]
+    batch_mean1, batch_var1 = tf.nn.moments(lstm_last_output,[0])
+
+    BN_layer =  tf.nn.batch_normalization(
+    lstm_last_output,
+    batch_mean1,
+    batch_var1,
+    _biases['beta'],
+    _weights['scale'],
+    epsilon)
+ 
+    BN_layer  = tf.layers.dropout(
+        BN_layer,
+        rate=0.25,
+        noise_shape=None,
+        seed=None,
+        training=False,
+        name=None
+    )
+
+
+    fc = tf.layers.dense(
+        BN_layer,
+        num_fully_connected,
+        activation=tf.nn.relu,
+        use_bias=True,
+        kernel_initializer=None,
+        bias_initializer=tf.zeros_initializer(),
+        kernel_regularizer=None,
+        bias_regularizer=None,
+        activity_regularizer=None,
+        kernel_constraint=None,
+        bias_constraint=None,
+        trainable=True,
+        name=None,
+        reuse=None
+    )
+
+
     # Linear activation
-    return tf.matmul(lstm_last_output, _weights['out']) + _biases['out']
+    return tf.matmul(fc, _weights['out']) + _biases['out']
 
 
 
@@ -173,7 +225,7 @@ def extract_batch_size(_train, step, batch_size):
     shape = list(_train.shape)
     shape[0] = batch_size
     batch_s = np.empty(shape)
-
+    
     for i in range(batch_size):
         # Loop index
         index = ((step-1)*batch_size + i) % len(_train)
@@ -182,29 +234,36 @@ def extract_batch_size(_train, step, batch_size):
     return batch_s
 
 
-def one_hot(y_):
-    # Function to encode output labels from number indexes 
-    # e.g.: [[5], [0], [3]] --> [[0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
+# def one_hot(y_):
+#     # Function to encode output labels from number indexes 
+#     # e.g.: [[5], [0], [3]] --> [[0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0]]
     
-    y_ = y_.reshape(len(y_))
-    n_values = int(np.max(y_)) + 1
-    return np.eye(n_values)[np.array(y_, dtype=np.int32)]  # Returns FLOATS
+#     y_ = y_.reshape(len(y_))
+#     n_values = 49
+#     return np.eye(n_values)[np.array(y_, dtype=np.int32)]  # Returns FLOATS
+
+def one_hot(y, num_classes):
+    encoded =  np.zeros((len(y), num_classes))
+    
+    for i in range(encoded.shape[0]):
+        j =  int(y[i])
+        encoded[i][j-1] = 1 
+    return encoded    
+
 
 
 
 # Graph input/output
-x = tf.placeholder(tf.float32, [None, n_steps, n_input])
-y = tf.placeholder(tf.float32, [None, n_classes])
+x = tf.placeholder(tf.float32, [batch_size, n_steps, n_input])
+y = tf.placeholder(tf.float32, [batch_size, n_classes])
 
 # Graph weights
 weights = {
-    'hidden': tf.Variable(tf.random_normal([n_input, n_hidden])), # Hidden layer weights
-    'BN':     tf.Variable(tf.random_normal([n_input, n_hidden])),  #BatchNormalization weights
-    'full_connected': tf.Variable(tf.random_normal([n_input, n_hidden])),
-    'out': tf.Variable(tf.random_normal([n_hidden, n_classes], mean=1.0))
+    'scale':     tf.Variable(tf.ones([batch_size, 2*n_hidden])),  #BatchNormalization weights
+    'out': tf.Variable(tf.random_normal([num_fully_connected, n_classes], mean=1.0))
 }
 biases = {
-    'hidden': tf.Variable(tf.random_normal([n_hidden])),
+    'beta':     tf.Variable(tf.zeros([2*n_hidden])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -214,8 +273,8 @@ pred = BiLSTM(x, weights, biases)
 l2 = lambda_loss_amount * sum(
     tf.nn.l2_loss(tf_var) for tf_var in tf.trainable_variables()
 ) # L2 loss prevents this overkill neural network to overfit the data
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=pred)) + l2 # Softmax loss
-optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost) # Adam Optimizer
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=pred)) + l2 # Softmax loss
+optimizer = tf.train.RMSPropOptimizer(learning_rate, decay=0.9, momentum=0.0).minimize(cost) # Adam Optimizer
 
 correct_pred = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
 accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
@@ -228,7 +287,7 @@ train_losses = []
 train_accuracies = []
 
 # Launch the graph
-sess = tf.InteractiveSession(config=tf.ConfigProto(log_device_placement=True))
+sess = tf.InteractiveSession(config=tf.ConfigProto(log_device_placement=2))
 init = tf.global_variables_initializer()
 sess.run(init)
 
@@ -236,7 +295,8 @@ sess.run(init)
 step = 1
 while step * batch_size <= training_iters:
     batch_xs =         extract_batch_size(X_train, step, batch_size)
-    batch_ys = one_hot(extract_batch_size(y_train, step, batch_size))
+    
+    batch_ys = one_hot(extract_batch_size(y_train, step, batch_size), n_classes)
 
     # Fit training using batch data
     _, loss, acc = sess.run(
@@ -261,8 +321,8 @@ while step * batch_size <= training_iters:
         loss, acc = sess.run(
             [cost, accuracy], 
             feed_dict={
-                x: X_test,
-                y: one_hot(y_test)
+                x: extract_batch_size(X_test, step, batch_size),
+                y: one_hot(extract_batch_size(y_test, step, batch_size), n_classes)
             }
         )
         test_losses.append(loss)
@@ -280,8 +340,8 @@ print("Optimization Finished!")
 one_hot_predictions, accuracy, final_loss = sess.run(
     [pred, accuracy, cost],
     feed_dict={
-        x: X_test,
-        y: one_hot(y_test)
+        x: extract_batch_size(X_test, step, batch_size),
+        y: one_hot(extract_batch_size(y_test, step, batch_size), n_classes)
     }
 )
 
