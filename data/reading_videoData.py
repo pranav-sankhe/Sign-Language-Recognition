@@ -9,7 +9,7 @@ IMG_HEIGHT = 256
 IMG_WIDTH = 256 
 IN_CHANNELS = 1
 NUM_FRAMES = 858
-BASE_PATH = '/home/data/All_video_data/HRJI_0721_movie'
+BASE_PATH = '/home/data/All_video_data/HRJI_0719_movie'
 
 l_numframe = []
 
@@ -19,6 +19,7 @@ for line in f:
     l_numframe.append(int(line[len(line) - 5:len(line)]))
 
 filenames = os.listdir(BASE_PATH)
+
 filenames = filenames[0:BATCH_SIZE*NUM_EPOCHS]
 def get_batch(step):
 
@@ -93,6 +94,8 @@ def save_as_numpy():
 
 
     for i in range(len(filenames)):
+        if filenames[i].split('.')[1] != 'mp4':
+            continue
         if not os.path.exists('video_frames' + '/' + filenames[i].split('.')[0]):
             os.makedirs('video_frames' + '/' + filenames[i].split('.')[0])
 
@@ -135,7 +138,6 @@ def save_as_numpy():
             #print "At frame", count
             ret, frame2 = cap.read()
             if ret == False: 
-                print "error"
                 break
             
             frame2_save = cv2.resize(frame2, (IMG_HEIGHT, IMG_WIDTH))
