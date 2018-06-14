@@ -12,7 +12,8 @@ BATCH_SIZE = 32
 NUM_EPOCHS = 100
 IMG_HEIGHT = 256
 IMG_WIDTH = 256 
-IN_CHANNELS = 1
+FRAME_MEAN = 39
+IN_CHANNELS = FRAME_MEAN
 NUM_FRAMES = 858
 BASE_PATH = '/home/data/All_video_data/HRIJ_0130_movie'
 
@@ -209,3 +210,41 @@ opflow_xy()
 cv2.destroyAllWindows()
 
 
+OpFlowPath = 'opflow_xy'
+Opflow_dirs = os.listdir(OpFlowPath)
+
+def getBatchOpFlow():
+    data = np.random.rand(BATCH_SIZE, NUM_FRAMES/IN_CHANNELS, IMG_HEIGHT, IMG_WIDTH, IN_CHANNELS)
+    for l in range(BATCH_SIZE):
+        for i in range(len(Opflow_dirs)):
+            files = os.listdir(Opflow_dirs[i])
+            files = np.sort(files)
+            num_frames = len(files)
+
+            for j in range(num_frames/2):            
+                x_flow = np.array(Image.open(OpFlowPath + '/' + Opflow_dirs[i] + '/' + files[j])) 
+                y_flow = np.array(Image.open(OpFlowPath + '/' + Opflow_dirs[i] + '/' + files[ num_frames/2 + j]))
+                for m in range(IN_CHANNELS):                
+                    data[l, j,:,:, 2*(m-1)] = x_flow
+                    data[l, j,:,:, 2*(m-1) + 1] = y_flow    
+    
+    print data, data.shape                        
+
+def getBatchOpFlow_1(step):
+
+    IN_CHANNELS = 2
+    data = np.random.rand(BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, IN_CHANNELS)
+    for l in range(BATCH_SIZE):
+        for i in range(len(Opflow_dirs)):
+            files = os.listdir(Opflow_dirs[i])
+            files = np.sort(files)
+            num_frames = len(files)
+            
+            for j in range(num_frames/2):            
+                x_flow = np.array(Image.open(OpFlowPath + '/' + Opflow_dirs[i] + '/' + files[j])) 
+                y_flow = np.array(Image.open(OpFlowPath + '/' + Opflow_dirs[i] + '/' + files[ num_frames/2 + j]))
+                for m in range(IN_CHANNELS):                
+                    data[l, j,:,:, 0] = x_flow
+                    data[l, j,:,:, 1] = y_flow    
+    
+    print data, data.shape 

@@ -478,3 +478,16 @@ def readSkeletonFiles(filepath):
                 
     return [motion_data, actionLabel]
 
+
+VOCAB_SIZE = 277 + 2 
+
+def embeddings():
+    
+    # Embedding
+    embedding_encoder = variable_scope.get_variable(
+        "embedding_encoder", [VOCAB_SIZE, 512])
+    # Look up embedding:
+    #   encoder_inputs: [max_time, batch_size]
+    #   encoder_emb_inp: [max_time, batch_size, embedding_size]
+    encoder_emb_inp = embedding_ops.embedding_lookup(
+        embedding_encoder, encoder_inputs)
