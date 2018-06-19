@@ -13,11 +13,17 @@ import math
 import lmdb
 from keras.utils import np_utils
 from sklearn import preprocessing
+from PIL import Image
 
 BAD_JOINTS = np.array([8,12,13,14,15,16,17,18,19,20]) 
 
 BATCH_SIZE = 100 
 MAX_FRAME_LEN = 429 
+MAX_VFRAME_LEN = 858 
+IMG_HEIGHT = 256
+IMG_WIDTH = 256 
+
+
 NUM_FEATURES = 75
 
 NUM_MARKERS = 107         #Total Number of markers
@@ -491,3 +497,44 @@ def embeddings():
     #   encoder_emb_inp: [max_time, batch_size, embedding_size]
     encoder_emb_inp = embedding_ops.embedding_lookup(
         embedding_encoder, encoder_inputs)
+
+
+def readlabels(filepath):
+    data = pd.read_csv(filepath)
+    data = data.values
+    sync = data[0][1]
+    SOS = "<s>"
+    EOS = "</s>"
+    data_shape = data.shape 
+    sentence = []
+    frame_start = []
+    frame_end = []
+ 
+    sentence.append(SOS)
+    for i in range(data_shape[0]/3):
+        j = 2 + i*3
+        frame_start.append(data[j-1][1])
+        sentence.append(data[j][0])
+        frame_end.append(data[j+1][2])
+    sentence.append(EOS)
+    return sentence, frame_start, frame_end
+
+
+def readOpflow(dirpath):
+    data = np.zeros((MAX_VFRAME_LEN, IMG_HEIGHT, IMG_WIDTH, 2))
+
+    files = os.listdir(dirpath)
+    files = np.sort(files)
+    num_frames = len(files) 
+    x_files = files[0:num_frames/2]
+    y_files = files[num_frames/2:num_frames]
+    for i in range(num_frames/2):
+        # print i
+        data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
+        data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
+    print data.shape
+    return data    
+
+readOpflow('/home/psankhe/sign-lang-recog/data/opflow_xy/RG0_Corpus_201707_01A_01_t01')
+
+

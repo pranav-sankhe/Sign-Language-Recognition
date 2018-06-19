@@ -33,6 +33,19 @@ utils.check_tensorflow_version()
 __all__ = ["BaseModel", "Model"]
 
 
+FC_SIZE = 1024
+DTYPE = tf.float32
+
+BATCH_SIZE = 1
+NUM_EPOCHS = 100
+IMG_HEIGHT = 220
+IMG_WIDTH = 220 
+IN_CHANNELS = 1
+NUM_FRAMES = 858
+NUM_LSTMCells = 2048
+
+
+
 class BaseModel(object):
   """Sequence-to-sequence base class.
   """
@@ -390,84 +403,82 @@ def __init__(self,
 
         # Decoder
                 my_decoder = tf.contrib.seq2seq.BasicDecoder(cell,helper,decoder_initial_state,)
---------------------------------------------------------------------------------------------------------------------
-        # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
-            my_decoder,
-            output_time_major=self.time_major,
-            swap_memory=True,
-            scope=decoder_scope)
+       # Dynamic decoding
+                outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
+                    my_decoder,
+                    output_time_major=self.time_major,
+                    swap_memory=True,
+                    scope=decoder_scope)
 
-        sample_id = outputs.sample_id
+                sample_id = outputs.sample_id
 
-        # Note: there's a subtle difference here between train and inference.
-        # We could have set output_layer when create my_decoder
-        #   and shared more code between train and inference.
-        # We chose to apply the output_layer to all timesteps for speed:
-        #   10% improvements for small models & 20% for larger ones.
-        # If memory is a concern, we should apply output_layer per timestep.
-        logits = self.output_layer(outputs.rnn_output)
+                # Note: there's a subtle difference here between train and inference.
+                # We could have set output_layer when create my_decoder
+                #   and shared more code between train and inference.
+                # We chose to apply the output_layer to all timesteps for speed:
+                #   10% improvements for small models & 20% for larger ones.
+                # If memory is a concern, we should apply output_layer per timestep.
+                logits = self.output_layer(outputs.rnn_output)
 
       ## Inference
-      else:
-        beam_width = hparams.beam_width
-        length_penalty_weight = hparams.length_penalty_weight
-        start_tokens = tf.fill([self.batch_size], tgt_sos_id)
-        end_token = tgt_eos_id
+            else:
+                beam_width = hparams.beam_width
+                length_penalty_weight = hparams.length_penalty_weight
+                start_tokens = tf.fill([self.batch_size], tgt_sos_id)
+                end_token = tgt_eos_id
 
-        if beam_width > 0:
-          my_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
-              cell=cell,
-              embedding=self.embedding_decoder,
-              start_tokens=start_tokens,
-              end_token=end_token,
-              initial_state=decoder_initial_state,
-              beam_width=beam_width,
-              output_layer=self.output_layer,
-              length_penalty_weight=length_penalty_weight)
-        else:
+                if beam_width > 0:
+                    my_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
+                          cell=cell,
+                          embedding=self.embedding_decoder,
+                          start_tokens=start_tokens,
+                          end_token=end_token,
+                          initial_state=decoder_initial_state,
+                          beam_width=beam_width,
+                          output_layer=self.output_layer,
+                          length_penalty_weight=length_penalty_weight)
+                else:
           # Helper
-          sampling_temperature = hparams.sampling_temperature
-          if sampling_temperature > 0.0:
-            helper = tf.contrib.seq2seq.SampleEmbeddingHelper(
-                self.embedding_decoder, start_tokens, end_token,
-                softmax_temperature=sampling_temperature,
-                seed=hparams.random_seed)
-          else:
-            helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
-                self.embedding_decoder, start_tokens, end_token)
+                    sampling_temperature = hparams.sampling_temperature
+                    if sampling_temperature > 0.0:
+                        helper = tf.contrib.seq2seq.SampleEmbeddingHelper(
+                            self.embedding_decoder, start_tokens, end_token,
+                            softmax_temperature=sampling_temperature,
+                            seed=hparams.random_seed)
+                    else:
+                        helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(self.embedding_decoder, start_tokens, end_token)
 
           # Decoder
-          my_decoder = tf.contrib.seq2seq.BasicDecoder(
-              cell,
-              helper,
-              decoder_initial_state,
-              output_layer=self.output_layer  # applied per timestep
-          )
+                    my_decoder = tf.contrib.seq2seq.BasicDecoder(
+                                                      cell,
+                                                      helper,
+                                                      decoder_initial_state,
+                                                      output_layer=self.output_layer  # applied per timestep
+                                                  )
 
-        # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
-            my_decoder,
-            maximum_iterations=maximum_iterations,
-            output_time_major=self.time_major,
-            swap_memory=True,
-            scope=decoder_scope)
+                # Dynamic decoding
+                outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
+                                                            my_decoder,
+                                                            maximum_iterations=maximum_iterations,
+                                                            output_time_major=self.time_major,
+                                                            swap_memory=True,
+                                                            scope=decoder_scope)
 
-        if beam_width > 0:
-          logits = tf.no_op()
-          sample_id = outputs.predicted_ids
-        else:
-          logits = outputs.rnn_output
-          sample_id = outputs.sample_id
+                if beam_width > 0:
+                    logits = tf.no_op()
+                    sample_id = outputs.predicted_ids
+                else:
+                    logits = outputs.rnn_output
+                    sample_id = outputs.sample_id
 
-    return logits, sample_id, final_context_state
+        return logits, sample_id, final_context_state
 
-  def get_max_time(self, tensor):
-    time_axis = 0 if self.time_major else 1
-    return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
+    def get_max_time(self, tensor):
+        time_axis = 0 if self.time_major else 1
+        return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
 
-  @abc.abstractmethod
-  def _build_decoder_cell(self, hparams, encoder_outputs, encoder_state,
+    @abc.abstractmethod
+    def _build_decoder_cell(self, hparams, encoder_outputs, encoder_state,
                           source_sequence_length):
     """Subclass must implement this.
 
@@ -481,54 +492,49 @@ def __init__(self,
       A tuple of a multi-layer RNN cell used by decoder
         and the intial state of the decoder RNN.
     """
-    pass
+        pass
 
-  def _compute_loss(self, logits):
+    def _compute_loss(self, logits):
     """Compute optimization loss."""
-    target_output = self.iterator.target_output
-    if self.time_major:
-      target_output = tf.transpose(target_output)
-    max_time = self.get_max_time(target_output)
-    crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
-        labels=target_output, logits=logits)
-    target_weights = tf.sequence_mask(
-        self.iterator.target_sequence_length, max_time, dtype=logits.dtype)
-    if self.time_major:
-      target_weights = tf.transpose(target_weights)
+        target_output = self.iterator.target_output
+        if self.time_major:
+            target_output = tf.transpose(target_output)
+        max_time = self.get_max_time(target_output)
+        crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=target_output, logits=logits)
+        target_weights = tf.sequence_mask(self.iterator.target_sequence_length, max_time, dtype=logits.dtype)
+        if self.time_major:
+            target_weights = tf.transpose(target_weights)
 
-    loss = tf.reduce_sum(
-        crossent * target_weights) / tf.to_float(self.batch_size)
-    return loss
+        loss = tf.reduce_sum(crossent * target_weights) / tf.to_float(self.batch_size)
+        return loss
 
-  def _get_infer_summary(self, hparams):
-    return tf.no_op()
+    def _get_infer_summary(self, hparams):
+        return tf.no_op()
 
-  def infer(self, sess):
-    assert self.mode == tf.contrib.learn.ModeKeys.INFER
-    return sess.run([
-        self.infer_logits, self.infer_summary, self.sample_id, self.sample_words
-    ])
+    def infer(self, sess):
+        assert self.mode == tf.contrib.learn.ModeKeys.INFER
+        return sess.run([self.infer_logits, self.infer_summary, self.sample_id, self.sample_words])
 
-  def decode(self, sess):
-    """Decode a batch.
+    def decode(self, sess):
+        """Decode a batch.
 
-    Args:
-      sess: tensorflow session to use.
+        Args:
+          sess: tensorflow session to use.
 
-    Returns:
-      A tuple consiting of outputs, infer_summary.
-        outputs: of size [batch_size, time]
-    """
-    _, infer_summary, _, sample_words = self.infer(sess)
+        Returns:
+          A tuple consiting of outputs, infer_summary.
+            outputs: of size [batch_size, time]
+        """
+        _, infer_summary, _, sample_words = self.infer(sess)
 
-    # make sure outputs is of shape [batch_size, time] or [beam_width,
-    # batch_size, time] when using beam search.
-    if self.time_major:
-      sample_words = sample_words.transpose()
-    elif sample_words.ndim == 3:  # beam search output in [batch_size,
+        # make sure outputs is of shape [batch_size, time] or [beam_width,
+        # batch_size, time] when using beam search.
+        if self.time_major:
+            sample_words = sample_words.transpose()
+        elif sample_words.ndim == 3:  # beam search output in [batch_size,
                                   # time, beam_width] shape.
-      sample_words = sample_words.transpose([2, 0, 1])
-    return sample_words, infer_summary
+            sample_words = sample_words.transpose([2, 0, 1])
+        return sample_words, infer_summary
 
 
 class Model(BaseModel):
@@ -538,128 +544,221 @@ class Model(BaseModel):
   and a multi-layer recurrent neural network decoder.
   """
 
-  def _build_encoder(self, hparams):
+    def _build_encoder(self, hparams):
     """Build an encoder."""
-    num_layers = self.num_encoder_layers
-    num_residual_layers = self.num_encoder_residual_layers
-    iterator = self.iterator
+        num_layers = self.num_encoder_layers
+        num_residual_layers = self.num_encoder_residual_layers
+        iterator = self.iterator
 
-    source = iterator.source
-    if self.time_major:
-      source = tf.transpose(source)
+        source = iterator.source
+        if self.time_major:
+            source = tf.transpose(source)
 
-    with tf.variable_scope("encoder") as scope:
-      dtype = scope.dtype
-      # Look up embedding, emp_inp: [max_time, batch_size, num_units]
-      encoder_emb_inp = tf.nn.embedding_lookup(
-          self.embedding_encoder, source)
+        with tf.variable_scope("encoder") as scope:
+            dtype = scope.dtype
+        # Look up embedding, emp_inp: [max_time, batch_size, num_units]
+        
 
-      # Encoder_outputs: [max_time, batch_size, num_units]
-      if hparams.encoder_type == "uni":
-        utils.print_out("  num_layers = %d, num_residual_layers=%d" %
-                        (num_layers, num_residual_layers))
-        cell = self._build_encoder_cell(
-            hparams, num_layers, num_residual_layers)
 
-        encoder_outputs, encoder_state = tf.nn.dynamic_rnn(
-            cell,
-            encoder_emb_inp,
-            dtype=dtype,
-            sequence_length=iterator.source_sequence_length,
-            time_major=self.time_major,
-            swap_memory=True)
-      elif hparams.encoder_type == "bi":
-        num_bi_layers = int(num_layers / 2)
-        num_bi_residual_layers = int(num_residual_layers / 2)
-        utils.print_out("  num_bi_layers = %d, num_bi_residual_layers=%d" %
-                        (num_bi_layers, num_bi_residual_layers))
+--------------------------------------------------------------------------------------------------------------------------------------------------
 
-        encoder_outputs, bi_encoder_state = (
-            self._build_bidirectional_rnn(
-                inputs=encoder_emb_inp,
-                sequence_length=iterator.source_sequence_length,
+
+        prev_layer = inputs_vid      #batch of optical flow images
+
+        in_filters = 2
+        with tf.variable_scope('conv1_vid') as scope:                                                          # name of the block  
+            out_filters = 16                                                                               # number of input channels for conv1     
+            kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])                       # (kernels = filters as defined in TF doc). kernel size = 5 (5*5*5) 
+            conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')                       # stride = 1          
+            biases = _bias_variable('biases', [out_filters])
+            bias = tf.nn.bias_add(conv, biases)                                                            # define biases for conv1 
+            conv1 = tf.nn.relu(bias, name=scope.name)                                                      # define the activation for conv1 
+
+            prev_layer = conv1                                                                              
+            in_filters = out_filters                                    
+
+        pool1 = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')        
+        norm1 = pool1  # tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta = 0.75, name='norm1')
+
+        prev_layer = norm1
+
+        with tf.variable_scope('conv2_vids') as scope:
+            out_filters = 32
+            kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+            conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+            biases = _bias_variable('biases', [out_filters])
+            bias = tf.nn.bias_add(conv, biases)
+            conv2 = tf.nn.relu(bias, name=scope.name)
+
+            prev_layer = conv2
+            in_filters = out_filters
+
+        # normalize prev_layer here
+        prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
+
+        with tf.variable_scope('conv3_1_vids') as scope:
+            out_filters = 64
+            kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+            conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+            biases = _bias_variable('biases', [out_filters])
+            bias = tf.nn.bias_add(conv, biases)
+            prev_layer = tf.nn.relu(bias, name=scope.name)
+            in_filters = out_filters
+
+        with tf.variable_scope('conv3_2_vids') as scope:
+            out_filters = 64
+            kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+            conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+            biases = _bias_variable('biases', [out_filters])
+            bias = tf.nn.bias_add(conv, biases)
+            prev_layer = tf.nn.relu(bias, name=scope.name)
+            in_filters = out_filters
+
+        with tf.variable_scope('conv3_3_vids') as scope:
+            out_filters = 32
+            kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+            conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+            biases = _bias_variable('biases', [out_filters])
+            bias = tf.nn.bias_add(conv, biases)
+            prev_layer = tf.nn.relu(bias, name=scope.name)
+            in_filters = out_filters
+
+        # normalize prev_layer here
+        prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
+
+
+        with tf.variable_scope('local3_vids') as scope:                                     # FULLY CONNECTED LAYER 
+            dim = np.prod(prev_layer.get_shape().as_list()[1:]) 
+            prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
+            weights = _weight_variable('weights', [dim, FC_SIZE])
+            biases = _bias_variable('biases', [FC_SIZE])
+            local3 = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
+
+        prev_layer = local3
+
+        with tf.variable_scope('local4_vids') as scope:                                      # ANOTHER FULLLY CONNECTED LAYER     
+            dim = np.prod(prev_layer.get_shape().as_list()[1:])
+            prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
+            weights = _weight_variable('weights', [dim, FC_SIZE])
+            biases = _bias_variable('biases', [FC_SIZE])
+            local4_vid = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
+
+
+        local4_vid = tf.reshape(local4_vid, [FC_SIZE, BATCH_SIZE, 1])
+
+        encoder_emb_inp = local4_vid
+
+------------------------------------------------------------------------------------------------------------------
+        
+        #encoder_emb_inp = tf.nn.embedding_lookup(self.embedding_encoder, source)       #Embedding of encoder
+
+         # Encoder_outputs: [max_time, batch_size, num_units]
+
+            if hparams.encoder_type == "uni":
+                utils.print_out("  num_layers = %d, num_residual_layers=%d" %
+                            (num_layers, num_residual_layers))
+                cell = self._build_encoder_cell(
+                hparams, num_layers, num_residual_layers)
+
+                encoder_outputs, encoder_state = tf.nn.dynamic_rnn(
+                cell,
+                encoder_emb_inp,
                 dtype=dtype,
-                hparams=hparams,
-                num_bi_layers=num_bi_layers,
-                num_bi_residual_layers=num_bi_residual_layers))
+                sequence_length=iterator.source_sequence_length,
+                time_major=self.time_major,
+                swap_memory=True)
+            elif hparams.encoder_type == "bi":
+                num_bi_layers = int(num_layers / 2)
+                num_bi_residual_layers = int(num_residual_layers / 2)
+                utils.print_out("  num_bi_layers = %d, num_bi_residual_layers=%d" %
+                                (num_bi_layers, num_bi_residual_layers))
 
-        if num_bi_layers == 1:
-          encoder_state = bi_encoder_state
-        else:
-          # alternatively concat forward and backward states
-          encoder_state = []
-          for layer_id in range(num_bi_layers):
-            encoder_state.append(bi_encoder_state[0][layer_id])  # forward
-            encoder_state.append(bi_encoder_state[1][layer_id])  # backward
-          encoder_state = tuple(encoder_state)
-      else:
-        raise ValueError("Unknown encoder_type %s" % hparams.encoder_type)
-    return encoder_outputs, encoder_state
+                encoder_outputs, bi_encoder_state = (
+                    self._build_bidirectional_rnn(
+                        inputs=encoder_emb_inp,
+                        sequence_length=iterator.source_sequence_length,
+                        dtype=dtype,
+                        hparams=hparams,
+                        num_bi_layers=num_bi_layers,
+                        num_bi_residual_layers=num_bi_residual_layers))
 
-  def _build_bidirectional_rnn(self, inputs, sequence_length,
+                if num_bi_layers == 1:
+                    encoder_state = bi_encoder_state
+                else:
+                # alternatively concat forward and backward states
+                    encoder_state = []
+                    for layer_id in range(num_bi_layers):
+                        encoder_state.append(bi_encoder_state[0][layer_id])  # forward
+                        encoder_state.append(bi_encoder_state[1][layer_id])  # backward
+                    encoder_state = tuple(encoder_state)
+            else:
+                raise ValueError("Unknown encoder_type %s" % hparams.encoder_type)
+        return encoder_outputs, encoder_state
+
+    def _build_bidirectional_rnn(self, inputs, sequence_length,
                                dtype, hparams,
                                num_bi_layers,
                                num_bi_residual_layers,
                                base_gpu=0):
-    """Create and call biddirectional RNN cells.
+        """Create and call biddirectional RNN cells.
 
-    Args:
-      num_residual_layers: Number of residual layers from top to bottom. For
-        example, if `num_bi_layers=4` and `num_residual_layers=2`, the last 2 RNN
-        layers in each RNN cell will be wrapped with `ResidualWrapper`.
-      base_gpu: The gpu device id to use for the first forward RNN layer. The
-        i-th forward RNN layer will use `(base_gpu + i) % num_gpus` as its
-        device id. The `base_gpu` for backward RNN cell is `(base_gpu +
-        num_bi_layers)`.
+        Args:
+          num_residual_layers: Number of residual layers from top to bottom. For
+            example, if `num_bi_layers=4` and `num_residual_layers=2`, the last 2 RNN
+            layers in each RNN cell will be wrapped with `ResidualWrapper`.
+          base_gpu: The gpu device id to use for the first forward RNN layer. The
+            i-th forward RNN layer will use `(base_gpu + i) % num_gpus` as its
+            device id. The `base_gpu` for backward RNN cell is `(base_gpu +
+            num_bi_layers)`.
 
-    Returns:
-      The concatenated bidirectional output and the bidirectional RNN cell"s
-      state.
-    """
-    # Construct forward and backward cells
-    fw_cell = self._build_encoder_cell(hparams,
+        Returns:
+          The concatenated bidirectional output and the bidirectional RNN cell"s
+          state.
+        """
+        # Construct forward and backward cells
+        fw_cell = self._build_encoder_cell(hparams,
                                        num_bi_layers,
                                        num_bi_residual_layers,
                                        base_gpu=base_gpu)
-    bw_cell = self._build_encoder_cell(hparams,
+        bw_cell = self._build_encoder_cell(hparams,
                                        num_bi_layers,
                                        num_bi_residual_layers,
                                        base_gpu=(base_gpu + num_bi_layers))
 
-    bi_outputs, bi_state = tf.nn.bidirectional_dynamic_rnn(
-        fw_cell,
-        bw_cell,
-        inputs,
-        dtype=dtype,
-        sequence_length=sequence_length,
-        time_major=self.time_major,
-        swap_memory=True)
+        bi_outputs, bi_state = tf.nn.bidirectional_dynamic_rnn(
+            fw_cell,
+            bw_cell,
+            inputs,
+            dtype=dtype,
+            sequence_length=sequence_length,
+            time_major=self.time_major,
+            swap_memory=True)
 
-    return tf.concat(bi_outputs, -1), bi_state
+        return tf.concat(bi_outputs, -1), bi_state
 
-  def _build_decoder_cell(self, hparams, encoder_outputs, encoder_state,
+    def _build_decoder_cell(self, hparams, encoder_outputs, encoder_state,
                           source_sequence_length):
     """Build an RNN cell that can be used by decoder."""
     # We only make use of encoder_outputs in attention-based models
-    if hparams.attention:
-      raise ValueError("BasicModel doesn't support attention.")
+        if hparams.attention:
+            raise ValueError("BasicModel doesn't support attention.")
 
-    cell = model_helper.create_rnn_cell(
-        unit_type=hparams.unit_type,
-        num_units=hparams.num_units,
-        num_layers=self.num_decoder_layers,
-        num_residual_layers=self.num_decoder_residual_layers,
-        forget_bias=hparams.forget_bias,
-        dropout=hparams.dropout,
-        num_gpus=self.num_gpus,
-        mode=self.mode,
-        single_cell_fn=self.single_cell_fn)
+        cell = model_helper.create_rnn_cell(
+            unit_type=hparams.unit_type,
+            num_units=hparams.num_units,
+            num_layers=self.num_decoder_layers,
+            num_residual_layers=self.num_decoder_residual_layers,
+            forget_bias=hparams.forget_bias,
+            dropout=hparams.dropout,
+            num_gpus=self.num_gpus,
+            mode=self.mode,
+            single_cell_fn=self.single_cell_fn)
 
-    # For beam search, we need to replicate encoder infos beam_width times
-    if self.mode == tf.contrib.learn.ModeKeys.INFER and hparams.beam_width > 0:
-      decoder_initial_state = tf.contrib.seq2seq.tile_batch(
-          encoder_state, multiplier=hparams.beam_width)
-    else:
-      decoder_initial_state = encoder_state
+        # For beam search, we need to replicate encoder infos beam_width times
+        if self.mode == tf.contrib.learn.ModeKeys.INFER and hparams.beam_width > 0:
+            decoder_initial_state = tf.contrib.seq2seq.tile_batch(
+            encoder_state, multiplier=hparams.beam_width)
+        else:
+            decoder_initial_state = encoder_state
 
-    return cell, decoder_initial_state
+        return cell, decoder_initial_state
