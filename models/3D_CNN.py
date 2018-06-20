@@ -116,13 +116,38 @@ def model(inputs_vid):
         encoder_cell, encoder_emb_inp, initial_state=init_state,
          time_major=True)
 
-    print encoder_outputs
-    print encoder_state
+    # print encoder_outputs
+    # print encoder_state
+
+    projection_layer = layers_core.Dense(
+        tgt_vocab_size, use_bias=False)
+
+
+    # Build RNN cell
+    num_units = 1024
+    decoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
+
+    # Helper
+    helper = tf.contrib.seq2seq.TrainingHelper(
+        decoder_emb_inp, decoder_lengths, time_major=True)
+    # Decoder
+    decoder = tf.contrib.seq2seq.BasicDecoder(
+        decoder_cell, helper, encoder_state,
+        output_layer=projection_layer)
+    # Dynamic decoding
+    outputs, _ = tf.contrib.seq2seq.dynamic_decode(decoder, maximum_iterations=maximum_iterations,
+                                                    output_time_major=self.time_major,
+                                                    swap_memory=True)
+    logits = outputs.rnn_output
+
     
 
-# data = np.random.rand(1,858,256,256,2)
-# data = data.astype(np.float32)
-# model(data)        
+
+    
+
+data = np.random.rand(1,858,256,256,2)
+data = data.astype(np.float32)
+model(data)        
 
 
 def word_to_int():
@@ -149,27 +174,7 @@ def embeddings(decoder_inputs):
 
 
 
-# Build RNN cell
-num_units = 1024
-decoder_cell = tf.nn.rnn_cell.BasicLSTMCell(num_units)
 
-# Helper
-helper = tf.contrib.seq2seq.TrainingHelper(
-    decoder_emb_inp, decoder_lengths, time_major=True)
-# Decoder
-decoder = tf.contrib.seq2seq.BasicDecoder(
-    decoder_cell, helper, encoder_state,
-    output_layer=projection_layer)
-# Dynamic decoding
-outputs, _ = tf.contrib.seq2seq.dynamic_decode(decoder, maximum_iterations=maximum_iterations,
-                                                output_time_major=self.time_major,
-                                                swap_memory=True)
-logits = outputs.rnn_output
-
-
-
-projection_layer = layers_core.Dense(
-    tgt_vocab_size, use_bias=False)
 
 crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
     labels=decoder_outputs, logits=logits)

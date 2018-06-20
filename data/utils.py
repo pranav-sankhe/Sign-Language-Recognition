@@ -532,9 +532,7 @@ def readOpflow(dirpath):
         # print i
         data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
         data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
-    print data.shape
     return data    
 
-readOpflow('/home/psankhe/sign-lang-recog/data/opflow_xy/RG0_Corpus_201707_01A_01_t01')
 
 
