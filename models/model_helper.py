@@ -267,18 +267,12 @@ def _create_or_load_embed(embed_name, vocab_file, embed_file,
           embed_name, [vocab_size, embed_size], dtype)
   return embedding
 
+def encoder_embedding(opFlowdir, sync):
+  return readOpflow(opFlowdir, sync)
 
-def create_emb_for_encoder_and_decoder(share_vocab,
-                                       src_vocab_size,
-                                       tgt_vocab_size,
-                                       src_embed_size,
-                                       tgt_embed_size,
-                                       dtype=tf.float32,
+def create_emb_for_encoder_and_decoder(label_path,
+                                        opFlowdir,
                                        num_partitions=0,
-                                       src_vocab_file=None,
-                                       tgt_vocab_file=None,
-                                       src_embed_file=None,
-                                       tgt_embed_file=None,
                                        scope=None):
   """Create embedding matrix for both encoder and decoder.
 
@@ -319,31 +313,19 @@ def create_emb_for_encoder_and_decoder(share_vocab,
 
   with tf.variable_scope(
       scope or "embeddings", dtype=dtype, partitioner=partitioner) as scope:
-    # Share embedding
-    if share_vocab:
-      if src_vocab_size != tgt_vocab_size:
-        raise ValueError("Share embedding but different src/tgt vocab sizes"
-                         " %d vs. %d" % (src_vocab_size, tgt_vocab_size))
-      assert src_embed_size == tgt_embed_size
-      utils.print_out("# Use the same embedding for source and target")
-      vocab_file = src_vocab_file or tgt_vocab_file
-      embed_file = src_embed_file or tgt_embed_file
+    
+    target_input, target_output, frame_start, frame_end, sync = readlabels(label_path)
 
-      embedding_encoder = _create_or_load_embed(
-          "embedding_share", vocab_file, embed_file,
-          src_vocab_size, src_embed_size, dtype)
-      embedding_decoder = embedding_encoder
-    else:
-      with tf.variable_scope("encoder", partitioner=partitioner):
-        embedding_encoder = _create_or_load_embed(
+    with tf.variable_scope("encoder", partitioner=partitioner):
+        '''embedding_encoder = _create_or_load_embed(
             "embedding_encoder", src_vocab_file, src_embed_file,
-            src_vocab_size, src_embed_size, dtype)
+            src_vocab_size, src_embed_size, dtype)'''
+          embedding_encoder = encoder_embedding(opFlowdir, sync)           
 
-      with tf.variable_scope("decoder", partitioner=partitioner):
-        embedding_decoder = _create_or_load_embed(
-            "embedding_decoder", tgt_vocab_file, tgt_embed_file,
-            tgt_vocab_size, tgt_embed_size, dtype)
-
+    with tf.variable_scope("decoder", partitioner=partitioner):
+      
+      decoder_inputs    = target_input     
+      embedding_decoder = embeddings(decoder_inputs)    
   return embedding_encoder, embedding_decoder
 
 
@@ -604,3 +586,67 @@ def compute_perplexity(model, sess, name):
   utils.print_time("  eval %s: perplexity %.2f" % (name, perplexity),
                    start_time)
   return perplexity
+
+
+
+def readOpflow(dirpath, sync):
+    data = np.zeros((MAX_VFRAME_LEN, IMG_HEIGHT, IMG_WIDTH, 2))
+
+    files = os.listdir(dirpath)
+    files = np.sort(files)
+    num_frames = len(files) 
+    x_files = files[0:num_frames/2]
+    y_files = files[num_frames/2:num_frames]
+    for i in range(num_frames/2):
+        # print i
+        data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
+        data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
+    data = data[sync:,:,:,:]
+    return data
+
+def embeddings(decoder_inputs):
+    decoder_inputs = word_to_int(decoder_inputs)  
+    with tf.variable_scope('embedding_decoder'):
+        embedding_decoder = tf.get_variable(
+            "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
+
+    decoder_emb_inp = embedding_ops.embedding_lookup(
+        embedding_decoder, decoder_inputs)
+    return decoder_emb_inp
+
+
+def word_to_int(l):
+    result = []
+    filepath = 'label.csv'
+    data = pd.read_csv(filepath, header=None, names=['0','1','2'])
+    data = data.values
+    data = data[:,0]
+    data = data[:-2]
+    for i in range(len(l)):
+        idx = np.where(data == l[i])[0][0]
+        result.append(idx)
+    print np.array(result)
+
+
+
+def readlabels(filepath):
+    data = pd.read_csv(filepath)
+    data = data.values
+    sync = data[0][1]
+    SOS = "<s>"
+    EOS = "</s>"
+    data_shape = data.shape 
+    target_output = []
+    target_input = []
+    frame_start = []
+    frame_end = []
+ 
+    target_input.append(SOS)
+    for i in range(data_shape[0]/3):
+        j = 2 + i*3
+        frame_start.append(data[j-1][1])
+        target_input.append(data[j][0])
+        target_output.append(data[j][0])
+        frame_end.append(data[j+1][2])
+    target_output.append(EOS)
+    return target_input, target_output, frame_start, frame_end, sync

@@ -33,6 +33,8 @@ utils.check_tensorflow_version()
 __all__ = ["BaseModel", "Model"]
 
 
+BATCH_SIZE = 32
+
 class BaseModel(object):
   """Sequence-to-sequence base class.
   """
@@ -106,7 +108,7 @@ class BaseModel(object):
 
     # Embeddings
     self.init_embeddings(hparams, scope)
-    self.batch_size = 32  # [HardCoded] tf.size(self.iterator.source_sequence_length)
+    self.batch_size = BATCH_SIZE  # self.batch_size =  tf.size(self.iterator.source_sequence_length)
 
     # Projection layer for decoder
     with tf.variable_scope(scope or "build_network"):
@@ -120,7 +122,7 @@ class BaseModel(object):
     # Setting the mode to train
     if self.mode == tf.contrib.learn.ModeKeys.TRAIN:
       self.train_loss = res[1]
-      self.word_count = MAX_FRAMES + MAX_OUTPUT_SENTENCE     #[Just for logging. Not involved in computations]  tf.reduce_sum(self.iterator.source_sequence_length) + tf.reduce_sum(self.iterator.target_sequence_length)
+      self.word_count = BATCH_SIZE*(MAX_FRAMES + MAX_OUTPUT_SENTENCE)     #[Just for logging. Not involved in computations]  tf.reduce_sum(self.iterator.source_sequence_length) + tf.reduce_sum(self.iterator.target_sequence_length)
 
     # Setting the mode to eval  
     elif self.mode == tf.contrib.learn.ModeKeys.EVAL:
@@ -132,9 +134,11 @@ class BaseModel(object):
       self.sample_words = reverse_target_vocab_table.lookup(
           tf.to_int64(self.sample_id))
 
+'''
     if self.mode != tf.contrib.learn.ModeKeys.INFER:
-      ## Count the number of predicted words for compute ppl(perplexity of model's own predictions).
-      self.predict_count = sum of lengths os sequences  # tf.reduce_sum(self.iterator.target_sequence_length)     
+      ## Count the number of predicted words to compute ppl(perplexity of model's own predictions).
+      self.predict_count = tf.reduce_sum(self.iterator.target_sequence_length)     
+'''
 
     self.global_step = tf.Variable(0, trainable=False)
     params = tf.trainable_variables()
@@ -250,19 +254,29 @@ class BaseModel(object):
 
   def init_embeddings(self, hparams, scope):
     """Init embeddings."""
+'''
     self.embedding_encoder, self.embedding_decoder = (
         model_helper.create_emb_for_encoder_and_decoder(
-            share_vocab=hparams.share_vocab,                              # False.  Default is False anyway. 
-            src_vocab_size=self.src_vocab_size,
-            tgt_vocab_size=self.tgt_vocab_size,
-            src_embed_size=hparams.num_units,
-            tgt_embed_size=hparams.num_units,
-            num_partitions=hparams.num_embeddings_partitions,             # Default = 0 
-            src_vocab_file=hparams.src_vocab_file,                        # File that contains all the words in source vocabulary including the start, end and unknown token 
-            tgt_vocab_file=hparams.tgt_vocab_file,                        # File that contains all the words in target vocabulary including the start, end and unknown token
-            src_embed_file=hparams.src_embed_file,                        # Default = None. Files containing the embedding matrix        
+            share_vocab=hparams.share_vocab,                              # False.  Default is False anyway. Hence Ignore
+            src_vocab_size=self.src_vocab_size,                           # Passed as hparams. Change it there.                     
+            tgt_vocab_size=self.tgt_vocab_size,                           # Passed as hparams. Change it there.  
+            src_embed_size=hparams.num_units,                             # Passed as hparams. Change it there.   
+            tgt_embed_size=hparams.num_units,                             # Passed as hparams. Change it there.   
+            num_partitions=hparams.num_embeddings_partitions,             # Ignore 
+            src_vocab_file=hparams.src_vocab_file,                        # start frame = complete zero. End frame = complete white. No file required. Change the setting in model_helper
+            tgt_vocab_file=hparams.tgt_vocab_file,                        # The CSV file that has the vocabulary. File that contains all the words in target vocabulary including the start, end and unknown token
+            src_embed_file=hparams.src_embed_file,                        # Default = None. Ignore. Files containing the embedding matrix        
             tgt_embed_file=hparams.tgt_embed_file,
             scope=scope,))
+'''
+
+    self.embedding_encoder, self.embedding_decoder = (
+        model_helper.create_emb_for_encoder_and_decoder(
+            label_path = label_path,
+            opFlowdir = opFlowdir,
+            num_partitions=hparams.num_embeddings_partitions,             # Ignore 
+            scope=scope,))
+
 
   def train(self, sess):
     assert self.mode == tf.contrib.learn.ModeKeys.TRAIN
@@ -357,7 +371,7 @@ class BaseModel(object):
     """Maximum decoding steps at inference time."""
     if hparams.tgt_max_len_infer:
       maximum_iterations = hparams.tgt_max_len_infer
-      utils.print_out("  decoding maximum_iterations %d" % maximum_iterations)
+      utils.print_out("decoding maximum_iterations %d" % maximum_iterations)
     else:
       # TODO(thangluong): add decoding_length_factor flag
       decoding_length_factor = 2.0
@@ -378,36 +392,37 @@ class BaseModel(object):
       A tuple of final logits and final decoder state:
         logits: size [time, batch_size, vocab_size] when time_major=True.
     """
-    tgt_sos_id = tf.cast(self.tgt_vocab_table.lookup(tf.constant(hparams.sos)),
-                         tf.int32)
-    tgt_eos_id = tf.cast(self.tgt_vocab_table.lookup(tf.constant(hparams.eos)),
-                         tf.int32)
-    iterator = self.iterator
+    # tgt_sos_id = tf.cast(self.tgt_vocab_table.lookup(tf.constant(hparams.sos)),
+    #                      tf.int32)
+    # tgt_eos_id = tf.cast(self.tgt_vocab_table.lookup(tf.constant(hparams.eos)),
+    #                      tf.int32)
+    
 
     # maximum_iteration: The maximum decoding steps.
-    maximum_iterations = self._get_infer_maximum_iterations(
-        hparams, <source sequence length of final outputs>)#iterator.source_sequence_length)
+    # maximum_iterations = self._get_infer_maximum_iterations(
+    #     hparams, <source sequence length of final outputs>)#iterator.source_sequence_length)
 
     ## Decoder.
     with tf.variable_scope("decoder") as decoder_scope:
       cell, decoder_initial_state = self._build_decoder_cell(
           hparams, encoder_outputs, encoder_state,
-           <source sequence length of final outputs>)#iterator.source_sequence_length)
+           BATCH_SIZE)#iterator.source_sequence_length)
 
       ## Train or eval
       if self.mode != tf.contrib.learn.ModeKeys.INFER:
         # decoder_emp_inp: [max_time, batch_size, num_units]
---------------------------------------------------------------------------------------------------------------------
-        target_input = iterator.target_input
-        if self.time_major:
-          target_input = tf.transpose(target_input)
-        decoder_emb_inp = tf.nn.embedding_lookup(
-            self.embedding_decoder, target_input)
----------------------------------------------------------------------------------------------------------------------
-        decoder_emb_inp = <reading and embedding functions>
+
+        # target_input = iterator.target_input
+        # if self.time_major:
+        #   target_input = tf.transpose(target_input)
+        # decoder_emb_inp = tf.nn.embedding_lookup(
+        #     self.embedding_decoder, target_input)
+
+         
+        decoder_emb_inp = embedding_decoder
         # Helper
         helper = tf.contrib.seq2seq.TrainingHelper(
-            decoder_emb_inp, batch_size'''iterator.target_sequence_length''',
+            decoder_emb_inp, BATCH_SIZE,
             time_major=self.time_major)
 
         # Decoder

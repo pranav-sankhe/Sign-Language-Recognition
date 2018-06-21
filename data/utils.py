@@ -488,7 +488,7 @@ def readSkeletonFiles(filepath):
 VOCAB_SIZE = 277 + 2 
 
 def embeddings():
-    
+        
     # Embedding
     embedding_encoder = variable_scope.get_variable(
         "embedding_encoder", [VOCAB_SIZE, 512])
@@ -498,6 +498,11 @@ def embeddings():
     encoder_emb_inp = embedding_ops.embedding_lookup(
         embedding_encoder, encoder_inputs)
 
+def word_to_int():
+    filepath = 'label.csv'
+    data = pd.read_csv(filepath, header=None, names=['0','1','2'])
+    data = data.values
+    data = data[:,(1,2)]
 
 def readlabels(filepath):
     data = pd.read_csv(filepath)
@@ -520,7 +525,7 @@ def readlabels(filepath):
     return sentence, frame_start, frame_end
 
 
-def readOpflow(dirpath):
+def readOpflow(dirpath, sync):
     data = np.zeros((MAX_VFRAME_LEN, IMG_HEIGHT, IMG_WIDTH, 2))
 
     files = os.listdir(dirpath)
