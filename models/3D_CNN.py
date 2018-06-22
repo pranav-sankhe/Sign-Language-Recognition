@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np
 import pandas as pd
 from tensorflow.python.ops import embedding_ops
-
+import acc_metric
 FC_SIZE = 1024
 DTYPE = tf.float32
 
@@ -14,9 +14,9 @@ NUM_FRAMES = 858
 NUM_LSTM_CELLS = 2048
 NUM_ENCODER_LAYERS = 2
 NUM_ITERATIONS = 1000
-beam_width = 0 
+beam_width = 5 #10 
 TIME_MAJOR = True
-
+optimizer = "sgd"
 
 def _weight_variable(name, shape):
     return tf.get_variable(name, shape, DTYPE, tf.truncated_normal_initializer(stddev=0.1))             # function to intilaize weights for each layer
@@ -30,7 +30,7 @@ def get_max_time(tensor):
     return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
 
 
-def _build_encoder():
+def _build_encoder(inputs_vid):
     """Build an encoder."""
 
     prev_layer = inputs_vid   # size = [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT. IMG_WIDTH, 2]
@@ -162,7 +162,7 @@ def _build_decoder_cell(encoder_outputs, encoder_state):
 
 
 
-def _build_decoder(encoder_outputs, encoder_state):
+def _build_decoder(encoder_outputs, encoder_state, target_inputs):
     """Build and run a RNN decoder with a final projection layer.
 
     Args:
@@ -182,6 +182,7 @@ def _build_decoder(encoder_outputs, encoder_state):
     #maximum_iterations = 
 
     ## Decoder.
+    projection_layer = layers_core.Dense(VOCAB_SIZE, use_bias=False)
 
     if mode == 'infer' and beam_width > 0:
         decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)
@@ -205,7 +206,7 @@ def _build_decoder(encoder_outputs, encoder_state):
         my_decoder = tf.contrib.seq2seq.BasicDecoder(
             decoder_cell,
             helper,
-            decoder_initial_state,)
+            decoder_initial_state, output_layer=projection_layer)
 
         # Dynamic decoding
         outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
@@ -293,7 +294,11 @@ def _compute_loss(target_output, logits):
         target_weights = tf.transpose(target_weights)
 
     loss = tf.reduce_sum(crossent * target_weights) / tf.to_float(self.batch_size)
-    return loss    
+    return loss
+
+
+
+
 
 
 def readOpflow(dirpath, sync):
@@ -357,3 +362,65 @@ def readlabels(filepath):
         frame_end.append(data[j+1][2])
     target_output.append(EOS)
     return target_input, target_output, frame_start, frame_end, sync
+
+
+max_gradient_norm = 1  #5
+
+def gradient_clip(gradients, max_gradient_norm):
+  """Clipping gradients of a model."""
+  clipped_gradients, gradient_norm = tf.clip_by_global_norm(
+      gradients, max_gradient_norm)
+  gradient_norm_summary = [tf.summary.scalar("grad_norm", gradient_norm)]
+  gradient_norm_summary.append(
+      tf.summary.scalar("clipped_gradient", tf.global_norm(clipped_gradients)))
+
+  return clipped_gradients, gradient_norm_summary, gradient_norm
+
+
+# CHANGE THE BATCH SIZE
+inputs_vid = tf.placeholder(tf.float32, [batch_size, n_steps, n_input])
+target_inputs = tf.placeholder(tf.float32, [batch_size, n_classes])
+target_outputs = tf.placeholder(tf.float32, [batch_size, n_classes])
+
+
+encoder_outputs, encoder_state = _build_encoder(inputs_vid)
+logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs)
+
+
+# Gradients
+train_loss = _compute_loss(target_outputs, logits)
+gradients = tf.gradients(train_loss, params, colocate_gradients_with_ops=hparams.colocate_gradients_with_ops)
+
+clipped_grads, grad_norm_summary, grad_norm = gradient_clip(gradients, max_gradient_norm=max_gradient_norm)
+
+
+#Optimizer
+if optimizer == "sgd":
+    opt = tf.train.GradientDescentOptimizer(learning_rate)
+
+elif optimizer == "adam":
+    opt = tf.train.AdamOptimizer(learning_rate)
+
+
+# Launch the graph
+sess = tf.InteractiveSession(config=tf.ConfigProto(log_device_placement=2))
+init = tf.global_variables_initializer()
+sess.run(init)
+
+step = 1
+
+while step * batch_size <= training_iters:
+    batch_xs =         extract_batch_size(X_train, step, batch_size)
+    
+    batch_ys = one_hot(extract_batch_size(y_train, step, batch_size), n_classes)
+
+
+
+    # Fit training using batch data
+    _, loss, acc = sess.run(
+        [optimizer, cost, accuracy],
+        feed_dict={
+            x: batch_xs, 
+            y: batch_ys
+        }
+    )
