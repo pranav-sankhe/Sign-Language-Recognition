@@ -184,10 +184,10 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         if TIME_MAJOR:
             target_input = tf.transpose(target_input)
         decoder_emb_inp = embeddings(target_input)
-
+        sequence_length = tf.placeholder(tf.int32, [None])
         # Helper
         helper = tf.contrib.seq2seq.TrainingHelper(
-            decoder_emb_inp, BATCH_SIZE,
+            decoder_emb_inp, sequence_length,
             time_major=True)
 
         # Decoder
