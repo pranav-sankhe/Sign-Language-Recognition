@@ -3,13 +3,18 @@ import numpy as np
 import pandas as pd
 from tensorflow.python.ops import embedding_ops
 import acc_metric
+import beamSearch
+from nltk.translate.bleu_score import sentence_bleu
+from tensorflow.python.layers import core as layers_core
+
+VOCAB_SIZE = 279
 FC_SIZE = 1024
 DTYPE = tf.float32
 
-BATCH_SIZE = 1
-IMG_HEIGHT = 220
-IMG_WIDTH = 220 
-IN_CHANNELS = 1
+BATCH_SIZE = 8
+IMG_HEIGHT = 256
+IMG_WIDTH = 256
+IN_CHANNELS = 2
 NUM_FRAMES = 858
 NUM_LSTM_CELLS = 2048
 NUM_ENCODER_LAYERS = 2
@@ -36,76 +41,82 @@ def _build_encoder(inputs_vid):
     prev_layer = inputs_vid   # size = [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT. IMG_WIDTH, 2]
 
     in_filters = 2
-    
-    out_filters = 16                                                                               # number of input channels for conv1     
-    kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])                       # (kernels = filters as defined in TF doc). kernel size = 5 (5*5*5) 
-    conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')                       # stride = 1          
-    biases = _bias_variable('biases', [out_filters])
-    bias = tf.nn.bias_add(conv, biases)                                                            # define biases for conv1 
-    conv1 = tf.nn.relu(bias, name=scope.name)                                                      # define the activation for conv1 
+    with tf.variable_scope('conv1_vid') as scope:                                                          # name of the block  
+        out_filters = 16                                                                               # number of input channels for conv1     
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])                       # (kernels = filters as defined in TF doc). kernel size = 5 (5*5*5) 
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')                       # stride = 1          
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)                                                            # define biases for conv1 
+        conv1 = tf.nn.relu(bias, name=scope.name)                                                      # define the activation for conv1 
 
-    prev_layer = conv1                                                                              
-    in_filters = out_filters                                    
+        prev_layer = conv1                                                                              
+        in_filters = out_filters                                    
 
     pool1 = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')        
     norm1 = pool1  # tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta = 0.75, name='norm1')
 
     prev_layer = norm1
-    
 
-    out_filters = 32
-    kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    biases = _bias_variable('biases', [out_filters])
-    bias = tf.nn.bias_add(conv, biases)
-    conv2 = tf.nn.relu(bias, name=scope.name)
+    with tf.variable_scope('conv2_vids') as scope:
+        out_filters = 32
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)
+        conv2 = tf.nn.relu(bias, name=scope.name)
 
-    prev_layer = conv2
-    in_filters = out_filters
-
-    # normalize prev_layer here
-    prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
-
-    out_filters = 64
-    kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    biases = _bias_variable('biases', [out_filters])
-    bias = tf.nn.bias_add(conv, biases)
-    prev_layer = tf.nn.relu(bias, name=scope.name)
-    in_filters = out_filters
-
-    out_filters = 64
-    kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    biases = _bias_variable('biases', [out_filters])
-    bias = tf.nn.bias_add(conv, biases)
-    prev_layer = tf.nn.relu(bias, name=scope.name)
-    in_filters = out_filters
-
-    out_filters = 32
-    kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    biases = _bias_variable('biases', [out_filters])
-    bias = tf.nn.bias_add(conv, biases)
-    prev_layer = tf.nn.relu(bias, name=scope.name)
-    in_filters = out_filters
+        prev_layer = conv2
+        in_filters = out_filters
 
     # normalize prev_layer here
     prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
 
-    dim = np.prod(prev_layer.get_shape().as_list()[1:]) 
-    prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
-    weights = _weight_variable('weights', [dim, FC_SIZE])
-    biases = _bias_variable('biases', [FC_SIZE])
-    local3 = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
+    with tf.variable_scope('conv3_1_vids') as scope:
+        out_filters = 64
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)
+        prev_layer = tf.nn.relu(bias, name=scope.name)
+        in_filters = out_filters
+
+    with tf.variable_scope('conv3_2_vids') as scope:
+        out_filters = 64
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)
+        prev_layer = tf.nn.relu(bias, name=scope.name)
+        in_filters = out_filters
+
+    with tf.variable_scope('conv3_3_vids') as scope:
+        out_filters = 32
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)
+        prev_layer = tf.nn.relu(bias, name=scope.name)
+        in_filters = out_filters
+
+    # normalize prev_layer here
+    prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
+
+
+    with tf.variable_scope('local3_vids') as scope:                                     # FULLY CONNECTED LAYER 
+        dim = np.prod(prev_layer.get_shape().as_list()[1:]) 
+        prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
+        weights = _weight_variable('weights', [dim, FC_SIZE])
+        biases = _bias_variable('biases', [FC_SIZE])
+        local3 = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
 
     prev_layer = local3
 
-    dim = np.prod(prev_layer.get_shape().as_list()[1:])
-    prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
-    weights = _weight_variable('weights', [dim, FC_SIZE])
-    biases = _bias_variable('biases', [FC_SIZE])
-    local4_vid = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
+    with tf.variable_scope('local4_vids') as scope:                                      # ANOTHER FULLLY CONNECTED LAYER     
+        dim = np.prod(prev_layer.get_shape().as_list()[1:])
+        prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
+        weights = _weight_variable('weights', [dim, FC_SIZE])
+        biases = _bias_variable('biases', [FC_SIZE])
+        local4_vid = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
 
 
     local4_vid = tf.reshape(local4_vid, [FC_SIZE, BATCH_SIZE, 1])
@@ -137,32 +148,9 @@ def _build_encoder(inputs_vid):
 
         return tf.concat(bi_outputs, -1), bi_state
 
-def _build_decoder_cell(encoder_outputs, encoder_state):
 
 
-    cell = model_helper.create_rnn_cell(
-        unit_type=hparams.unit_type,
-        num_units=hparams.num_units,
-        num_layers=self.num_decoder_layers,
-        num_residual_layers=self.num_decoder_residual_layers,
-        forget_bias=hparams.forget_bias,
-        dropout=hparams.dropout,
-        num_gpus=self.num_gpus,
-        mode=self.mode,
-        single_cell_fn=self.single_cell_fn)
-
-    # For beam search, we need to replicate encoder infos beam_width times
-    if self.mode == tf.contrib.learn.ModeKeys.INFER and hparams.beam_width > 0:
-      decoder_initial_state = tf.contrib.seq2seq.tile_batch(
-          encoder_state, multiplier=hparams.beam_width)
-    else:
-      decoder_initial_state = encoder_state
-
-    return cell, decoder_initial_state
-
-
-
-def _build_decoder(encoder_outputs, encoder_state, target_inputs):
+def _build_decoder(encoder_outputs, encoder_state, target_input):
     """Build and run a RNN decoder with a final projection layer.
 
     Args:
@@ -180,7 +168,7 @@ def _build_decoder(encoder_outputs, encoder_state, target_inputs):
 
     # maximum_iteration: The maximum decoding steps.
     #maximum_iterations = 
-
+    mode = 'train'
     ## Decoder.
     projection_layer = layers_core.Dense(VOCAB_SIZE, use_bias=False)
 
@@ -192,10 +180,10 @@ def _build_decoder(encoder_outputs, encoder_state, target_inputs):
       ## Train or eval
     if mode != 'infer':
         # decoder_emp_inp: [max_time, batch_size, num_units]
-        target_input = iterator.target_input
-        if self.time_major:
+        
+        if TIME_MAJOR:
             target_input = tf.transpose(target_input)
-        decoder_emb_inp = tf.nn.embedding_lookup(self.embedding_decoder, target_input)
+        decoder_emb_inp = embeddings(target_input)
 
         # Helper
         helper = tf.contrib.seq2seq.TrainingHelper(
@@ -298,9 +286,6 @@ def _compute_loss(target_output, logits):
 
 
 
-
-
-
 def readOpflow(dirpath, sync):
     data = np.zeros((MAX_VFRAME_LEN, IMG_HEIGHT, IMG_WIDTH, 2))
 
@@ -337,7 +322,8 @@ def word_to_int(l):
     for i in range(len(l)):
         idx = np.where(data == l[i])[0][0]
         result.append(idx)
-    print np.array(result)
+    return result
+
 
 
 
@@ -364,6 +350,27 @@ def readlabels(filepath):
     return target_input, target_output, frame_start, frame_end, sync
 
 
+def getOpflowBatch(file_list, syncs):
+    data = np.zeros((BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2))
+    for i in range(len(file_list)):
+        data[i,:,:,:,:] = readOpflow(dirpath, sync[0])
+    return data    
+
+
+
+def getLabelbatch(file_list):
+    target_inputs = []
+    target_output = []
+    syncs = []
+
+    for i in range(len(file_list)):
+
+        target_input, target_output, frame_start, frame_end, sync = readlabels(filepath)
+        target_inputs.append(target_input)
+        target_outputs.append(target_output)
+        syncs.append(sync)
+    return target_inputs, target_outputs, syncs    
+
 max_gradient_norm = 1  #5
 
 def gradient_clip(gradients, max_gradient_norm):
@@ -378,9 +385,9 @@ def gradient_clip(gradients, max_gradient_norm):
 
 
 # CHANGE THE BATCH SIZE
-inputs_vid = tf.placeholder(tf.float32, [batch_size, n_steps, n_input])
-target_inputs = tf.placeholder(tf.float32, [batch_size, n_classes])
-target_outputs = tf.placeholder(tf.float32, [batch_size, n_classes])
+inputs_vid = tf.placeholder(tf.float32, [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2])
+target_inputs = tf.placeholder(tf.float32, [BATCH_SIZE, None])
+target_outputs = tf.placeholder(tf.float32, [BATCH_SIZE, None])
 
 
 encoder_outputs, encoder_state = _build_encoder(inputs_vid)
@@ -402,6 +409,24 @@ elif optimizer == "adam":
     opt = tf.train.AdamOptimizer(learning_rate)
 
 
+pred_sequences = beam_search_decoder(logits, k=5)
+score_list = []
+for i in range(len(pred_sequences)):
+    reference = target_outputs
+
+    score = sentence_bleu(reference, pred_sequences[i])
+    score_list.append(score)
+
+accuracy = score_list
+
+
+for i in range(5):
+    pred_sequences[i]    
+
+
+#accuracy = acc_metric.wer(logits, )
+# beamSearch.ctc_beamsearch(dist, '-ab', k=100)
+
 # Launch the graph
 sess = tf.InteractiveSession(config=tf.ConfigProto(log_device_placement=2))
 init = tf.global_variables_initializer()
@@ -409,18 +434,41 @@ sess.run(init)
 
 step = 1
 
-while step * batch_size <= training_iters:
-    batch_xs =         extract_batch_size(X_train, step, batch_size)
-    
-    batch_ys = one_hot(extract_batch_size(y_train, step, batch_size), n_classes)
+for i in range(NUM_ITERATIONS):
+
+    BASE_VIDEO_FILE = '/home/psankhe/sign-lang-recog/data/opflow_xy'
+    BASE_ANNOT_FILE = '/home/data/00_Annotations_20180427'
+
+    annot_files = os.listdir(BASE_ANNOT_FILE)
+    for i in range(len(annot_files)):
+        annot_files[i] = os.path.basename(annot_files[i]).split('.')[0]
 
 
+    vid_files = os.listdir(BASE_VIDEO_FILE)
 
-    # Fit training using batch data
-    _, loss, acc = sess.run(
-        [optimizer, cost, accuracy],
-        feed_dict={
-            x: batch_xs, 
-            y: batch_ys
-        }
-    )
+    for i in range(len(vid_files)):
+        vid_files[i] = os.path.basename(vid_files[i]).split('.')[0]
+
+    filenames = np.intersect1d(vid_files, annot_files)        
+
+    filenames = np.random.shuffle()
+    epochs = len(filenames)/BATCH_SIZE
+    for i in range(epochs):
+        file_list = filenames[i:i+BATCH_SIZE]
+        target_batch_data = getLabelbatch(file_list)
+        tgt_batch_input = target_batch_data[0]
+        tgt_batch_input = target_batch_data[1]
+        syncs = target_batch_data[2]
+        batch_vids = getOpflowBatch(file_list, syncs)
+
+
+        # Fit training using batch data
+        _, loss = sess.run(
+            [optimizer, train_loss],
+            feed_dict={
+                inputs_vid: inputs_vid, 
+                target_input: tgt_input,
+                target_output: tgt_output
+            }
+        )
+    print (loss)

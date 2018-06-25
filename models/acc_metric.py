@@ -183,6 +183,8 @@ def wer(r, h):
     You can use it like this: wer("what is it".split(), "what is".split()) 
     """
     # build the matrix
+    r = str(r)
+    h = str(h)
     d = editDistance(r, h)
 
     # find out the manipulation steps
