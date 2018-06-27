@@ -7,10 +7,11 @@ import beamSearch
 from nltk.translate.bleu_score import sentence_bleu
 from tensorflow.python.layers import core as layers_core
 
+EMBEDDING_SIZE = 512
 VOCAB_SIZE = 279
 FC_SIZE = 1024
 DTYPE = tf.float32
-
+MAX_SENT_LENGTH = 16
 BATCH_SIZE = 8
 IMG_HEIGHT = 256
 IMG_WIDTH = 256
@@ -20,8 +21,11 @@ NUM_LSTM_CELLS = 2048
 NUM_ENCODER_LAYERS = 2
 NUM_ITERATIONS = 1000
 beam_width = 5 #10 
-TIME_MAJOR = True
+TIME_MAJOR = False
 optimizer = "sgd"
+SOS = '<s>'
+EOS = '</s>'
+
 
 def _weight_variable(name, shape):
     return tf.get_variable(name, shape, DTYPE, tf.truncated_normal_initializer(stddev=0.1))             # function to intilaize weights for each layer
@@ -37,7 +41,7 @@ def get_max_time(tensor):
 
 def _build_encoder(inputs_vid):
     """Build an encoder."""
-
+    bi_flag = False
     prev_layer = inputs_vid   # size = [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT. IMG_WIDTH, 2]
 
     in_filters = 2
@@ -117,20 +121,24 @@ def _build_encoder(inputs_vid):
         weights = _weight_variable('weights', [dim, FC_SIZE])
         biases = _bias_variable('biases', [FC_SIZE])
         local4_vid = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
+    
 
 
-    local4_vid = tf.reshape(local4_vid, [FC_SIZE, BATCH_SIZE, 1])
+    encoder_emb_inp = tf.tile(tf.expand_dims(local4_vid, 2), [1, 1, 128])
 
-    encoder_emb_inp = local4_vid
+    # create 2 LSTMCells
+    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [128, 256]]
 
-      # Encoder_outputs: [max_time, batch_size, num_units]
+    # create a RNN cell composed sequentially of a number of RNNCells
+    multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
 
-    encoder_cell = tf.nn.rnn_cell.BasicLSTMCell(NUM_LSTM_CELLS)
-    init_state = encoder_cell.zero_state(BATCH_SIZE, tf.float32) 
-    # Run Dynamic RNN
-    #   encoder_outputs: [max_time, batch_size, num_units]
-    #   encoder_state: [batch_size, num_units]
-    encoder_outputs, encoder_state = tf.nn.dynamic_rnn(encoder_cell, encoder_emb_inp, initial_state=init_state, time_major=True)
+    # 'outputs' is a tensor of shape [batch_size, max_time, 256]
+    # 'state' is a N-tuple where N is the number of LSTMCells containing a
+    # tf.contrib.rnn.LSTMStateTuple for each cell
+    encoder_outputs, encoder_state = tf.nn.dynamic_rnn(cell=multi_rnn_cell,
+                                       inputs=encoder_emb_inp,
+                                       dtype=tf.float32)
+
 
     return encoder_outputs, encoder_state
 
@@ -149,7 +157,7 @@ def _build_encoder(inputs_vid):
         return tf.concat(bi_outputs, -1), bi_state
 
 
-
+    
 def _build_decoder(encoder_outputs, encoder_state, target_input):
     """Build and run a RNN decoder with a final projection layer.
 
@@ -163,14 +171,12 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         logits: size [time, batch_size, vocab_size] when time_major=True.
     """
 
-    SOS = '<s>'
-    EOS = '</s>'
 
     # maximum_iteration: The maximum decoding steps.
     #maximum_iterations = 
     mode = 'train'
     ## Decoder.
-    projection_layer = layers_core.Dense(VOCAB_SIZE, use_bias=False)
+    output_layer = layers_core.Dense(VOCAB_SIZE, use_bias=False)                          # Define projection layer
 
     if mode == 'infer' and beam_width > 0:
         decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)
@@ -186,22 +192,22 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         decoder_emb_inp = embeddings(target_input)
         sequence_length = tf.placeholder(tf.int32, [None])
         # Helper
+        output_seq_len = 16
         helper = tf.contrib.seq2seq.TrainingHelper(
-            decoder_emb_inp, sequence_length,
-            time_major=True)
+            decoder_emb_inp, sequence_length=[output_seq_len for _ in range(BATCH_SIZE)])
 
         # Decoder
         my_decoder = tf.contrib.seq2seq.BasicDecoder(
             decoder_cell,
             helper,
-            decoder_initial_state, output_layer=projection_layer)
+            decoder_initial_state, output_layer=output_layer)
+
+
+        
 
         # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
-            my_decoder,
-            output_time_major=True,
-            swap_memory=True)
-
+        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(my_decoder, maximum_iterations=16, swap_memory=True)
+        import pdb; pdb.set_trace()
         sample_id = outputs.sample_id
 
         # Note: there's a subtle difference here between train and inference.
@@ -210,7 +216,8 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         # We chose to apply the output_layer to all timesteps for speed:
         #   10% improvements for small models & 20% for larger ones.
         # If memory is a concern, we should apply output_layer per timestep.
-        logits = self.output_layer(outputs.rnn_output)
+        logits = output_layer(outputs.rnn_output)
+        
 
       # ## Inference
       # else:
@@ -302,37 +309,30 @@ def readOpflow(dirpath, sync):
     return data
 
 def embeddings(decoder_inputs):
-    decoder_inputs = word_to_int(decoder_inputs)  
     with tf.variable_scope('embedding_decoder'):
         embedding_decoder = tf.get_variable(
             "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
 
-    decoder_emb_inp = embedding_ops.embedding_lookup(
-        embedding_decoder, decoder_inputs)
+    decoder_emb_inp = embedding_ops.embedding_lookup(embedding_decoder, decoder_inputs)
     return decoder_emb_inp
-
 
 def word_to_int(l):
     result = []
-    filepath = 'label.csv'
+    filepath = '/home/data/01_Label/label.csv'
     data = pd.read_csv(filepath, header=None, names=['0','1','2'])
     data = data.values
     data = data[:,0]
     data = data[:-2]
-    for i in range(len(l)):
-        idx = np.where(data == l[i])[0][0]
+    for x in l:
+        idx = np.where(data == x)[0][0]
         result.append(idx)
     return result
-
-
 
 
 def readlabels(filepath):
     data = pd.read_csv(filepath)
     data = data.values
-    sync = data[0][1]
-    SOS = "<s>"
-    EOS = "</s>"
+    sync = data[0][1] 
     data_shape = data.shape 
     target_output = []
     target_input = []
@@ -347,6 +347,9 @@ def readlabels(filepath):
         target_output.append(data[j][0])
         frame_end.append(data[j+1][2])
     target_output.append(EOS)
+
+    target_input = word_to_int(target_input)
+    target_output = word_to_int(target_output)
     return target_input, target_output, frame_start, frame_end, sync
 
 
@@ -355,7 +358,6 @@ def getOpflowBatch(file_list, syncs):
     for i in range(len(file_list)):
         data[i,:,:,:,:] = readOpflow(dirpath, sync[0])
     return data    
-
 
 
 def getLabelbatch(file_list):
@@ -384,17 +386,20 @@ def gradient_clip(gradients, max_gradient_norm):
   return clipped_gradients, gradient_norm_summary, gradient_norm
 
 
+
 # CHANGE THE BATCH SIZE
 inputs_vid = tf.placeholder(tf.float32, [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2])
-target_inputs = tf.placeholder(tf.float32, [BATCH_SIZE, None])
-target_outputs = tf.placeholder(tf.float32, [BATCH_SIZE, None])
+target_inputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
+target_outputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
 
 
 encoder_outputs, encoder_state = _build_encoder(inputs_vid)
+
 logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs)
 
 
 # Gradients
+params = tf.trainable_variables()
 train_loss = _compute_loss(target_outputs, logits)
 gradients = tf.gradients(train_loss, params, colocate_gradients_with_ops=hparams.colocate_gradients_with_ops)
 
@@ -420,8 +425,8 @@ for i in range(len(pred_sequences)):
 accuracy = score_list
 
 
-for i in range(5):
-    pred_sequences[i]    
+# for i in range(5):
+#     pred_sequences[i]    
 
 
 #accuracy = acc_metric.wer(logits, )
