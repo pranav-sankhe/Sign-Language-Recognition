@@ -9,6 +9,9 @@ from tensorflow.python.layers import core as layers_core
 import os
 import random
 from PIL import Image
+import confuncs
+
+
 
 EMBEDDING_SIZE = 256
 VOCAB_SIZE = 279
@@ -37,16 +40,7 @@ BASE_VIDEO_FILE = '/home/psankhe/sign-lang-recog/data/opflow_xy'
 BASE_ANNOT_FILE = '/home/psankhe/sign-lang-recog/annotations'
 
 
-def _weight_variable(name, shape):
-    return tf.get_variable(name, shape, DTYPE, tf.truncated_normal_initializer(stddev=0.1))             # function to intilaize weights for each layer
 
-def _bias_variable(name, shape):
-    return tf.get_variable(name, shape, DTYPE, tf.constant_initializer(0.1, dtype=DTYPE))               # fucntion to intiliaze bias vector for each layer
-
-
-def get_max_time(tensor):
-    time_axis = 0 if TIME_MAJOR else 1
-    return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
 
 
 def _build_encoder(inputs_vid):
@@ -55,90 +49,33 @@ def _build_encoder(inputs_vid):
     prev_layer = inputs_vid   # size = [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT. IMG_WIDTH, 2]
 
     in_filters = 2
-    with tf.variable_scope('conv1_vid') as scope:                                                          # name of the block  
-        out_filters = 8                                                                               # number of input channels for conv1     
-        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])                       # (kernels = filters as defined in TF doc). kernel size = 5 (5*5*5) 
-        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')                       # stride = 1          
-        biases = _bias_variable('biases', [out_filters])
-        bias = tf.nn.bias_add(conv, biases)                                                            # define biases for conv1 
-        conv1 = tf.nn.relu(bias, name=scope.name)                                                      # define the activation for conv1 
+    out_filters = 8
+    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv1')
 
-        prev_layer = conv1                                                                              
-        in_filters = out_filters                                    
+    in_filters = 2
+    out_filters = 8
+    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv2')
 
-    pool1 = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')        
-    norm1 = pool1  # tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta = 0.75, name='norm1')
+    in_filters = 2
+    out_filters = 8
+    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, 'conv3a')
 
-    prev_layer = norm1
+    in_filters = 2
+    out_filters = 8
+    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, 'conv3b')
 
-    with tf.variable_scope('conv2_vids') as scope:
-        out_filters = 16
-        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-        biases = _bias_variable('biases', [out_filters])
-        bias = tf.nn.bias_add(conv, biases)
-        conv2 = tf.nn.relu(bias, name=scope.name)
+    in_filters = 2
+    out_filters = 8
+    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv3c')
 
-        prev_layer = conv2
-        in_filters = out_filters
-
-    # normalize prev_layer here
-    prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
-
-    with tf.variable_scope('conv3_1_vids') as scope:
-        out_filters = 32
-        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-        biases = _bias_variable('biases', [out_filters])
-        bias = tf.nn.bias_add(conv, biases)
-        prev_layer = tf.nn.relu(bias, name=scope.name)
-        in_filters = out_filters
-
-    # with tf.variable_scope('conv3_2_vids') as scope:
-    #     out_filters = 32
-    #     kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    #     conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    #     biases = _bias_variable('biases', [out_filters])
-    #     bias = tf.nn.bias_add(conv, biases)
-    #     prev_layer = tf.nn.relu(bias, name=scope.name)
-    #     in_filters = out_filters
-
-    with tf.variable_scope('conv3_3_vids') as scope:
-        out_filters = 64
-        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-        biases = _bias_variable('biases', [out_filters])
-        bias = tf.nn.bias_add(conv, biases)
-        prev_layer = tf.nn.relu(bias, name=scope.name)
-        in_filters = out_filters
-
-    # normalize prev_layer here
-    prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
+    prev_layer = confuncs.fully_connected(prev_layer, Fc_size=FC_SIZE, 'FC_1')
+    prev_layer = confuncs.fully_connected(prev_layer, Fc_size=FC_SIZE, 'FC_2')
 
 
-    # with tf.variable_scope('local3_vids') as scope:                                     # FULLY CONNECTED LAYER 
-    #     dim = np.prod(prev_layer.get_shape().as_list()[1:]) 
-    #     prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
-    #     weights = _weight_variable('weights', [dim, FC_SIZE])
-    #     biases = _bias_variable('biases', [FC_SIZE])
-    #     local3 = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
-
-    # prev_layer = local3
-
-    with tf.variable_scope('local4_vids') as scope:                                      # ANOTHER FULLLY CONNECTED LAYER     
-        dim = np.prod(prev_layer.get_shape().as_list()[1:])
-        prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
-        weights = _weight_variable('weights', [dim, FC_SIZE])
-        biases = _bias_variable('biases', [FC_SIZE])
-        local4_vid = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
-    
-
-     
-
-    encoder_emb_inp = tf.tile(tf.expand_dims(local4_vid, 2), [1, 1, 256])
+    encoder_emb_inp = tf.tile(tf.expand_dims(prev_layer, 2), [1, 1, NUM_LSTM_CELLS])
 
     # create 2 LSTMCells
-    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [256, 256]]
+    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [NUM_LSTM_CELLS, NUM_LSTM_CELLS]]
 
     # create a RNN cell composed sequentially of a number of RNNCells
     multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
@@ -169,7 +106,7 @@ def _build_encoder(inputs_vid):
 
 
     
-def _build_decoder(encoder_outputs, encoder_state, target_input):
+def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence_length):
     """Build and run a RNN decoder with a final projection layer.
 
     Args:
@@ -211,9 +148,8 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         decoder_emb_inp = embeddings(target_input)
         sequence_length = tf.placeholder(tf.int32, [None])
         # Helper
-        output_seq_len = 16
         helper = tf.contrib.seq2seq.TrainingHelper(
-            decoder_emb_inp, sequence_length=[output_seq_len for _ in range(BATCH_SIZE)])
+            decoder_emb_inp, sequence_length=target_sequence_length)
 
         # Decoder
         my_decoder = tf.contrib.seq2seq.BasicDecoder(
@@ -295,6 +231,9 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
     return logits, sample_id, final_context_state
 
 
+def core_model(input_videos, target_inputs=None, mode):              # mode can be infer or train 
+        
+
     
 
 def _compute_loss(target_output, logits):
@@ -314,97 +253,7 @@ def _compute_loss(target_output, logits):
 
 
 
-def readOpflow(dirpath, sync, prescaler):
-    dirpath = BASE_VIDEO_FILE + '/' + dirpath
-    data = np.zeros((NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2))
-    files = os.listdir(dirpath)
-    files = np.sort(files)
-    num_frames = len(files) 
-    x_files = files[0:num_frames/2]
-    y_files = files[num_frames/2:num_frames]
-    count = 0 
 
-    for i in range(NUM_FRAMES):
-        if i < num_frames/2:
-            if i%2 == 0:
-                data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
-                data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
-    for i in range(sync/2):
-        data[i,:,:,:] = np.zeros((IMG_HEIGHT, IMG_WIDTH, 2))            
-    return data
-
-def embeddings(decoder_inputs):
-    with tf.variable_scope('embedding_decoder'):
-        embedding_decoder = tf.get_variable(
-            "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
-
-    decoder_emb_inp = embedding_ops.embedding_lookup(embedding_decoder, decoder_inputs)
-    return decoder_emb_inp
-
-def word_to_int(l):
-    result = []
-    filepath = '/home/data/01_Label/label.csv'
-    data = pd.read_csv(filepath, header=None, names=['0','1','2'])
-    data = data.values
-    data = data[:,0]
-    data = data[:-2]
-    data = np.append(data,'<s>')
-    data = np.append(data,'</s>')
-    
-    for x in l:
-        idx = np.where(data == x)[0][0]
-        result.append(idx)
-    return result
-
-
-def readlabels(filepath):
-    filepath = BASE_ANNOT_FILE + '/' + filepath + '.csv'
-    data = pd.read_csv(filepath)
-    data = data.values
-    sync = data[0][1] 
-    data_shape = data.shape 
-    target_output = []
-    target_input = []
-    frame_start = []
-    frame_end = []
- 
-    target_input.append(SOS)
-    for i in range(data_shape[0]/3):
-        j = 2 + i*3
-        frame_start.append(data[j-1][1])
-        target_input.append(data[j][0])
-        target_output.append(data[j][0])
-        frame_end.append(data[j+1][2])
-    target_output.append(EOS)
-
-    target_input = word_to_int(target_input)
-    target_output = word_to_int(target_output)
-    while(len(target_input) < 16):
-        target_input.append(278)
-    while(len(target_output) < 16):
-        target_output.append(278)
-    return target_input, target_output, frame_start, frame_end, sync
-
-
-def getOpflowBatch(file_list, syncs):
-    data = np.zeros((BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2))
-    for i in range(len(file_list)):
-        data[i,:,:,:,:] = readOpflow(file_list[i], syncs[0], prescaler)
-    return data    
-
-
-def getLabelbatch(file_list):
-    target_inputs = []
-    target_outputs = []
-    syncs = []
-
-    for i in range(len(file_list)):
-
-        target_input, target_output, frame_start, frame_end, sync = readlabels(file_list[i])
-        target_inputs.append(target_input)
-        target_outputs.append(target_output)
-        syncs.append(sync)
-    return target_inputs, target_outputs, syncs    
 
 max_gradient_norm = 1  #5
 
@@ -420,31 +269,29 @@ def gradient_clip(gradients, max_gradient_norm):
 
 
 
-# CHANGE THE BATCH SIZE
+
 inputs_vid = tf.placeholder(tf.float32, [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2])
 target_inputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
 target_outputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
+target_sequence_length = tf.placeholder(tf.int32, BATCH_SIZE)
 
 
-with tf.device('/device:GPU:2'):
+encoder_outputs, encoder_state = _build_encoder(inputs_vid)
 
-    encoder_outputs, encoder_state = _build_encoder(inputs_vid)
-
-    logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs)
+logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs, target_sequence_length)
 
 
-with tf.device('/device:GPU:1'):
 # Gradients
-    params = tf.trainable_variables()
-    train_loss = _compute_loss(target_outputs, logits)
-    gradients = tf.gradients(train_loss, params, colocate_gradients_with_ops=True)
+params = tf.trainable_variables()
+train_loss = _compute_loss(target_outputs, logits)
+gradients = tf.gradients(train_loss, params, colocate_gradients_with_ops=True)
 
-    clipped_grads, grad_norm_summary, grad_norm = gradient_clip(gradients, max_gradient_norm=max_gradient_norm)
+clipped_grads, grad_norm_summary, grad_norm = gradient_clip(gradients, max_gradient_norm=max_gradient_norm)
 
 
-    #Optimizer
-    # if optimizer == "sgd":
-    optimizer = tf.train.GradientDescentOptimizer(LR).minimize(train_loss)
+#Optimizer
+# if optimizer == "sgd":
+optimizer = tf.train.GradientDescentOptimizer(LR).minimize(train_loss)
 
 # elif optimizer == "adam":
 #     opt = tf.train.AdamOptimizer(LR)
@@ -497,11 +344,12 @@ for i in range(NUM_ITERATIONS):
     for i in range(epochs):
         file_list = filenames[i:i+BATCH_SIZE]
         
-        target_batch_data = getLabelbatch(file_list)
+        target_batch_data = confuncs.getLabelbatch(file_list)
         tgt_batch_input = target_batch_data[0]
         tgt_batch_output = target_batch_data[1]
         syncs = target_batch_data[2]
-        batch_vids = getOpflowBatch(file_list, syncs)
+        tgt_sequence_length = len(tgt_batch_input[0] +1)
+        batch_vids = confuncs.getOpflowBatch(file_list, syncs)
 
 
 
@@ -513,6 +361,7 @@ for i in range(NUM_ITERATIONS):
                 inputs_vid: batch_vids, 
                 target_inputs: tgt_batch_input,
                 target_outputs: tgt_batch_output
+                target_sequence_length: tgt_sequence_length
             }
         )
         print (loss)
