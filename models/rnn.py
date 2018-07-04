@@ -1,7 +1,6 @@
 # All Includes
 
 import numpy as np
-<<<<<<< HEAD
 import matplotlib
 import matplotlib.pyplot as plt
 import tensorflow as tf  # Version 1.0.0 (some previous versions are used in past commits)
@@ -325,6 +324,7 @@ def extract_batch_size(_train, step, batch_size):
         # Loop index
         index = ((step-1)*batch_size + i) % len(_train)
         batch_s[i] = _train[index] 
+
 X_train = np.load('data.npy')
 Y_train = np.load('labels.npy')
 

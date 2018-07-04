@@ -9,12 +9,13 @@ from tensorflow.python.layers import core as layers_core
 import os
 import random
 from PIL import Image
-EMBEDDING_SIZE = 512
+
+EMBEDDING_SIZE = 256
 VOCAB_SIZE = 279
-FC_SIZE = 512
+FC_SIZE = 256
 DTYPE = tf.float32
 MAX_SENT_LENGTH = 16
-BATCH_SIZE = 1
+BATCH_SIZE = 8
 IMG_HEIGHT = 256
 IMG_WIDTH = 256
 IN_CHANNELS = 2
@@ -55,7 +56,7 @@ def _build_encoder(inputs_vid):
 
     in_filters = 2
     with tf.variable_scope('conv1_vid') as scope:                                                          # name of the block  
-        out_filters = 4                                                                               # number of input channels for conv1     
+        out_filters = 8                                                                               # number of input channels for conv1     
         kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])                       # (kernels = filters as defined in TF doc). kernel size = 5 (5*5*5) 
         conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')                       # stride = 1          
         biases = _bias_variable('biases', [out_filters])
@@ -71,7 +72,7 @@ def _build_encoder(inputs_vid):
     prev_layer = norm1
 
     with tf.variable_scope('conv2_vids') as scope:
-        out_filters = 8
+        out_filters = 16
         kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
         conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
         biases = _bias_variable('biases', [out_filters])
@@ -84,17 +85,17 @@ def _build_encoder(inputs_vid):
     # normalize prev_layer here
     prev_layer = tf.nn.max_pool3d(prev_layer, ksize=[1, 3, 3, 3, 1], strides=[1, 2, 2, 2, 1], padding='SAME')
 
-    # with tf.variable_scope('conv3_1_vids') as scope:
-    #     out_filters = 64
-    #     kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
-    #     conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
-    #     biases = _bias_variable('biases', [out_filters])
-    #     bias = tf.nn.bias_add(conv, biases)
-    #     prev_layer = tf.nn.relu(bias, name=scope.name)
-    #     in_filters = out_filters
+    with tf.variable_scope('conv3_1_vids') as scope:
+        out_filters = 32
+        kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
+        conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
+        biases = _bias_variable('biases', [out_filters])
+        bias = tf.nn.bias_add(conv, biases)
+        prev_layer = tf.nn.relu(bias, name=scope.name)
+        in_filters = out_filters
 
     # with tf.variable_scope('conv3_2_vids') as scope:
-    #     out_filters = 64
+    #     out_filters = 32
     #     kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
     #     conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
     #     biases = _bias_variable('biases', [out_filters])
@@ -103,7 +104,7 @@ def _build_encoder(inputs_vid):
     #     in_filters = out_filters
 
     with tf.variable_scope('conv3_3_vids') as scope:
-        out_filters = 16
+        out_filters = 64
         kernel = _weight_variable('weights', [5, 5, 5, in_filters, out_filters])
         conv = tf.nn.conv3d(prev_layer, kernel, [1, 1, 1, 1, 1], padding='SAME')
         biases = _bias_variable('biases', [out_filters])
@@ -134,10 +135,10 @@ def _build_encoder(inputs_vid):
 
      
 
-    encoder_emb_inp = tf.tile(tf.expand_dims(local4_vid, 2), [1, 1, 512])
+    encoder_emb_inp = tf.tile(tf.expand_dims(local4_vid, 2), [1, 1, 256])
 
     # create 2 LSTMCells
-    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [512, 512]]
+    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [256, 256]]
 
     # create a RNN cell composed sequentially of a number of RNNCells
     multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
@@ -193,7 +194,7 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
     else:
         decoder_initial_state = encoder_state    
     # create 2 LSTMCells
-    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [512, 512]]
+    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [256, 256]]
 
     # create a RNN cell composed sequentially of a number of RNNCells
     multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
@@ -235,6 +236,7 @@ def _build_decoder(encoder_outputs, encoder_state, target_input):
         # If memory is a concern, we should apply output_layer per timestep.
         
         logits = output_layer(outputs.rnn_output)
+        # import pdb; pdb.set_trace()
 
         
 
