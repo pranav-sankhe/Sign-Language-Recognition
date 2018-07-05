@@ -11,8 +11,7 @@ import random
 from PIL import Image
 import confuncs
 
-
-
+NUM_SEGEMENTS = 9
 EMBEDDING_SIZE = 256
 VOCAB_SIZE = 279
 FC_SIZE = 256
@@ -50,29 +49,44 @@ def _build_encoder(inputs_vid):
 
     in_filters = 2
     out_filters = 8
-    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv1')
-
-    in_filters = 2
-    out_filters = 8
-    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv2')
-
-    in_filters = 2
-    out_filters = 8
-    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, 'conv3a')
-
-    in_filters = 2
-    out_filters = 8
-    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, 'conv3b')
-
-    in_filters = 2
-    out_filters = 8
-    prev_layer = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, 'conv3c')
-
-    prev_layer = confuncs.fully_connected(prev_layer, Fc_size=FC_SIZE, 'FC_1')
-    prev_layer = confuncs.fully_connected(prev_layer, Fc_size=FC_SIZE, 'FC_2')
+    conv1 = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, name_scope ='conv1')
+    prev_layer = conv1
+    
+    in_filters = out_filters
+    out_filters = 16
+    conv2 = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, name_scope='conv2')
+    prev_layer = conv2
 
 
-    encoder_emb_inp = tf.tile(tf.expand_dims(prev_layer, 2), [1, 1, NUM_LSTM_CELLS])
+    in_filters = out_filters
+    out_filters = 32
+    conv3a = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, name_scope='conv3a')
+    prev_layer = conv3a
+
+
+    in_filters = out_filters
+    out_filters = 64
+    conv3b = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=False, name_scope='conv3b')
+    prev_layer = conv3b
+
+    in_filters = out_filters
+    out_filters = 128
+    conv3c = confuncs.conv_layer(prev_layer, in_filters, out_filters, Ksize=5, poolTrue=True, name_scope='conv3c')
+    prev_layer = conv3c
+
+    prev_layer = tf.split(prev_layer, NUM_SEGEMENTS, axis=1)       #split into segments in time dimensions
+    output_fc = []
+    flag = True 
+    for i in range(len(prev_layer)):
+        output_fc.append( confuncs.fully_connected(prev_layer[i], Fc_size=FC_SIZE, name_scope='FC_' + str(i)) )
+
+    
+    
+    output_fc = tf.convert_to_tensor(output_fc)
+    output_fc = tf.transpose(output_fc, [1, 0, 2])
+    
+    encoder_emb_inp = output_fc
+    # encoder_emb_inp = tf.tile(tf.expand_dims(prev_layer, 2), [1, 1, NUM_LSTM_CELLS])
 
     # create 2 LSTMCells
     rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [NUM_LSTM_CELLS, NUM_LSTM_CELLS]]
@@ -86,7 +100,6 @@ def _build_encoder(inputs_vid):
     encoder_outputs, encoder_state = tf.nn.dynamic_rnn(cell=multi_rnn_cell,
                                        inputs=encoder_emb_inp,
                                        dtype=tf.float32)
-
 
     return encoder_outputs, encoder_state
 
@@ -106,7 +119,7 @@ def _build_encoder(inputs_vid):
 
 
     
-def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence_length):
+def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence_length,mode):
     """Build and run a RNN decoder with a final projection layer.
 
     Args:
@@ -120,33 +133,17 @@ def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence
     """
 
 
-    # maximum_iteration: The maximum decoding steps.
-    #maximum_iterations = 
-    mode = 'train'
     ## Decoder.
     output_layer = layers_core.Dense(VOCAB_SIZE, use_bias=False)                          # Define projection layer
 
-    if mode == 'infer' and beam_width > 0:
-        decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)
-    else:
-        decoder_initial_state = encoder_state    
-    # create 2 LSTMCells
-    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [256, 256]]
-
-    # create a RNN cell composed sequentially of a number of RNNCells
+    rnn_layers = [tf.nn.rnn_cell.LSTMCell(size) for size in [NUM_LSTM_CELLS, NUM_LSTM_CELLS]]
     multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
 
- 
-
-
-      ## Train or eval
-    if mode != 'infer':
+    maximum_iterations = confuncs._get_infer_maximum_iterations(target_sequence_length)
+    if mode == 'train':
         # decoder_emp_inp: [max_time, batch_size, num_units]
-        
-        if TIME_MAJOR:
-            target_input = tf.transpose(target_input)
-        decoder_emb_inp = embeddings(target_input)
-        sequence_length = tf.placeholder(tf.int32, [None])
+        decoder_initial_state = encoder_state
+        decoder_emb_inp = confuncs.embeddings(target_input)
         # Helper
         helper = tf.contrib.seq2seq.TrainingHelper(
             decoder_emb_inp, sequence_length=target_sequence_length)
@@ -157,90 +154,61 @@ def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence
             helper,
             decoder_initial_state)
 
-
+        
         
         # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(my_decoder, swap_memory=True)
+        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(my_decoder, maximum_iterations=maximum_iterations, swap_memory=True)
 
         sample_id = outputs.sample_id
         
-        # Note: there's a subtle difference here between train and inference.
-        # We could have set output_layer when create my_decoder
-        #   and shared more code between train and inference.
-        # We chose to apply the output_layer to all timesteps for speed:
-        #   10% improvements for small models & 20% for larger ones.
-        # If memory is a concern, we should apply output_layer per timestep.
-        
         logits = output_layer(outputs.rnn_output)
-        # import pdb; pdb.set_trace()
-
         
 
-      # ## Inference
-      # else:
-      #   #beam_width = hparams.beam_width
-      #   length_penalty_weight = 0#hparams.length_penalty_weight
-      #   start_tokens = tf.fill([self.batch_size], tgt_sos_id)
-      #   end_token = tgt_eos_id
+    if mode == 'infer':
+        decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)        
+        start_tokens = tf.fill([self.batch_size], SOS)
+        end_token = EOS
+        length_penalty_weight = 0 
+        beam_width = 5
+        my_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
+                                                          cell=cell,
+                                                          embedding=confuncs.embedding_for_beamSearch,
+                                                          start_tokens=start_tokens,
+                                                          end_token=end_token,
+                                                          initial_state=decoder_initial_state,
+                                                          beam_width=beam_width,
+                                                          output_layer=output_layer,
+                                                          length_penalty_weight=length_penalty_weight)
 
-      #   if beam_width > 0:
-      #     my_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
-      #         cell=cell,
-      #         embedding=self.embedding_decoder,
-      #         start_tokens=start_tokens,
-      #         end_token=end_token,
-      #         initial_state=decoder_initial_state,
-      #         beam_width=beam_width,
-      #         output_layer=self.output_layer,
-      #         length_penalty_weight=length_penalty_weight)
-      #   else:
-      #     # Helper
-      #     sampling_temperature = hparams.sampling_temperature
-      #     if sampling_temperature > 0.0:
-      #       helper = tf.contrib.seq2seq.SampleEmbeddingHelper(
-      #           self.embedding_decoder, start_tokens, end_token,
-      #           softmax_temperature=sampling_temperature,
-      #           seed=hparams.random_seed)
-      #     else:
-      #       helper = tf.contrib.seq2seq.GreedyEmbeddingHelper(
-      #           self.embedding_decoder, start_tokens, end_token)
-
-      #     # Decoder
-      #     my_decoder = tf.contrib.seq2seq.BasicDecoder(
-      #         cell,
-      #         helper,
-      #         decoder_initial_state,
-      #         output_layer=self.output_layer  # applied per timestep
-      #     )
-
+        
         # Dynamic decoding
-        # outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
-        #     my_decoder,
-        #     maximum_iterations=maximum_iterations,
-        #     output_time_major=self.time_major,
-        #     swap_memory=True,
-        #     scope=decoder_scope)
+        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
+            my_decoder,
+            maximum_iterations=maximum_iterations,
+            swap_memory=True)
 
-        # if beam_width > 0:
-        #   logits = tf.no_op()
-        #   sample_id = outputs.predicted_ids
-        # else:
-        #   logits = outputs.rnn_output
-        #   sample_id = outputs.sample_id
+        if beam_width > 0:
+          logits = tf.no_op()
+          sample_id = outputs.predicted_ids
+        else:
+          logits = outputs.rnn_output
+          sample_id = outputs.sample_id
+
 
     return logits, sample_id, final_context_state
 
 
-def core_model(input_videos, target_inputs=None, mode):              # mode can be infer or train 
+def core_model(input_videos, target_inputs, target_sequence_length, mode):              # mode can be infer or train 
+    encoder_outputs, encoder_state = _build_encoder(input_videos)
+    logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs, target_sequence_length, mode)
+    return logits, sample_id, final_context_state
         
-
-    
 
 def _compute_loss(target_output, logits):
     """Compute optimization loss."""
     if TIME_MAJOR:
         target_output = tf.transpose(target_output)
-    max_time = get_max_time(target_output)
+    max_time = confuncs.get_max_time(target_output)
     crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
         labels=target_output, logits=logits)
     target_weights = tf.sequence_mask(
@@ -270,22 +238,17 @@ def gradient_clip(gradients, max_gradient_norm):
 
 
 
-inputs_vid = tf.placeholder(tf.float32, [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2])
+input_vids = tf.placeholder(tf.float32, [BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2])
 target_inputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
 target_outputs = tf.placeholder(tf.int32, [BATCH_SIZE, MAX_SENT_LENGTH])
-target_sequence_length = tf.placeholder(tf.int32, BATCH_SIZE)
-
-
-encoder_outputs, encoder_state = _build_encoder(inputs_vid)
-
-logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs, target_sequence_length)
-
+target_sequence_length = tf.placeholder(tf.int32, [BATCH_SIZE])
+mode = 'train'
+logits, sample_id, final_context_state = core_model(input_vids, target_inputs, target_sequence_length, mode)
 
 # Gradients
 params = tf.trainable_variables()
 train_loss = _compute_loss(target_outputs, logits)
 gradients = tf.gradients(train_loss, params, colocate_gradients_with_ops=True)
-
 clipped_grads, grad_norm_summary, grad_norm = gradient_clip(gradients, max_gradient_norm=max_gradient_norm)
 
 
@@ -296,7 +259,7 @@ optimizer = tf.train.GradientDescentOptimizer(LR).minimize(train_loss)
 # elif optimizer == "adam":
 #     opt = tf.train.AdamOptimizer(LR)
 
-# import pdb; pdb.set_trace()
+
 
 # pred_sequences = beam_search_decoder(logits, k=5)
 # score_list = []
@@ -348,7 +311,10 @@ for i in range(NUM_ITERATIONS):
         tgt_batch_input = target_batch_data[0]
         tgt_batch_output = target_batch_data[1]
         syncs = target_batch_data[2]
-        tgt_sequence_length = len(tgt_batch_input[0] +1)
+        tgt_sequence_length =[]
+        for j in range(len(tgt_batch_input)):
+            tgt_sequence_length.append(len(tgt_batch_input[i]))
+        len(tgt_batch_input[0] +1)
         batch_vids = confuncs.getOpflowBatch(file_list, syncs)
 
 
@@ -360,7 +326,7 @@ for i in range(NUM_ITERATIONS):
             feed_dict={
                 inputs_vid: batch_vids, 
                 target_inputs: tgt_batch_input,
-                target_outputs: tgt_batch_output
+                target_outputs: tgt_batch_output,
                 target_sequence_length: tgt_sequence_length
             }
         )
