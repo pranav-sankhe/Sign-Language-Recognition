@@ -14,10 +14,6 @@ for filename in os.listdir(BASE_PATH):
         print "Running through the skeleton file: ", filename, " File Number: ", count
         filepath = BASE_PATH +'/' + filename
         l = utils.twoPpl_list(l, filepath)
-       
-
-
-
 
 
 l = np.array(l)

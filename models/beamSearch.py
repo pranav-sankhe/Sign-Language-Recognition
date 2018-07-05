@@ -21,20 +21,20 @@ def beam_search_decoder(data, k):
         sequences = ordered[:k]
     return sequences
  
-# define a sequence of 10 words over a vocab of 5 words
-data = [[0.1, 0.2, 0.3, 0.4, 0.5],
-        [0.5, 0.4, 0.3, 0.2, 0.1],
-        [0.1, 0.2, 0.3, 0.4, 0.5],
-        [0.5, 0.4, 0.3, 0.2, 0.1],
-        [0.1, 0.2, 0.3, 0.4, 0.5],
-        [0.5, 0.4, 0.3, 0.2, 0.1],
-        [0.1, 0.2, 0.3, 0.4, 0.5],
-        [0.5, 0.4, 0.3, 0.2, 0.1],
-        [0.1, 0.2, 0.3, 0.4, 0.5],
-        [0.5, 0.4, 0.3, 0.2, 0.1]]
-data = array(data)
-# decode sequence
-result = beam_search_decoder(data, 3)
-# print result
-for seq in result:
-    print(seq)
+# # define a sequence of 10 words over a vocab of 5 words
+# data = [[0.1, 0.2, 0.3, 0.4, 0.5],
+#         [0.5, 0.4, 0.3, 0.2, 0.1],
+#         [0.1, 0.2, 0.3, 0.4, 0.5],
+#         [0.5, 0.4, 0.3, 0.2, 0.1],
+#         [0.1, 0.2, 0.3, 0.4, 0.5],
+#         [0.5, 0.4, 0.3, 0.2, 0.1],
+#         [0.1, 0.2, 0.3, 0.4, 0.5],
+#         [0.5, 0.4, 0.3, 0.2, 0.1],
+#         [0.1, 0.2, 0.3, 0.4, 0.5],
+#         [0.5, 0.4, 0.3, 0.2, 0.1]]
+# data = array(data)
+# # decode sequence
+# result = beam_search_decoder(data, 3)
+# # print result
+# for seq in result:
+#     print(seq)
