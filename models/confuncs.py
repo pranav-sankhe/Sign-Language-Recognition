@@ -1,13 +1,34 @@
-import tensorflow
+import tensorflow as tf
 import numpy as np 
 import pandas as pd
 import os
+from tensorflow.python.ops import embedding_ops
+
+EMBEDDING_SIZE = 256
+VOCAB_SIZE = 279
+FC_SIZE = 256
+DTYPE = tf.float32
+MAX_SENT_LENGTH = 16
+BATCH_SIZE = 8
+IMG_HEIGHT = 256
+IMG_WIDTH = 256
+IN_CHANNELS = 2
+prescaler = 2
+NUM_FRAMES = 858/prescaler
+NUM_LSTM_CELLS = 256
+NUM_ENCODER_LAYERS = 2
+NUM_ITERATIONS = 1000
+beam_width = 5 #10 
+TIME_MAJOR = False
+optimizer = "sgd"
+SOS = '<s>'
+EOS = '</s>'
+LR = 0.0001
 
 
 
-
-
-
+BASE_VIDEO_FILE = '/home/psankhe/sign-lang-recog/data/opflow_xy'
+BASE_ANNOT_FILE = '/home/psankhe/sign-lang-recog/annotations'
 
 
 
@@ -32,7 +53,7 @@ def get_max_time(tensor):
     time_axis = 0 if TIME_MAJOR else 1
     return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
 
-def conv_layer(prev_layer, in_filters, out_filters, Ksize, poolTrue, name_scope)
+def conv_layer(prev_layer, in_filters, out_filters, Ksize, poolTrue, name_scope):
 
     # in_filters = 2
     with tf.variable_scope(name_scope) as scope:                                                          # name of the block  
@@ -52,7 +73,7 @@ def conv_layer(prev_layer, in_filters, out_filters, Ksize, poolTrue, name_scope)
     return prev_layer    
 
 
-def fully_connected(prev_layer,Fc_size, name_scope)
+def fully_connected(prev_layer,Fc_size, name_scope):
     with tf.variable_scope(name_scope) as scope:
         dim = np.prod(prev_layer.get_shape().as_list()[1:])
         prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
@@ -81,6 +102,13 @@ def readOpflow(dirpath, sync, prescaler):
     for i in range(sync/2):
         data[i,:,:,:] = np.zeros((IMG_HEIGHT, IMG_WIDTH, 2))            
     return data
+
+def embedding_for_beamSearch(decoder_inputs):
+    with tf.variable_scope('embedding_decoder'):
+        embedding_decoder = tf.get_variable(
+            "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
+        return embedding_decoder
+
 
 def embeddings(decoder_inputs):
     with tf.variable_scope('embedding_decoder'):
@@ -155,4 +183,40 @@ def getLabelbatch(file_list):
         syncs.append(sync)
     return target_inputs, target_outputs, syncs      
 
+
+def _get_infer_maximum_iterations(sequence_length):
+    """Maximum decoding steps at inference time."""
+      # TODO(thangluong): add decoding_length_factor flag
+    decoding_length_factor = 2.0
+    max_encoder_length = tf.reduce_max(sequence_length)
+    maximum_iterations = tf.to_int32(tf.round(
+          tf.to_float(max_encoder_length) * decoding_length_factor))
+    return maximum_iterations
+
+
+
+def _compute_loss(target_output, logits):
+    """Compute optimization loss."""
+    if TIME_MAJOR:
+        target_output = tf.transpose(target_output)
+    max_time = get_max_time(target_output)
+    crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
+        labels=target_output, logits=logits)
+    target_weights = tf.sequence_mask(
+        BATCH_SIZE, max_time, dtype=logits.dtype)
+    if TIME_MAJOR:
+        target_weights = tf.transpose(target_weights)
+
+    loss = tf.reduce_sum(crossent * target_weights) / tf.to_float(BATCH_SIZE)
+    return loss
+
+def gradient_clip(gradients, max_gradient_norm):
+  """Clipping gradients of a model."""
+  clipped_gradients, gradient_norm = tf.clip_by_global_norm(
+      gradients, max_gradient_norm)
+  gradient_norm_summary = [tf.summary.scalar("grad_norm", gradient_norm)]
+  gradient_norm_summary.append(
+      tf.summary.scalar("clipped_gradient", tf.global_norm(clipped_gradients)))
+
+  return clipped_gradients, gradient_norm_summary, gradient_norm
 
