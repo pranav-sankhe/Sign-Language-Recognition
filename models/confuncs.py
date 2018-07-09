@@ -3,54 +3,36 @@ import numpy as np
 import pandas as pd
 import os
 from tensorflow.python.ops import embedding_ops
+from PIL import Image
+import hparams
 
-EMBEDDING_SIZE = 256
-VOCAB_SIZE = 279
-FC_SIZE = 256
-DTYPE = tf.float32
-MAX_SENT_LENGTH = 16
-BATCH_SIZE = 8
-IMG_HEIGHT = 256
-IMG_WIDTH = 256
-IN_CHANNELS = 2
-prescaler = 2
-NUM_FRAMES = 858/prescaler
-NUM_LSTM_CELLS = 256
-NUM_ENCODER_LAYERS = 2
-NUM_ITERATIONS = 1000
-beam_width = 5 #10 
-TIME_MAJOR = False
-optimizer = "sgd"
-SOS = '<s>'
-EOS = '</s>'
-LR = 0.0001
 
 
 
 BASE_VIDEO_FILE = '/home/psankhe/sign-lang-recog/data/opflow_xy'
 BASE_ANNOT_FILE = '/home/psankhe/sign-lang-recog/annotations'
 
-
-
-def batch_norm(inputs, training, data_format):
-  """Performs a batch normalization using a standard set of parameters."""
-  # We set fused=True for a significant performance boost. See
-  # https://www.tensorflow.org/performance/performance_guide#common_fused_ops
-  return tf.layers.batch_normalization(
-      inputs=inputs, axis=1 if data_format == 'channels_first' else 3,
-      momentum=_BATCH_NORM_DECAY, epsilon=_BATCH_NORM_EPSILON, center=True,
-      scale=True, training=training, fused=True)
-
+def primes(n):
+    primfac = []
+    d = 2
+    while d*d <= n:
+        while (n % d) == 0:
+            primfac.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+       primfac.append(n)
+    return primfac
 
 def _weight_variable(name, shape):
-    return tf.get_variable(name, shape, DTYPE, tf.truncated_normal_initializer(stddev=0.1))             # function to intilaize weights for each layer
+    return tf.get_variable(name, shape, hparams.DTYPE, tf.truncated_normal_initializer(stddev=0.1))             # function to intilaize weights for each layer
 
 def _bias_variable(name, shape):
-    return tf.get_variable(name, shape, DTYPE, tf.constant_initializer(0.1, dtype=DTYPE))               # fucntion to intiliaze bias vector for each layer
+    return tf.get_variable(name, shape, hparams.DTYPE, tf.constant_initializer(0.1, dtype=hparams.DTYPE))               # fucntion to intiliaze bias vector for each layer
 
 
 def get_max_time(tensor):
-    time_axis = 0 if TIME_MAJOR else 1
+    time_axis = 0 if hparams.TIME_MAJOR else 1
     return tensor.shape[time_axis].value or tf.shape(tensor)[time_axis]
 
 def conv_layer(prev_layer, in_filters, out_filters, Ksize, poolTrue, name_scope):
@@ -73,47 +55,46 @@ def conv_layer(prev_layer, in_filters, out_filters, Ksize, poolTrue, name_scope)
     return prev_layer    
 
 
-def fully_connected(prev_layer,Fc_size, name_scope):
+def fully_connected(prev_layer, name_scope):
     with tf.variable_scope(name_scope) as scope:
         dim = np.prod(prev_layer.get_shape().as_list()[1:])
         prev_layer_flat = tf.reshape(prev_layer, [-1, dim])
-        weights = _weight_variable('weights', [dim, Fc_size])
-        biases = _bias_variable('biases', [Fc_size])
+        weights = _weight_variable('weights', [dim, hparams.FC_SIZE])
+        biases = _bias_variable('biases', [hparams.FC_SIZE])
         output = tf.nn.relu(tf.matmul(prev_layer_flat, weights) + biases, name=scope.name)
     return output    
 
 
 
 def readOpflow(dirpath, sync, prescaler):
-    dirpath = BASE_VIDEO_FILE + '/' + dirpath
-    data = np.zeros((NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2))
+    dirpath = hparams.BASE_VIDEO_FILE + '/' + dirpath
+    data = np.zeros((hparams.NUM_FRAMES, hparams.IMG_HEIGHT, hparams.IMG_WIDTH, hparams.IN_CHANNELS))
     files = os.listdir(dirpath)
     files = np.sort(files)
     num_frames = len(files) 
     x_files = files[0:num_frames/2]
     y_files = files[num_frames/2:num_frames]
-    count = 0 
-
-    for i in range(NUM_FRAMES):
-        if i < num_frames/2:
-            if i%2 == 0:
-                data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
-                data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
-    for i in range(sync/2):
-        data[i,:,:,:] = np.zeros((IMG_HEIGHT, IMG_WIDTH, 2))            
+    x_files = x_files[::prescaler]
+    y_files = y_files[::prescaler]
+    for i in range(len(x_files)):        
+        data[i,:,:,0] = np.array(Image.open(dirpath + '/' + x_files[i])) 
+        data[i,:,:,1] = np.array(Image.open(dirpath + '/' + y_files[i]))
+    for i in range(sync/hparams.prescaler):
+        data[i,:,:,:] = np.zeros((hparams.IMG_HEIGHT, hparams.IMG_WIDTH, hparams.IN_CHANNELS))            
     return data
+    # return data
 
 def embedding_for_beamSearch(decoder_inputs):
     with tf.variable_scope('embedding_decoder'):
         embedding_decoder = tf.get_variable(
-            "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
+            "embedding_decoder", [hparams.VOCAB_SIZE, hparams.EMBEDDING_SIZE])
         return embedding_decoder
 
 
 def embeddings(decoder_inputs):
     with tf.variable_scope('embedding_decoder'):
         embedding_decoder = tf.get_variable(
-            "embedding_decoder", [VOCAB_SIZE, EMBEDDING_SIZE])
+            "embedding_decoder", [hparams.VOCAB_SIZE, hparams.EMBEDDING_SIZE])
 
     decoder_emb_inp = embedding_ops.embedding_lookup(embedding_decoder, decoder_inputs)
     return decoder_emb_inp
@@ -135,7 +116,7 @@ def word_to_int(l):
 
 
 def readlabels(filepath):
-    filepath = BASE_ANNOT_FILE + '/' + filepath + '.csv'
+    filepath = hparams.BASE_ANNOT_FILE + '/' + filepath + '.csv'
     data = pd.read_csv(filepath)
     data = data.values
     sync = data[0][1] 
@@ -145,14 +126,14 @@ def readlabels(filepath):
     frame_start = []
     frame_end = []
  
-    target_input.append(SOS)
+    target_input.append(hparams.SOS)
     for i in range(data_shape[0]/3):
         j = 2 + i*3
         frame_start.append(data[j-1][1])
         target_input.append(data[j][0])
         target_output.append(data[j][0])
         frame_end.append(data[j+1][2])
-    target_output.append(EOS)
+    target_output.append(hparams.EOS)
 
     target_input = word_to_int(target_input)
     target_output = word_to_int(target_output)
@@ -163,10 +144,11 @@ def readlabels(filepath):
     return target_input, target_output, frame_start, frame_end, sync
 
 
-def getOpflowBatch(file_list, syncs):
-    data = np.zeros((BATCH_SIZE, NUM_FRAMES, IMG_HEIGHT, IMG_WIDTH, 2))
+def getOpflowBatch(file_list, syncs,prescaler):
+    data = [] 
     for i in range(len(file_list)):
-        data[i,:,:,:,:] = readOpflow(file_list[i], syncs[0], prescaler)
+        data.append(readOpflow(file_list[i], syncs[0], prescaler)) 
+    data = np.array(data)
     return data    
 
 
@@ -195,19 +177,19 @@ def _get_infer_maximum_iterations(sequence_length):
 
 
 
-def _compute_loss(target_output, logits):
+def _compute_loss(target_output, logits, batch_size):
     """Compute optimization loss."""
-    if TIME_MAJOR:
+    if hparams.TIME_MAJOR:
         target_output = tf.transpose(target_output)
     max_time = get_max_time(target_output)
     crossent = tf.nn.sparse_softmax_cross_entropy_with_logits(
         labels=target_output, logits=logits)
     target_weights = tf.sequence_mask(
-        BATCH_SIZE, max_time, dtype=logits.dtype)
-    if TIME_MAJOR:
+        batch_size, max_time, dtype=logits.dtype)
+    if hparams.TIME_MAJOR:
         target_weights = tf.transpose(target_weights)
 
-    loss = tf.reduce_sum(crossent * target_weights) / tf.to_float(BATCH_SIZE)
+    loss = tf.reduce_sum(crossent * target_weights) / tf.to_float(batch_size)
     return loss
 
 def gradient_clip(gradients, max_gradient_norm):
@@ -220,3 +202,151 @@ def gradient_clip(gradients, max_gradient_norm):
 
   return clipped_gradients, gradient_norm_summary, gradient_norm
 
+
+
+def batch_norm(inputs, training):
+    return tf.layers.batch_normalization(
+          inputs=inputs, axis=4,
+          momentum=hparams._BATCH_NORM_DECAY, epsilon=hparams._BATCH_NORM_EPSILON, center=True,
+          scale=True, training=training, fused=True)
+
+
+def fixed_padding(inputs, kernel_size):
+    pad_total = kernel_size - 1
+    pad_beg = pad_total // 2
+    pad_end = pad_total - pad_beg
+
+    padded_inputs = tf.pad(inputs, [ [0, 0], [0,0], [pad_beg, pad_end],
+                                    [pad_beg, pad_end], [0, 0] ])
+
+    return padded_inputs
+
+
+
+
+def conv3d_fixed_padding(inputs, filters, kernel_size, strides):
+    if strides > 1:
+        inputs = fixed_padding(inputs, kernel_size)
+
+    return tf.layers.conv3d(
+                          inputs,
+                          filters,
+                          kernel_size,
+                          strides=(1, 1, 1),
+                          padding=('SAME' if strides == 1 else 'VALID'),
+                          use_bias=False,
+                          kernel_initializer=tf.variance_scaling_initializer(),
+                          )
+
+################################################################################
+# ResNet block definitions.
+################################################################################
+def _building_block_v1(inputs, filters, training, projection_shortcut, strides):
+
+    shortcut = inputs
+
+    if projection_shortcut is not None:
+        shortcut = projection_shortcut(inputs)
+        shortcut = batch_norm(inputs=shortcut, training=training)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=3, strides=strides)
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=3, strides=1)
+    inputs = batch_norm(inputs, training)
+    inputs += shortcut
+    inputs = tf.nn.relu(inputs)
+
+    return inputs
+
+
+def _bottleneck_block_v1(inputs, filters, training, projection_shortcut,strides):
+    shortcut = inputs
+
+    if projection_shortcut is not None:
+        shortcut = projection_shortcut(inputs)
+        shortcut = batch_norm(inputs=shortcut, training=training)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=1, strides=1)
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=3, strides=strides)
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=4 * filters, kernel_size=1, strides=1)
+    inputs = batch_norm(inputs, training)
+    inputs += shortcut
+    inputs = tf.nn.relu(inputs)
+
+    return inputs
+
+def _building_block_v2(inputs, filters, training, projection_shortcut, strides):
+
+    shortcut = inputs
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+
+    # The projection shortcut should come after the first batch norm and ReLU
+    # since it performs a 1x1 convolution.
+    if projection_shortcut is not None:
+        shortcut = projection_shortcut(inputs)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=3, strides=strides)
+
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+    inputs = conv2d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=3, strides=1)
+
+    return inputs + shortcut
+
+
+def _bottleneck_block_v2(inputs, filters, training, projection_shortcut,strides):
+    shortcut = inputs
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+
+    # The projection shortcut should come after the first batch norm and ReLU
+    # since it performs a 1x1 convolution.
+    if projection_shortcut is not None:
+        shortcut = projection_shortcut(inputs)
+
+    inputs = conv3d_fixed_padding(
+      inputs=inputs, filters=filters, kernel_size=1, strides=1)
+
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+    inputs = conv3d_fixed_padding(inputs=inputs, filters=filters, kernel_size=3, strides=strides)
+
+    inputs = batch_norm(inputs, training)
+    inputs = tf.nn.relu(inputs)
+    inputs = conv3d_fixed_padding(inputs=inputs, filters=4 * filters, kernel_size=1, strides=1)
+
+    return inputs + shortcut
+
+
+
+def block_layer(inputs, filters, bottleneck, block_fn, blocks, strides,
+                training, name):
+# Bottleneck blocks end with 4x the number of filters as they start with
+    filters_out = filters * 4 if bottleneck else filters
+
+    def projection_shortcut(inputs):
+        return conv3d_fixed_padding(inputs=inputs, filters=filters_out, kernel_size=1, strides=strides)
+
+    # Only the first block per block_layer uses projection_shortcut and strides
+    inputs = block_fn(inputs, filters, training, projection_shortcut, strides)
+
+    for _ in range(1, blocks):
+        inputs = block_fn(inputs, filters, training, None, 1)
+
+    return tf.identity(inputs, name)
