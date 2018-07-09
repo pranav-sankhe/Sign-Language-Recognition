@@ -10,36 +10,7 @@ import os
 import random
 from PIL import Image
 import confuncs
-
-NUM_SEGEMENTS = 9
-EMBEDDING_SIZE = 256
-VOCAB_SIZE = 279
-FC_SIZE = 256
-DTYPE = tf.float32
-MAX_SENT_LENGTH = 16
-BATCH_SIZE = 8
-IMG_HEIGHT = 256
-IMG_WIDTH = 256
-IN_CHANNELS = 2
-prescaler = 2
-NUM_FRAMES = 858/prescaler
-NUM_LSTM_CELLS = 256
-NUM_ENCODER_LAYERS = 2
-NUM_ITERATIONS = 1000
-beam_width = 5 #10 
-TIME_MAJOR = False
-optimizer = "sgd"
-SOS = '<s>'
-EOS = '</s>'
-LR = 0.0001
-
-
-
-BASE_VIDEO_FILE = '/home/psankhe/sign-lang-recog/data/opflow_xy'
-BASE_ANNOT_FILE = '/home/psankhe/sign-lang-recog/annotations'
-
-
-
+import hparams
 
 
 def _build_encoder(inputs_vid):
