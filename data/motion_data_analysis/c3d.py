@@ -5,7 +5,7 @@ import matplotlib.animation as animation
 import numpy as np
 
 reader = btk.btkAcquisitionFileReader()  # build a btk reader object 
-reader.SetFilename("./C3D/RG0_Corpus_201707_01B_01_t03.c3d") # set a filename to the reader
+reader.SetFilename("RG0_Corpus_201707_01A_01_t01.c3d") # set a filename to the reader
 acq = reader.GetOutput()                 # btk aquisition object
 acq.Update()                             # Update ProcessObject associated with DataObject
 
@@ -49,12 +49,14 @@ for i in range(0, acq.GetPoints().GetItemNumber()):
 data = data.T
 data = np.delete(data, 0, axis=0)  # first marker is noisy for this file
 data[data==0] = np.NaN             # handle missing data (zeros)
+shape = data.shape
 data = data + np.random.rand(shape[0], shape[1], shape[2])*0
 print(np.nanmin(data), np.nanmax(data))
 
 
 
-
+Writer = animation.writers['ffmpeg']
+writer = Writer(fps=30, metadata=dict(artist='Me'), bitrate=1800)
 
 
 dat = data[:, 130:340, :]
@@ -84,5 +86,5 @@ def animate(i):
 
 # Animation object
 anim = animation.FuncAnimation(fig, func=animate, frames=dat.shape[1], interval=1000/freq, blit=True)
-
+anim.save('lines.mp4', writer=writer)
 plt.show()

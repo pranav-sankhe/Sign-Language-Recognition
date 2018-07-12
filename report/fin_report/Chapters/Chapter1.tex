@@ -1,0 +1,100 @@
+\chapter{Introduction}
+
+It has been shown that oscillatory neural activity is sensitive to accented tones in a rhythmic sequence rhythmic sequence. Our entire analysis is based on one assumption that the neural activity associated with music perception is synchronized with the actual recordings. For example, if there's a onset in the recording, there would be an onset in he perceived music as well. We wish to conduct this analysis on the public domain \emph{OpenMIIR dataset} of EEG recordings taken during music perception and imagination. The biggest challenge involved in this task is the extremely noisy nature of the EEG signal. We would be applying several de-noising techniques like \textbfPCA{}, \textbf{ICA} (Blind Source Seperation), SSP based filtering, Wavelet transform denoising,Wavelet Packet Transform, Non-Linear Adaptive filtering,etc. 
+This raises the question whether Music Information Retrieval techniques originally developed to detect beats and extract the tempo from music recordings could also be used for the analysis of corresponding EEG signals. One could argue that as the brain processes the perceived music, it generates a transformed representation which is captured by the EEG electrodes. Hence, the recorded EEG signal could in principle be seen as a mid-level representation of the original music piece that has been heavily distorted by two consecutive black-box filters—the brain and the EEG equipment. 
+
+\section{STFT}
+When we compute the fourier transform of a signal x(t), it is multiplied with an exponential term, at some certain frequency "f" , and then integrated over \textbf{all times}. 
+
+The information provided by the integral, corresponds to all time instances, since the integration is from minus infinity to plus infinity over time. It follows that no matter where in time the component with frequency "f" appears, it will affect the result of the integration equally as well. In other words, whether the frequency component "f" appears at time t1 or t2, it will have the same effect on the integration. This is why Fourier transform is not suitable if the signal has time varying frequency, i.e., the signal is non-stationary. If only, the signal has the frequency component "f" at all times (for all "f" values), then the result obtained by the Fourier transform makes sense.
+
+To introduce a sense of time in our signal analysis, we assume that some portion of a non-stationary signal is stationary and evaluate the fourier transform of the signal in that window. 
+Dennis Gabor (1946) Used STFT to analyze only a small section of the signal at a time -- a technique called Windowing the Signal.
+The segment of signal is assumed \emph{stationary}. \textbf{STFT} is a 3D transform. It is a function of time and frequency. 
+
+$$ STFT_x(t^{'}, f) = \int x(t)*\omega(t-t^{'})*exp(-j2\pi ft)dt  $$
+
+\section{Dataset}
+
+In this study,  we use a subset of the OpenMIIR dataset a public domain dataset of EEG recordings taken during music perception and imagination.These stimuli were selected from well-known pieces of different genres. They span several musical dimensions such as meter, tempo, instrumentation (ranging from piano to orchestra) and the presence of lyrics (singing or no singing present). All stimuli were normalized in volume and kept similar in length, while ensuring that they all contained complete musical phrases starting from the beginning of the piece. The EEG recording sessions consisted of five trials $ t \epsilon T := \{ 1, ... ,5 \} $ in which all stimuli $ s \epsilon S := \{ 01,02,03,04,11,12,13,14,21,22,23,24 \}  $ were presented in randomize order. This results in total of 300 trials for 5 (example) participants, 60 trials per particpant 25 trials per stimulus. EEG was recorded with a BioSemi Active-Two system using 64+2 EEG channels at 512 Hz. Horizontal and vertical electrooculography (EOG) channels were used to record eye movements. 
+
+ 
+\section{Data Preprocessing}
+
+EEG pre-processing comprised the removal and interpolation of bad channels as well as the reduction of artifacts using techniques like Independent component analysis to remove ocular artifacts, etc.
+The following pre-processing techniques have been tried out:
+\begin{itemize}
+  \item There are in total 69 channels out of which 64 are EEG channels and the remaining 5 channels are \textbf{EOG} channels which record the ocular activity. The ocular activity introduces noisy artifacts in the EEG signal. We cross-correlated the 5 \textbf{EOG} channels with each 64 EEG channels and filtered out the bad EEG channels which displayed a high correlation value.
+
+  \begin{figure}[h!]
+	\includegraphics[width=\linewidth]{/Users/sankhe/Downloads/prof_gadre_report/images/correlationwithEOG.png}
+	\caption{Correlation of EEG channels with \textbf{EOG} channels.}
+	\label{fig:result1}
+  \end{figure}
+
+\textbf{ICA}\\ 
+We could view a measurement as an estimate of a single source corrupted by some random fluctuations (e.g.  additive white noise). Instead, we assert that a measurement can be a combination of many distinct sources – each different from random noise. The broad topic of separating mixed sources has a name -blind source separation (BSS). As of today’s writing, solving an arbitrary BSS problem is often intractable. However, a small subset of these types of problem have been solved only as recently as the last two decades – this is the provenance of independent component analysis (ICA). \\
+
+Solving blind source separation using ICA has two related interpretations – filtering and dimensional reduction. If each source can be identified, a practitioner might choose to selectively delete or retain a single source (e.g. a person’s voice, above).   This is  a filtering operation in the sense that some aspect of the data is selectively removed or retained. A filtering operation is equivalent to projecting out some aspect (or dimension) of the data – in other words a prescription for dimensional reduction. Filtering data based on ICA has found many applications including the analysis of photographic images, medical signals (e.g. EEG, MEG, MRI, etc.), biological assays (e.g. micro-arrays, gene chips, etc.) and most notably audio signal processing. \\ 
+
+Quick Summary of ICA: \\ 
+
+\begin{itemize}
+  \item Subtract off the mean of the data in each dimension.
+  \item Whiten the data by calculating the eigenvectors of the covariance of the data.
+  \item Identify final rotation matrix that optimizes statistical independence   
+\end{itemize}
+
+
+  \item ICA has been extensively used as an effective filtering technique for EEG channels. We applied ICA and we got some interesting results which we want to analyse further. The following plots are STFT of the signals. Since music information is embedded in the frequency content, we applied STFT. We are reading up on PICA, a variant of ICA and planning to implement it on the raw data. 
+
+	\begin{figure}
+	\hfill
+	\subfigure[Without ICA]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/eeg64_before_mvg_sfreq=512.png}}
+	\hfill
+	\subfigure[With ICA]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/ica_filtered_eeg_64_data_before_mavg_512.png}}
+	\hfill
+	\caption{Sampled at 512 Hz}
+	\end{figure}	
+
+	\begin{figure}
+	\hfill
+	\subfigure[Without ICA]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/eeg_64_before_mavg_sfreq=256.png}}
+	\hfill
+	\subfigure[With ICA]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/ica_filtered_data_before_mavg_sfreq=256.png}}
+	\hfill
+	\caption{Sampled at 256 Hz}
+	\end{figure}
+
+
+
+  \item We calculated the moving average by specifying a window-size and subtracted it from the EEG signal. When we take average using window, we allow some impulses in the signal due to which renders the STFT of the signal meaningless. Also you can see repeating patterns in the STFT plot which is due to the sampling at different harmonics of a fundamental frequency decided by the window size.  
+        
+	\begin{figure}
+	\hfill
+	\subfigure[Window Size = 5]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/ee64_data_after_mavg_wsize=5.png}}
+	\hfill
+	\subfigure[Window Size = 10]{\includegraphics[width=7cm]{/Users/sankhe/Downloads/prof_gadre_report/images/eeg64_after_mavg_wsize=10.png}}
+	\hfill
+	\caption{Sampled at 512 Hz without applying ICA}
+	\end{figure}
+
+\end{itemize}
+
+\textbf{PICA} \\ 
+One of the drawbacks of ICA is that it does not come (like PCA does) with a well-defined method to select the most important components. In the original formulation, the number of independent components is equal to the dimension of the variables, so that the decomposition is achieved without dimensional reduction. This leads to computational and overfitting issues when dealing with high-dimensional data and small sample sizes, and a lack of interpretability of the obtained results.\\
+Probabilistic ICA (alternatively called noisy ICA, or independent factor analysis, although we will reserve the latter term to a more specific method in which factors are Gaussian mixtures) assumes a small number of indepen- dent components, with a residual term which is modeled as Gaussian noise. The explicit model is therefore given by
+
+$$ x_i = As_i + \mu + \eta_i  $$
+
+Here,
+\begin{itemize}
+\itemsep-1em
+    \item $x_i$ denotes the p-dimensional column vector of individual measurements at voxel location i
+    \item $s_i$ denotes the q-dimensional column vector of non-Gaussian source signals contained in the data
+    \item $\eta_i$ denotes Gaussian noise $\eta_i ∼ N (0, \sigma^2\Sigma_i)$
+\end{itemize}
+
+We assume that $q < p$, i.e. that there are fewer source processes than observations in time.
+
+

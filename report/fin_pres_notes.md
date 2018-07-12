@@ -51,10 +51,19 @@ The decoder model is a simple 2 layer RNN model as used in the standard NMT mode
 
 ## Slide 7
 
-We added residual blocks as described in the resnet paper after taking inspiration from the current state of art activity classification model which uses ResNet. After adding residual blocks we were able to make the model more deep and easier to train. 
+We added residual blocks as described in the resnet paper after taking inspiration from the current state of art activity classification model which uses ResNet. After adding residual blocks we were able to make the model more deep and easier to train.
 
-The reason why we didn't use the RGB videos and just the optical flow was that the data we had was just of single person and also we wanted to keeo the model simple and adding a two stream input would have made it more complex and harder to train. 
+The reason why we didn't use the RGB videos and just the optical flow was that the data we had was just of single person and also we wanted to keeo the model simple and adding a two stream input would have made it more complex and harder to train.
 
+Instead of learning a direct mapping of x ->y with a function H(x) (A few stacked non-linear layers). Let us define the residual function using F(x) = H(x) — x, which can be reframed into H(x) = F(x)+x, where F(x) and x represents the stacked non-linear layers and the identity function(input=output) respectively.
+
+If the identity mapping is optimal, We can easily push the residuals to zero (F(x) = 0) than to fit an identity mapping (x, input=output) by a stack of non-linear layers. In simple language it is very easy to come up with a solution like F(x) =0 rather than F(x)=x using stack of non-linear cnn layers as function (Think about it). So, this function F(x) is what the authors called Residual function. 
+
+How resnet solves the problem of vanishing gradients
+
+More layers is better but because of the vanishing gradient problem, model weights of the first layers can not be updated correctly through the backpropagation of the error gradient (the chain rule multiplies error gradient values lower than one and then, when the gradient error comes to the first layers, its value goes to zero).
+That is the objective of Resnet : preserve the gradient.
+How ? Thanks to the idendity matrix because “what if we were to backpropagate through the identity function? Then the gradient would simply be multiplied by 1 and nothing would happen to it!”.
 
 ## Slide 8 
 

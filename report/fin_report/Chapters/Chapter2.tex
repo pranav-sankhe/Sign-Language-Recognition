@@ -1,0 +1,120 @@
+\chapter{Wavelet Transform}
+
+\section{Introduction to Wavelet Transform}
+
+\textbf{What is a wavelet?} - \emph{A small wave, a wave like oscillation} \\
+
+Wavelet Transforms \\ 
+\vspace{-0.4in}
+\begin{itemize}
+\itemsep-1em
+\item Converts a signal into a series of wavelets
+\item Provides a way for analyzing waveforms, bounded in both frequency and duration
+\item Allow signals to be stored more efficiently than by Fourier transform
+\item Able to better approximate real-world signals
+%\item Well-suited for approximating data with sharp discontinuities
+\end{itemize}
+
+To make a real long story short, we pass the time-domain signal from various highpass and low pass filters, which filters out either high frequency or low frequency portions of the signal. This procedure is repeated, every time some portion of the signal corresponding to some frequencies being removed from the signal.
+
+
+\textbf{Stationary Signal} 
+Signals with frequency content unchanged in time.All frequency components exist at all times. \\
+\textbf{Non-stationary Signal}\\
+Frequency changes in time. One example: the “Chirp Signal” \\ 
+
+Disadvantages of Fourier Transform \\ 
+\vspace{-0.4in}
+\begin{itemize}
+\itemsep-1em
+     \item FT Only Gives what frequency components \emph{exist} in the signal
+    \item The Time and frequency information can not be seen at the \textbf{same time}
+    \item Time-frequency representation of the signal is needed. 
+\end{itemize}
+
+Most of real-world Signals are Non-stationary. 
+We need to know \textbf{whether} and also \textbf{when} an incident was happened. \\ 
+
+One earlier solution in the quest of searching the answer for \emph{when an incident happened}, was the \textbf{STFT} which we analyzed earlier.
+
+The drawbacks of STFT \\
+\vspace{-0.4in}
+\begin{itemize}
+\itemsep-1em
+    \item Unchanged Window
+    \item Dilemma of Resolution
+         \vspace{-0.2in}
+	    \begin{itemize}
+	    \itemsep-1em
+             \item   Narrow window $\rightarrow$ poor frequency resolution 
+            \item    Wide window $\rightarrow$ poor time resolution
+         \end{itemize}
+
+    \item \emph{Heisenberg Uncertainty Principle}: Cannot know what frequency exists at what time intervals
+\end{itemize}
+
+In FT, the kernel function, allows us to obtain perfect frequency resolution, because the kernel itself is a window of infinite length. In STFT is window is of finite length, and we no longer have perfect frequency resolution. You may ask, why don't we make the length of the window in the STFT infinite, just like as it is in the FT, to get perfect frequency resolution? Well, than you loose all the time information, you basically end up with the FT instead of STFT. To make a long story real short, we are faced with the following dilemma:
+If we use a window of infinite length, we get the FT, which gives perfect frequency resolution, but no time information. Furthermore, in order to obtain the stationarity, we have to have a short enough window, in which the signal is stationary. \\
+The narrower we make the window, the better the time resolution, and better the assumption of stationarity, but poorer the frequency resolution:
+
+Wavelet Transform is an alternative approach to the short time Fourier transform invented to overcome the resolution problem 
+It is similar to STFT in the sense that the signal is multiplied with a function. Using wavelet transfrom, we can analyze the signal at different frequencies with different resolutions.\\
+High frequencies $\rightarrow$ Good time resolution and poor frequency resolution\\
+Low frequencies $\rightarrow$ Good frequency resolution and poor time resolution \\
+Hence wavelet transform is more suitable for short duration of higher frequency; and longer duration of lower frequency components. \\ 
+
+
+\section{Definition of Wavelet Transform}
+
+The wavelet transform splits up the signal into a bunch of signals
+representing the same signal, but all corresponding to different frequency bands; only providing what \emph{frequency bands} exists at what \emph{time intervals}. 
+
+Mathematically, the following is the equation of the wavelet transform: \\  
+$$ CWT_x^{\psi}(\tau, s) = \frac{1}{\sqrt{|s|}}\int x(t)*\psi^*(\frac{t - \tau}{s})dt $$
+
+where, \\ 
+$\tau$ represents translation, the location of the window \\ 
+$s$ represents the scale \\ 
+The term $\psi^*(\frac{t - \tau}{s})$ is the mother wavelet: A prototype for generating the other window functions. All the used windows are its dilated or compressed and shifted versions. 
+
+\textbf{Some insights on scale ($s$)} \\ 
+\vspace{-0.4in}
+\begin{itemize}
+\itemsep-1em
+\item $s>1$ : dilate the signal
+\item $s<1$ : compress the signal
+\item Low frequency $\rightarrow$ high $s$ $\rightarrow$ Non-detailed global view of signal $\rightarrow$ span entire signal
+\item High frequency $\rightarrow$ low $s$ $\rightarrow$ detailed view last in short time
+\item Only limited interval of scales is necessary
+\end{itemize}
+
+
+\section{Computation of Wavelet Transform}
+\begin{itemize}
+\item Step 1: The wavelet is placed at the beginning of the signal, and set s=1 (the most compressed wavelet);
+\item Step 2: The wavelet function at scale “1” is multiplied by the signal, and integrated over all times; then multiplied by       ;
+\item Step 3: Shift the wavelet to $t= \tau$, and get the transform value at $t= \tau$ and s=1;
+\item Step 4: Repeat the procedure until the wavelet reaches the end of the signal;
+\item Step 5: Scale s is increased by a sufficiently small value, the above procedure is repeated for all s;
+\item Step 6: Each computation for a given s fills the single row of the time-scale plane;
+\item Step 7: CWT is obtained if all s are calculated.
+\end{itemize}
+
+
+
+We plotted the wavelet transforms using the \texttt{python packages} like \texttt{pywt} and \texttt{numpy}. The y-axis represents the scales which map to frequency. 
+
+  \begin{figure}[h!]
+	\includegraphics[width=\linewidth]{/Users/sankhe/Downloads/prof_gadre_report/images/eeg_ica_filtered_waveletTF_Nscales=30.png}
+	\caption{EEG data}
+	\label{fig:result1}
+  \end{figure}
+
+  \begin{figure}[h!]
+	\includegraphics[width=\linewidth]{/Users/sankhe/Downloads/prof_gadre_report/images/S22_harry_potter_TF_Nscales=30.png}
+	\caption{Harry potter theme}
+	\label{fig:result1}
+  \end{figure}
+	
+	
+ 
