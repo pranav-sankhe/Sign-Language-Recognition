@@ -84,20 +84,20 @@ def readOpflow(dirpath, sync, prescaler):
     return data
     # return data
 
-def embedding_for_beamSearch(decoder_inputs):
+def embeddings():
     with tf.variable_scope('embedding_decoder'):
         embedding_decoder = tf.get_variable(
             "embedding_decoder", [hparams.VOCAB_SIZE, hparams.EMBEDDING_SIZE])
         return embedding_decoder
 
 
-def embeddings(decoder_inputs):
-    with tf.variable_scope('embedding_decoder'):
-        embedding_decoder = tf.get_variable(
-            "embedding_decoder", [hparams.VOCAB_SIZE, hparams.EMBEDDING_SIZE])
+# def embeddings(decoder_inputs):
+#     with tf.variable_scope('embedding_decoder'):
+#         embedding_decoder = tf.get_variable(
+#             "embedding_decoder", [hparams.VOCAB_SIZE, hparams.EMBEDDING_SIZE])
 
-    decoder_emb_inp = embedding_ops.embedding_lookup(embedding_decoder, decoder_inputs)
-    return decoder_emb_inp
+#     decoder_emb_inp = embedding_ops.embedding_lookup(embedding_decoder, decoder_inputs)
+#     return decoder_emb_inp
 
 def word_to_int(l):
     result = []
@@ -113,6 +113,21 @@ def word_to_int(l):
         idx = np.where(data == x)[0][0]
         result.append(idx)
     return result
+
+def int_to_word(l):
+    result = []
+    filepath = '/home/data/01_Label/label.csv'
+    data = pd.read_csv(filepath, header=None, names=['0','1','2'])
+    data = data.values
+    data = data[:,0]
+    data = data[:-2]
+    data = np.append(data,'<s>')
+    data = np.append(data,'</s>')
+    
+    for x in l:
+        result.append(data[x])
+    return result
+
 
 
 def readlabels(filepath):
@@ -201,6 +216,11 @@ def gradient_clip(gradients, max_gradient_norm):
       tf.summary.scalar("clipped_gradient", tf.global_norm(clipped_gradients)))
 
   return clipped_gradients, gradient_norm_summary, gradient_norm
+
+
+
+
+
 
 
 

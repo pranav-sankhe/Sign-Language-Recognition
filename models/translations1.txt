@@ -1,0 +1,608 @@
+Filelist = ['RG0_Corpus_201707_06A_01_t01' 'RG0_Corpus_201801_P147_01_t01'
+ 'RG0_Corpus_201801_P210_01_t01' 'RG0_Corpus_201707_44B_02_t01'
+ 'RG0_Corpus_201801_P110_02_t01' 'RG0_Corpus_201707_67B_01_t01']
+['swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'search', 'search', 'search', 'search', 'search', 'CL(B)', 'CL(B)', 'CL(B)', 'interesting(CP3)', 'interesting(CP3)', 'interesting(CP3)', 'interesting(CP3)', 'cake', 'cake', 'cake', 'cake', 'cake', 'cake', 'Hawaii', 'Hawaii', 'Hawaii', 'Hawaii', 'Hawaii'] 1
+['swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'swim', 'search', 'search', 'search', 'search', 'search', 'CL(B)', 'CL(B)', 'CL(B)', 'interesting(CP3)', 'interesting(CP3)', 'interesting(CP3)', 'interesting(CP3)', 'cake', 'cake', 'cake', 'cake', 'cake', 'cake', 'Hawaii', 'Hawaii', 'Hawaii', 'cake', 'Hawaii'] 2
+['necessary', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'everything', 'everything', 'everything', 'everything', 'everything', 'everything', 'Suzuki', 'Suzuki', 'Suzuki', 'Suzuki', 'Hawaii(Gen.)', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference'] 1
+['necessary', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'everything', 'everything', 'everything', 'everything', 'everything', 'everything', 'Suzuki', 'Suzuki', 'Suzuki', 'Suzuki', 'Hawaii(Gen.)', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'money'] 2
+['send', 'send', 'not know', 'not know', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'ramen'] 1
+['send', 'send', 'not know', 'not know', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'ramen', 'ramen'] 2
+['he', 'he', 'he', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'pay(PV)', 'produce', 'produce', 'produce', 'produce', 'produce', 'woman(Gen.)lover', 'Suzuki', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference'] 1
+['he', 'he', 'he', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'pay(PV)', 'produce', 'produce', 'produce', 'produce', 'produce', 'woman(Gen.)lover', 'Suzuki', 'Suzuki', 'conference', 'conference', 'conference', 'conference', 'conference'] 2
+['necessary', 'man', 'man', 'man', 'he', 'he', 'he', 'he', 'buy', 'buy', 'buy', 'buy', 'buy', 'buy', 'buy', 'always', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'surprised(CP2)', 'surprised(CP2)', 'Sato', 'Sato', 'Sato', 'tasty(CP3)', 'tasty(CP3)', 'tasty(CP3)'] 1
+['necessary', 'man', 'man', 'man', 'he', 'he', 'he', 'he', 'buy', 'buy', 'buy', 'buy', 'buy', 'buy', 'buy', 'always', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'amuse', 'surprised(CP2)', 'surprised(CP2)', 'Sato', 'Sato', 'tasty(CP3)', 'tasty(CP3)', 'tasty(CP3)', 'tasty(CP3)'] 2
+['send', 'send', 'send', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'letter', 'letter', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'same', 'same', 'same', 'same', 'difficult', 'send', 'send'] 1
+['send', 'send', 'send', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'letter', 'letter', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'same', 'same', 'same', 'same', 'difficult', 'difficult', 'send'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_35E_02_t02' 'RG0_Corpus_201801_P051_02_t01'
+ 'RG0_Corpus_201707_29C_02_t01' 'RG0_Corpus_201707_61D_02_t01'
+ 'RG0_Corpus_201801_P094_01_t01' 'RG0_Corpus_201707_51B_01_t02']
+['friend', 'friend', 'friend', 'friend', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'teach', 'woman', 'letter', 'letter', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'pay(PV)'] 1
+['friend', 'friend', 'friend', 'friend', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'teach', 'woman', 'letter', 'letter', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach'] 2
+['pt1', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'woman', 'woman', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'pay(PV)', 'pay(PV)', 'pay(PV)', 'pay(PV)', 'pay(PV)', 'go(all)'] 1
+['pt1', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'woman', 'woman', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'pay(PV)', 'pay(PV)', 'pay(PV)', 'pay(PV)', 'go(all)', 'go(all)'] 2
+['friend', 'friend', 'Sato', 'Sato', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference'] 1
+['friend', 'friend', 'Sato', 'Sato', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'he(Gen.)', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference', 'conference'] 2
+['friend', 'friend', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'money', 'money', 'money', 'money', 'money', 'money', 'money', 'friend', 'friend', 'money', 'friend', 'friend', 'friend', 'friend', 'friend', 'he(Gen.)', 'he(Gen.)', 'past', 'past', 'past', 'past', 'interesting(CP3)'] 1
+['friend', 'friend', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'money', 'money', 'money', 'money', 'money', 'money', 'money', 'friend', 'friend', 'money', 'friend', 'friend', 'friend', 'friend', 'friend', 'he(Gen.)', 'he(Gen.)', 'past', 'past', 'past', 'Sato', 'interesting(CP3)'] 2
+['teach', 'man', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'same', 'same', 'same', 'same', 'same', 'same', 'send', 'send', 'send', 'send', 'pt2'] 1
+['teach', 'man', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'jealous(CP3)', 'same', 'same', 'same', 'same', 'same', 'same', 'send', 'send', 'send', 'pt2', 'pt2'] 2
+['friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'past', 'past', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'jealous(CP3)', 'woman', 'woman', 'woman', 'letter', 'teach'] 1
+['friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'past', 'past', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'jealous(CP3)', 'woman', 'woman', 'woman', 'letter', 'letter'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_01D_01_t01' 'RG0_Corpus_201707_25A_03_t01'
+ 'RG0_Corpus_201707_21F_01_t01' 'RG0_Corpus_201707_60C_01_t01'
+ 'RG0_Corpus_201707_51E_01_t01' 'RG0_Corpus_201801_P073_02_t02']
+['friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'teach', 'woman', 'woman', 'woman', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach'] 1
+['friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'teach', 'woman', 'teach', 'woman', 'woman', 'woman', 'woman', 'woman', 'teach', 'teach', 'teach', 'teach', 'teach'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'busy', 'Sato', 'Sato', 'Sato', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'Sato'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'busy', 'Sato', 'Sato', 'Sato', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'strawberry', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'Sato', 'Sato', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'Sato', 'Sato', 'Sato'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'strawberry', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'Sato', 'Sato', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'Sato', 'pt2', 'Sato'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'pt2'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'pt2', 'pt2'] 2
+['friend', 'friend', 'man', 'man', 'man', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'pt2', 'pt2', 'Sato'] 1
+['friend', 'friend', 'man', 'man', 'man', 'man', 'man', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 'not know', 'not know', 'not know', 'not know', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2', 'pt2', 'pt2', 'Sato', 'Sato'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'busy', 'Sato', 'Sato', 'Sato', 'Sato', 'teach', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'busy', 'Sato', 'Sato', 'Sato', 'Sato', 'teach', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_12E_02_t01' 'RG0_Corpus_201707_26A_02_t01'
+ 'RG0_Corpus_201801_P149_02_t01' 'RG0_Corpus_201801_P103_01_t01'
+ 'RG0_Corpus_201801_P094_01_t01' 'RG0_Corpus_201707_28A_01_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'Sato', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2', 'pt2'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'pt2'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'Sato', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'Sato', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend', 'pt2'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'pt2'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'woman', 'pt2'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'pt2'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'Sato', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'friend'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_18E_01_t02' 'RG0_Corpus_201801_P109_01_t01'
+ 'RG0_Corpus_201707_36D_01_t02' 'RG0_Corpus_201707_13A_03_t01'
+ 'RG0_Corpus_201801_P137_02_t02' 'RG0_Corpus_201801_P167_02_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'woman', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'woman', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend', 'friend', 'friend', 'pt2'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P034_02_t01' 'RG0_Corpus_201707_31E_01_t01'
+ 'RG0_Corpus_201707_24B_02_t01' 'RG0_Corpus_201707_13B_02_t01'
+ 'RG0_Corpus_201707_03D_01_t02' 'RG0_Corpus_201801_P217_01_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_41C_01_t01' 'RG0_Corpus_201707_08D_01_t01'
+ 'RG0_Corpus_201707_06B_01_t01' 'RG0_Corpus_201707_06E_02_t01'
+ 'RG0_Corpus_201801_P071_01_t02' 'RG0_Corpus_201707_41D_02_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_06D_02_t01' 'RG0_Corpus_201707_30D_02_t01'
+ 'RG0_Corpus_201801_P223_01_t01' 'RG0_Corpus_201707_37A_01_t01'
+ 'RG0_Corpus_201707_53C_02_t01' 'RG0_Corpus_201707_11B_01_t02']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'friend'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P023_02_t01' 'RG0_Corpus_201801_P145_01_t01'
+ 'RG0_Corpus_201801_P131_02_t01' 'RG0_Corpus_201707_16F_02_t01'
+ 'RG0_Corpus_201707_14D_02_t01' 'RG0_Corpus_201707_52A_02_t02']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'woman', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'woman', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_66E_01_t01' 'RG0_Corpus_201707_07E_02_t01'
+ 'RG0_Corpus_201801_P168_01_t01' 'RG0_Corpus_201707_44A_02_t01'
+ 'RG0_Corpus_201801_08F_01_t02' 'RG0_Corpus_201707_62C_02_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'man', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1', 'pt1'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_63C_02_t01' 'RG0_Corpus_201801_P036_01_t01'
+ 'RG0_Corpus_201707_36F_01_t01' 'RG0_Corpus_201707_69D_02_t01'
+ 'RG0_Corpus_201707_34C_02_t01' 'RG0_Corpus_201707_65B_01_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P215_01_t01' 'RG0_Corpus_201707_55C_02_t01'
+ 'RG0_Corpus_201801_P007_01_t01' 'RG0_Corpus_201801_P066_01_t01'
+ 'RG0_Corpus_201801_P137_01_t01' 'RG0_Corpus_201707_75A_01_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_04A_01_t02' 'RG0_Corpus_201801_31B_01_t01'
+ 'RG0_Corpus_201707_40F_01_t01' 'RG0_Corpus_201801_P047_01_t01'
+ 'RG0_Corpus_201707_21C_01_t01' 'RG0_Corpus_201801_P237_01_t01']
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1', 'pt1'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1', 'pt1'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'pt1'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P169_02_t02' 'RG0_Corpus_201707_17F_02_t01'
+ 'RG0_Corpus_201707_05D_02_t01' 'RG0_Corpus_201707_12B_01_t01'
+ 'RG0_Corpus_201707_10A_01_t01' 'RG0_Corpus_201707_37A_03_t01']
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1'] 2
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 2
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'woman', 'pt1'] 2
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 2
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1'] 2
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'pt1'] 1
+['pt1', 'pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'pt1', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_20A_02_t01' 'RG0_Corpus_201801_P087_01_t01'
+ 'RG0_Corpus_201801_P194_01_t02' 'RG0_Corpus_201707_60A_02_t01'
+ 'RG0_Corpus_201707_05B_02_t01' 'RG0_Corpus_201801_P108_01_t01']
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P102_02_t02' 'RG0_Corpus_201707_10A_01_t01'
+ 'RG0_Corpus_201707_18E_02_t01' 'RG0_Corpus_201707_46D_01_t01'
+ 'RG0_Corpus_201801_P179_02_t01' 'RG0_Corpus_201707_45D_01_t02']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P194_01_t02' 'RG0_Corpus_201801_P229_01_t01'
+ 'RG0_Corpus_201707_52E_01_t01' 'RG0_Corpus_201707_14E_02_t01'
+ 'RG0_Corpus_201707_36C_01_t01' 'RG0_Corpus_201801_P202_01_t01']
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_63D_02_t01' 'RG0_Corpus_201707_58D_01_t01'
+ 'RG0_Corpus_201801_P225_02_t01' 'RG0_Corpus_201801_P198_02_t01'
+ 'RG0_Corpus_201707_63A_01_t01' 'RG0_Corpus_201801_P107_01_t02']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P137_02_t02' 'RG0_Corpus_201707_60D_02_t01'
+ 'RG0_Corpus_201707_52E_02_t01' 'RG0_Corpus_201707_23C_02_t01'
+ 'RG0_Corpus_201707_39F_02_t01' 'RG0_Corpus_201707_25B_01_t01']
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_50E_02_t01' 'RG0_Corpus_201801_P010_02_t01'
+ 'RG0_Corpus_201707_09A_01_t01' 'RG0_Corpus_201707_45D_01_t02'
+ 'RG0_Corpus_201707_60C_02_t02' 'RG0_Corpus_201801_P202_01_t01']
+['man', 'man', 'man', 'man', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['man', 'man', 'man', 'man', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['man', 'man', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'man', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_21A_03_t01' 'RG0_Corpus_201801_P186_01_t01'
+ 'RG0_Corpus_201707_14E_02_t01' 'RG0_Corpus_201801_P030_02_t01'
+ 'RG0_Corpus_201801_P230_02_t01' 'RG0_Corpus_201801_P120_01_t02']
+['man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P093_02_t01' 'RG0_Corpus_201707_11A_01_t02'
+ 'RG0_Corpus_201707_22C_01_t01' 'RG0_Corpus_201801_P168_01_t01'
+ 'RG0_Corpus_201707_60D_01_t02' 'RG0_Corpus_201707_43D_02_t01']
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_08C_01_t01' 'RG0_Corpus_201707_28B_02_t01'
+ 'RG0_Corpus_201707_64B_01_t01' 'RG0_Corpus_201707_66D_01_t01'
+ 'RG0_Corpus_201707_53E_02_t01' 'RG0_Corpus_201801_P017_02_t01']
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'woman', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_13D_02_t01' 'RG0_Corpus_201707_04A_01_t02'
+ 'RG0_Corpus_201707_17E_01_t02' 'RG0_Corpus_201801_P231_01_t01'
+ 'RG0_Corpus_201801_P067_01_t01' 'RG0_Corpus_201707_66D_01_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'friend', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'friend', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'friend', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'friend', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_23D_02_t01' 'RG0_Corpus_201801_P121_02_t01'
+ 'RG0_Corpus_201801_P084_02_t01' 'RG0_Corpus_201801_P134_02_t01'
+ 'RG0_Corpus_201707_78A_02_t01' 'RG0_Corpus_201707_66D_01_t01']
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P060_02_t01' 'RG0_Corpus_201707_51A_03_t01'
+ 'RG0_Corpus_201801_P128_02_t01' 'RG0_Corpus_201707_60E_02_t01'
+ 'RG0_Corpus_201707_41D_02_t01' 'RG0_Corpus_201707_02D_02_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['Yamamoto', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_33A_02_t01' 'RG0_Corpus_201707_36B_01_t01'
+ 'RG0_Corpus_201801_P032_01_t01' 'RG0_Corpus_201707_54E_02_t01'
+ 'RG0_Corpus_201707_11F_02_t01' 'RG0_Corpus_201707_42D_02_t02']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['Yamamoto', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_51A_01_t01' 'RG0_Corpus_201707_06A_03_t01'
+ 'RG0_Corpus_201707_24A_01_t01' 'RG0_Corpus_201707_02D_02_t01'
+ 'RG0_Corpus_201707_27A_01_t01' 'RG0_Corpus_201801_P037_02_t01']
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_50C_02_t01' 'RG0_Corpus_201707_20D_02_t01'
+ 'RG0_Corpus_201707_15C_01_t01' 'RG0_Corpus_201707_60D_01_t02'
+ 'RG0_Corpus_201801_P026_02_t01' 'RG0_Corpus_201707_17A_02_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P206_02_t01' 'RG0_Corpus_201707_31E_01_t01'
+ 'RG0_Corpus_201801_P063_01_t03' 'RG0_Corpus_201707_01E_02_t03'
+ 'RG0_Corpus_201707_21F_02_t01' 'RG0_Corpus_201707_34A_01_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['Suzuki', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['Suzuki', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201801_P232_02_t01' 'RG0_Corpus_201707_44A_03_t01'
+ 'RG0_Corpus_201707_63C_02_t01' 'RG0_Corpus_201707_05B_02_t01'
+ 'RG0_Corpus_201801_P121_01_t01' 'RG0_Corpus_201707_53C_01_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'man', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+
+ Epoch%d
+
+
+Filelist = ['RG0_Corpus_201707_59E_02_t01' 'RG0_Corpus_201707_03A_02_t02'
+ 'RG0_Corpus_201801_P241_01_t02' 'RG0_Corpus_201801_10C_01_t01'
+ 'RG0_Corpus_201707_55E_01_t02' 'RG0_Corpus_201707_14C_01_t01']
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman'] 1
+['pt1', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'woman', 'man'] 2
+
+ Epoch%d
+
+

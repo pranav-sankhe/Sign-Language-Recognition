@@ -118,12 +118,12 @@ def _build_encoder_resnet(inputs):
     out_filters = 8
     inputs = confuncs.conv_layer(inputs, in_filters, out_filters, Ksize=3, poolTrue=True, name_scope ='conv1')
     in_filters = out_filters
-    out_filters = 8
+    out_filters = 16
     inputs = confuncs.conv_layer(inputs, in_filters, out_filters, Ksize=3, poolTrue=True, name_scope ='conv2')
     in_filters = out_filters
     out_filters = 16
     inputs = confuncs.conv_layer(inputs, in_filters, out_filters, Ksize=3, poolTrue=True, name_scope ='conv3')
-
+    
     inputs = confuncs.conv3d_fixed_padding(inputs=inputs, filters=num_filters, kernel_size=kernel_size,strides=conv_stride)
     inputs = tf.identity(inputs, 'initial_conv')
 
@@ -183,7 +183,7 @@ def _build_encoder_resnet(inputs):
 
 
     
-def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence_length, mode):
+def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence_length):
     """Build and run a RNN decoder with a final projection layer.
 
     Args:
@@ -206,73 +206,83 @@ def _build_decoder(encoder_outputs, encoder_state, target_input, target_sequence
     multi_rnn_cell = tf.nn.rnn_cell.MultiRNNCell(rnn_layers)
 
      
-    if mode == 'train':
-        # decoder_emp_inp: [max_time, batch_size, num_units]
-        decoder_initial_state = encoder_state
-        decoder_emb_inp = confuncs.embeddings(target_input)
+    # decoder_emp_inp: [max_time, batch_size, num_units]
+    decoder_initial_state = encoder_state
+    
+    table = confuncs.embeddings()
+    decoder_emb_inp = embedding_ops.embedding_lookup(table, target_input)
+    
+    def apply_embedding(ids):
+        embed_ids = embedding_ops.embedding_lookup(table, ids)
+        return embed_ids
+
+    # Helper
+    helper = tf.contrib.seq2seq.TrainingHelper(
+        decoder_emb_inp, sequence_length=target_sequence_length)
+
+    # Decoder
+    train_decoder = tf.contrib.seq2seq.BasicDecoder(
+        multi_rnn_cell,
+        helper,
+        decoder_initial_state)
+
+    
+    
+    # Dynamic decoding
+    outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(train_decoder, maximum_iterations=maximum_iterations, swap_memory=True)
+
+    sample_id = outputs.sample_id
+
+    output_layer = tf.layers.Dense(units=hparams.VOCAB_SIZE)
+    logits = output_layer(outputs.rnn_output)
+    
+    #logits = projection_layer(outputs.rnn_output)
         
-        # Helper
-        helper = tf.contrib.seq2seq.TrainingHelper(
-            decoder_emb_inp, sequence_length=target_sequence_length)
+    beam_width = hparams.beam_width
+    infer_decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)        
+    start_token = confuncs.word_to_int([hparams.SOS])[0]
+    start_token = start_token.astype(np.int32)
+    start_tokens = tf.fill([batch_size], start_token)
+    end_token = confuncs.word_to_int([hparams.EOS])[0]
+    end_token = end_token.astype(np.int32)
+    
+    length_penalty_weight = 0 
+    # output_layer = layers_core.Dense(
+    #         hparams.VOCAB_SIZE, use_bias=False, name="output_projection")
+    
+    infer_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
+                                                    cell=multi_rnn_cell,
+                                                    embedding=apply_embedding,
+                                                    start_tokens=start_tokens,
+                                                    end_token=end_token,
+                                                    initial_state=infer_decoder_initial_state,
+                                                    beam_width=beam_width,
+                                                    output_layer=output_layer,
+                                                    length_penalty_weight=length_penalty_weight)
 
-        # Decoder
-        my_decoder = tf.contrib.seq2seq.BasicDecoder(
-            multi_rnn_cell,
-            helper,
-            decoder_initial_state)
+    
+    # Dynamic decoding
+    infer_outputs, infer_final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
+        infer_decoder,
+        maximum_iterations=maximum_iterations,
+        swap_memory=True)
 
-        
-        
-        # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(my_decoder, maximum_iterations=maximum_iterations, swap_memory=True)
+    if beam_width > 0:
+        # infer_logits = tf.no_op()
+        translations = infer_outputs.predicted_ids
+    else:
+        # logits = outputs.rnn_output
+        translations = outputs.sample_id
 
-        sample_id = outputs.sample_id
-
-        logits = tf.layers.dense(inputs=outputs.rnn_output, units=hparams.VOCAB_SIZE)
-        
-        #logits = projection_layer(outputs.rnn_output)
-        
-
-    if mode == 'infer':
-        decoder_initial_state = tf.contrib.seq2seq.tile_batch(encoder_state, multiplier=beam_width)        
-        start_tokens = tf.fill([batch_size], hparams.SOS)
-        end_token = EOS
-        length_penalty_weight = 0 
-        beam_width = hparams.beam_width
-        my_decoder = tf.contrib.seq2seq.BeamSearchDecoder(
-                                                        cell=cell,
-                                                        embedding=confuncs.embedding_for_beamSearch,
-                                                        start_tokens=start_tokens,
-                                                        end_token=end_token,
-                                                        initial_state=decoder_initial_state,
-                                                        beam_width=beam_width,
-                                                        output_layer=output_layer,
-                                                        length_penalty_weight=length_penalty_weight)
-
-        
-        # Dynamic decoding
-        outputs, final_context_state, _ = tf.contrib.seq2seq.dynamic_decode(
-            my_decoder,
-            maximum_iterations=maximum_iterations,
-            swap_memory=True)
-
-        if beam_width > 0:
-          logits = tf.no_op()
-          sample_id = outputs.predicted_ids
-        else:
-          logits = outputs.rnn_output
-          sample_id = outputs.sample_id
+    return logits, sample_id, final_context_state, translations
 
 
-    return logits, sample_id, final_context_state
-
-
-def core_model(input_videos, target_inputs, target_sequence_length, mode, reuse=True):              # mode can be infer or train 
+def core_model(input_videos, target_inputs, target_sequence_length, reuse=True):               
     with tf.variable_scope("core_model", reuse=reuse):
         # encoder_outputs, encoder_state = _build_encoder(input_videos)
         encoder_outputs, encoder_state = _build_encoder_resnet(input_videos)
-        logits, sample_id, final_context_state = _build_decoder(encoder_outputs, encoder_state, target_inputs, target_sequence_length, mode)
-    return logits, sample_id, final_context_state
+        logits, sample_id, final_context_state, translations = _build_decoder(encoder_outputs, encoder_state, target_inputs, target_sequence_length)
+    return logits, sample_id, final_context_state, translations
         
 
 
@@ -304,7 +314,7 @@ def assign_to_device(device, ps_device):
 
 
 
-def create_parallel_optimization(input_vids, target_inputs, target_sequence_length, target_outputs, optimizer, mode, controller="/cpu:0"):
+def create_parallel_optimization(input_vids, target_inputs, target_sequence_length, target_outputs, optimizer, controller="/cpu:0"):
 
     # returns operation to apply gradients and return loss
     
@@ -324,6 +334,7 @@ def create_parallel_optimization(input_vids, target_inputs, target_sequence_leng
     # This list keeps track of the gradients per tower and the losses
     tower_grads = []
     losses = []
+    infer_outputs = []
     # Get the current variable scope so we can reuse all variables we need once we get
     # to the second iteration of the loop below
     with tf.variable_scope(tf.get_variable_scope()) as outer_scope:
@@ -334,11 +345,11 @@ def create_parallel_optimization(input_vids, target_inputs, target_sequence_leng
             with tf.device("/gpu:%d"%i), tf.name_scope(name):
             # with tf.device(assign_to_device(id_, controller)), tf.name_scope(name):
                 
-                logits, sample_id, final_context_state = core_model(input_vids_list[i], target_inputs_list[i], target_sequence_length_list[i], mode, i!=0)
+                logits, sample_id, final_context_state, translations = core_model(input_vids_list[i], target_inputs_list[i], target_sequence_length_list[i], i!=0)
                 # Compute loss and gradients, but don't apply them yet
                 batch_size = input_vids_list[i].get_shape().as_list()[0]
                 loss = confuncs._compute_loss(target_outputs_list[i], logits, batch_size)  
-                
+                infer_outputs.append(translations)
                 with tf.name_scope("compute_gradients"):
                     # compute_gradients` returns a list of (gradient, variable) pairs
                     params = tf.trainable_variables()
@@ -349,7 +360,8 @@ def create_parallel_optimization(input_vids, target_inputs, target_sequence_leng
                     grads = tf.gradients(loss, params, colocate_gradients_with_ops=True)    # optimizer.compute_gradients(loss)
                     clipped_grads, grad_norm_summary, grad_norm = confuncs.gradient_clip(grads, max_gradient_norm=hparams.max_gradient_norm)
                     grad_and_vars = zip(clipped_grads, params)
-                    tower_grads.append(grad_and_vars)    
+                    tower_grads.append(grad_and_vars) 
+
                 losses.append(loss)
 
             
@@ -372,7 +384,7 @@ def create_parallel_optimization(input_vids, target_inputs, target_sequence_leng
         tf.summary.scalar('loss', avg_loss)
 
 
-    return apply_gradient_op, avg_loss
+    return apply_gradient_op, avg_loss, infer_outputs
 
 
 def get_available_gpus():
@@ -486,10 +498,12 @@ def parallel_training():
     target_outputs = tf.placeholder(tf.int32, [hparams.BATCH_SIZE, hparams.MAX_SENT_LENGTH])
     target_sequence_length = tf.placeholder(tf.int32, [hparams.BATCH_SIZE])
     
-    mode = 'train'
 
     optimizer = tf.train.GradientDescentOptimizer(hparams.LR)
-    update_op, loss = create_parallel_optimization(input_vids, target_inputs, target_sequence_length, target_outputs, optimizer, mode, controller="/cpu:0")
+    
+    update_op, loss, outputs = create_parallel_optimization(input_vids, target_inputs, target_sequence_length, target_outputs, optimizer, controller="/cpu:0")
+           
+
 
     #train(update_op, loss)
 
@@ -512,7 +526,7 @@ def parallel_training():
 
         saver = tf.train.Saver()
         ndevices = len(get_available_gpus())
-
+        f = open("translations.txt","w+")
 
         for i in range(hparams.NUM_ITERATIONS):
             annot_files = os.listdir(hparams.BASE_ANNOT_FILE)
@@ -531,6 +545,7 @@ def parallel_training():
             mini_batch_size = hparams.BATCH_SIZE/ndevices      
             
             epochs = len(filenames)/hparams.BATCH_SIZE
+            output_val = []
             for j in range(epochs):
                 
                 file_list = filenames[j: j + hparams.BATCH_SIZE]
@@ -546,8 +561,8 @@ def parallel_training():
                 batch_vids = confuncs.getOpflowBatch(file_list, syncs, hparams.prescaler)
 
                 # Fit training using batch data
-                _, loss_val, summary = sess.run(
-                    [update_op, loss, merged],
+                _, loss_val, output_val, summary = sess.run(
+                    [update_op, loss, outputs, merged],
                     feed_dict={
                         input_vids: batch_vids, 
                         target_inputs: tgt_batch_input,
@@ -555,12 +570,28 @@ def parallel_training():
                         target_sequence_length: tgt_sequence_length
                     }
                 )
-                print loss_val
                 train_writer.add_summary(summary, j)
+                print loss_val
+                
+            f.write("Filelist = " + str(file_list) + "\n")
+            
+            mini_batch_size = len(output_val) 
+            for l in range(mini_batch_size):
+                data = output_val[l]
+                shape = data.shape
+                for m in range(shape[0]):
+                    chunck = data[m] 
+                    for n in range(shape[-1]):
+                        sent_ids = chunck[:,n]
+                        sentences = confuncs.int_to_word(list(sent_ids))
+                        f.write( str(sentences) +" %d\r\n" % (n+1))
+            f.write("\n")
+            f.write(" Epoch%d\r\n")        
+            f.write("\n")
+            f.write("\n")
 
             save_path = saver.save(sess, "./saved_model.ckpt")    #Save trained model
             print("Model saved in path: %s" % save_path)
-
 
 
 
