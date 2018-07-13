@@ -149,18 +149,18 @@
 \examiner    {}
 \degree      {}
 \authors     {}
-\university  {\texorpdfstring{\href{http://www.iitb.ac.in/}
+\university  {\texorpdfstring{\href{}
                 {Indian Institute of Technology, Bombay}}
                 {Indian Institute of Technology, Bombay}}
 \UNIVERSITY  {\texorpdfstring{\href{}
                 {INDIAN INSTITUTE OF TECHNOLOGY, BOMBAY \\ AND  \\ HONDA RESEARCH INSTITUTE}}
                 {INDIAN INSTITUTE OF TECHNOLOGY, BOMBAY}}
 \department  {\texorpdfstring{\href{http://ee.iitb.ac.in/}
-                {Department of Electrical Engineering}}
-                {Department of Electrical Engineering}}
-\DEPARTMENT  {\texorpdfstring{\href{http://ee.iitb.ac.in/}
-                {DEPARTMENT OF ELECTRICAL ENGINEERING}}
-                {DEPARTMENT OF ELECTRICAL ENGINEERING}}
+                {}}
+                {}}
+\DEPARTMENT  {\texorpdfstring{\href{}
+                {}}
+                {}}
 \group       {\texorpdfstring{\href{Research Group Web Site URL Here (include http://)}
                 {Research Group Name}}
                 {Research Group Name}}
@@ -168,11 +168,11 @@
                 {RESEARCH GROUP NAME (IN BLOCK CAPITALS)}}
                 {RESEARCH GROUP NAME (IN BLOCK CAPITALS)}}
 \faculty     {\texorpdfstring{\href{}
-                {Dr. Heike Brock}}
-                {Dr. Heike Brock}}
+                {}}
+                {}}
 \FACULTY     {\texorpdfstring{\href{}
-                {Dr. Heike Brock}}
-                {Dr. Heike Brock}}
+                {}}
+                {}}
 
 \addresses   {}
 \subject     {}
@@ -201,11 +201,11 @@
       \smallskip
       {\LARGE \authornames \par}
       \vfill
-      {\large Application Assignment: Group No. 27}
+      {\large Supervisor: Dr. Heike Brock }
       %{\large degree of Doctor of Philosophy \par}
       %\bigskip
       \bigskip
-      {\large to \par}
+      % {\large to \par}
       {\large \facname \par}
       {\large \deptname \par}
       \bigskip
